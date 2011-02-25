@@ -1,5 +1,5 @@
-\documentclass[11pt]{article}
-\usepackage{fancyvrb,natbib,url,array,dcolumn}
+\documentclass[12pt]{article}
+\usepackage{fancyvrb,natbib,url,array,dcolumn,float,booktabs}
 
 \title{Collaboration}
 
@@ -7,9 +7,55 @@
 
 \date{\today}
 
-\newcolumntype{.}{D{.}{.}{2.1}} 
+\newcolumntype{.}{D{.}{.}{1.2}} 
+
+\usepackage[noae,nogin]{Sweave} %Declaring this explicitly so that I can modify the Sweave environment here rather in Sweave.sty which will be c
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=.5em,fontsize=\footnotesize} 
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=.5em,fontsize=\footnotesize} 
+\DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=.5em,fontsize=\footnotesize} 
+\fvset{listparameters={\setlength{\topsep}{0pt}}} 
+\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}} 
+\SweaveOpts{keep.source=TRUE}  %Show comments
+\fvset{fontsize=\normalsize} %slightly smaller verbatim font
+
+%% These next lines tell latex that it is ok to have a single graphic
+%% taking up most of a page, and they also decrease the space arou
+%% figures and tables.
+\renewcommand\floatpagefraction{.9}
+\renewcommand\topfraction{.9}
+\renewcommand\bottomfraction{.9}
+\renewcommand\textfraction{.1}   
+\setcounter{totalnumber}{50}
+\setcounter{topnumber}{50}
+\setcounter{bottomnumber}{50}
+\setlength{\intextsep}{2ex}
+\setlength{\floatsep}{2ex}
+\setlength{\textfloatsep}{2ex}
+
+
 \begin{document}
 \maketitle
+
+
+<<initialize,echo=FALSE,results=hide>>= 
+##First, just setup the \R environment:
+
+options(SweaveHooks=list(
+          fig=function(){
+            par(mar=c(3.5, 3, 1.1, 0),
+                pty="s",
+                mgp=c(1.5,0.5,0),
+                oma=c(0,0,0,0))},#,
+          echo=function(){options(continue=" ") ##Don't show "+" prompts,
+                         options(prompt=" ")}
+          ),
+        digits=3,
+        scipen=8,
+        width=100
+        )
+
+@ 
+
 
 \begin{verse}
 Do I contradict myself? \\
@@ -18,7 +64,7 @@ Very well then I contradict myself, \\
 \citep{whitman1855song}
 \end{verse}
 
-An idea is born in a coffee shop, a seminar, a quiet walk in 2011. This idea inspires a seminar paper in 2011. And a conference paper arises from the seminar paper in 2012. A dissertation chapter descends from the conference paper in 2013. Other dissertation chapters take up 2014. A submission to a journal happens in 2015. Revision and resubmission wait until 2017 while harried editors, reviewers and author strive to balance teaching, service, and life. In 2018 a child is born and a paper is published. In 2020 a graduate student in a coffee shop reads the paper and has an idea that challenges the analysis in the paper. What would happen if only the author had thought to control for X? Or run one more MCMC chain? Or chosen a different likelihood function? Will the United Nations (now eager to act based the paper) make a wrong move? Time to go back to the analyses run sometime between 2011 and 2020 to check. Easy. Right? Collaboration between the past self and the present self should be simple --- after all you are the same person in 2011 and 2020, right? And the way Microsoft Word/Stata/SPSS/R/LISREL stores files and the way that your Windows/Mac machine reads and writes them is the same, right? And you know exactly which bit of code produced which table and which figure, right? And you wrote your code following Nagler's Maxims \citet{nagler1995coding} and being following King's Replication Standard \citet{king1995replication} right? 
+An idea is born in a coffee shop, a seminar, a quiet walk. It is winter 2011. This idea inspires a seminar paper in the spring. And a conference paper arises from the seminar paper in 2012. A dissertation chapter descends from the conference paper in 2013. Other dissertation chapters take up 2014. A submission to a journal happens in 2015. Revision and resubmission wait until 2017 while harried editors, reviewers and author strive to balance teaching, service, and life. In 2018 a child is born and a paper is published. In 2020 a graduate student in a coffee shop reads the paper and has an idea that challenges the analysis in the paper. What would happen if only the author had thought to control for X? Or run one more MCMC chain? Or chosen a different likelihood function? Will the United Nations (now eager to act based the paper) make a wrong move? Time to go back to the analyses run sometime between 2011 and 2020 to check. Easy. Right? Collaboration between the past self and the present self should be simple --- after all you are the same person in 2011 and 2020, right? And the way Microsoft Word/Stata/SPSS/R/LISREL stores files and the way that your Windows/Mac machine reads and writes them is the same, right? And you know exactly which bit of code produced which table and which figure, right? And you wrote your code following Nagler's Maxims \citet{nagler1995coding} and being following King's Replication Standard \citet{king1995replication} right? 
 
 Just in case one has some doubt about answering these questions, this piece aims to amplify some of what we already ought to know \citet{nagler1995coding}, and to update some of those ideas given current practices, platforms, and propensities.
 
@@ -42,16 +88,16 @@ The principle of modularity \cite{nagler1995coding} suggests that you separate d
 
 Now, if in 5 years we wonder where 'cleandata.rda' came from, we might \Verb+ grep cleandata *.R+ to search for occurrences of this file on our Unix/OS X system. However, if such searching among files is a burden, and even nicer solution is to maintain a file for each project called ``MANIFEST.txt'' or ``INDEX.txt'' or ``README.txt'' which lists the data and command files with brief descriptions of their functions and relations. 
 
-The principle regarding data is to know where the data came from and what operations were performed on which set of data. I have seen command files which do not begin with a call to load data and I have despaired. What is the meaning of \Verb+please-fit var1 with var2+ if I do not know where var1 var2 come from.\footnote{The command \Verb+please-fit+ comes from the MayIPleaseDoStatistics package for R which emphasizes politeness in data analysis. It is highly recommended for use with toddlers.}
+The principle regarding data is to know where the data came from and what operations were performed on which set of data. I have seen command files which do not begin with a call to load data and I have despaired. What is the meaning of \Verb+please-fit(var1 with var2)+ if I do not know where var1 var2 come from.\footnote{The command \Verb+please-fit+ comes from the MayIPleaseDoStatistics package for R which emphasizes politeness in data analysis. It is highly recommended for use with toddlers.}
 
 \section{Code not Clicking}
 All tables and graphs should be as much as possible generated from code and not clicking (let alone copying and pasting). If I wanted to re-create the figure you created but with red lines, and only for people in the South, I should be able to do so with just a few edits to the code.
 
-Using R, for example: I would write
+Using R, for example, I might specify that the file \Verb+fig1.pdf+ was produced by the command, where the \Verb+please-plot+ function was loaded elsewhere.
 
 \begin{verbatim}
 pdf('fig1.pdf')
-plot(stuff)
+please-plot(outcome by explanatory)
 dev.off()
 \end{verbatim}
 
@@ -59,11 +105,39 @@ Now, in the future if I wonder how ``that plot on page 10'' was created, if I su
 
 An even nicer way to ensure that figures and tables are reproducible or easily modifiable by your older and wiser but more harried self is to use literate programming. For example, one may insert the following chunk of code into either a LaTeX or an OpenOffice document, ask R to process the document, and then produce a pdf file in which the code has disappeared to be replaced with an actual figure:
 
-\begin{Verbatim}
- <<fig1,fig=TRUE>>==
- plot(stuff)
- @
-\end{Verbatim}
+<<read.data>>=
+
+##This read.csv line is slightly more complex than needed because of
+##the particular encoding used for characters in the source file.
+
+dem.nations.df<-read.csv(url("http://www.hks.harvard.edu/fs/pnorris/Data/Democracy%20CrossNational%20Data/Democracy%20Crossnational%20Data%20Spring%202009.csv",encoding="ISO_8859-1"),as.is=TRUE)
+
+row.names(dem.nations.df)<-dem.nations.df$Natabrv ##make the row names more helpful
+
+good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
+@ 
+
+<<fig1code,echo=TRUE,fig=FALSE,width=3,height=3>>=
+##The code to produce the following figure
+par(bty="n",xpd=TRUE,pty="s",tcl=-.25)
+with(good.df,plot(Gini2004/100,protac2000,
+     xlab='Gini Coefficient 2004 (UNDP)',
+     ylab='Mean Protest Activities\n(World Values Survey 1980-2000)',
+     cex=.8))
+
+with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
+     text(Gini2004/100,protac2000,labels=Nation,srt=0,cex=.6,pos=3,offset=.1))
+@
+ 
+\begin{figure}[ht]
+  \begin{center}
+<<fig1plot,echo=FALSE,fig=TRUE,width=3,height=3>>= 
+<<fig1code>>
+@
+    \caption{Protest activity by income inequality from \citep{norris2009data}.}\label{fig:giniprot}
+  \end{center}
+\end{figure}
+
 
 The principle here is to know where tables and figures came from --- to know what commands created which figures and tables.
 
@@ -76,9 +150,8 @@ The Sweave system is even nicer because you can have a LaTeX file with R code ri
 
 <<maketable, echo=FALSE, results=tex>>=
 ##source("http://artsci.wustl.edu/~jgill/Models/graph.summary.R")
-dem.nations.df<-read.csv("http://www.hks.harvard.edu/fs/pnorris/Data/Democracy%20CrossNational%20Data/Democracy%20Crossnational%20Data%20Spring%202009.csv")
 
-lm1<-lm(protac2000~Gini2004+meanpr,data=dem.nations.df)
+lm1<-lm(protac2000~I(Gini2004/100)+meanpr,data=good.df)
 
 themat<-cbind(summary(lm1)$coef[,c("Estimate","Std. Error")],confint(lm1))
 n<-length(lm1$fitted.values)
@@ -86,20 +159,22 @@ est.sigma<-round(summary(lm1)$sigma,3)
 library(xtable)
 
 colnames(themat)[3:4]<-c("~{}","~{}")
+row.names(themat)<-c("Intercept","Income Inequality (lower=more equal)","Mean Political Rights (lower=more rights)")
 thextab<-xtable(themat,align=c("l",rep(".",4)),
                 caption="People living in countries with unequal
   income distributions report less protest activity to World Values
   Survey interviewers than people living in countries with relatively
-  more equal income distributions, controlling for mean political
-  rights as measured by Freedom House 1980--2000",label="tab:protest") 
+  more equal income distributions, adjusting for average political
+  rights as measured by Freedom House 1980--2000. Data from \\citep{norris2009data}.",label="tab:protest") 
 
 
 
 print(thextab,include.colnames=FALSE,
+      hline.after=NULL,
       add.to.row=list(pos=list(0,3),
-                command=c("& \\multicolumn{1}{c}{Coef} & \\multicolumn{1}{c}{Std. Err.} 
-& \\multicolumn{2}{c}{95\\% CI} \\\\", 
-                  paste("\\multicolumn{4}{l}{n: ",n,",   $\\hat{\\sigma}$:",est.sigma,"} \\\\ "))
+                command=c("\\toprule \n & \\multicolumn{1}{c}{Coef} & \\multicolumn{1}{c}{Std. Err.} 
+& \\multicolumn{2}{c}{95\\% CI} \\\\ \\cmidrule(r){2-5} ", 
+                  paste("& \\multicolumn{4}{c}{n: ",n,",   $\\hat{\\sigma}$:",est.sigma,"} \\\\ \\bottomrule"))
                 )
       )
 @
@@ -110,20 +185,68 @@ Right now it is hard to beat Sweave as a system for enhancing the collaboration 
 
 \section{Enabling revision. Preventing clobbering.}
 
-Group work requires version control.  If you are using some kind of weak version control system (which is much much better than none at all), like Dropbox, then you must communicate with other folks in your group before you edit existing files. That is, only one of you can edit a given file at a time. This prevents your work (or your colleagues work) from getting lost when you both try to save the same file on top of each other. If you find that you are needing to work on the same files at the same time, then you should work on establishing your own shared version control system. Free options include launchpad, github, sourceforge for open source projects (i.e. papers you are writing which you are happy to share with others). Each of those services include paid versions too. One may also use Dropbox as a kind of server for version control: checking out files from the Dropbox directory into a local working directory.
+Group work requires version control.\footnote{See X for more
+  discussion of what version control is.} Many people are familiar
+with ``Track Changes'' feature in OpenOffice/Word/Pages or the fact that
+Dropbox allows one to recover previous versions of files. These are
+both kinds of version control. When collaborating with yourself or
+others, it is useful to see what has changed, to feel free to
+experiment and then to dump the experiment in favor of previous work,
+to have multiple ``releases'' of the same document (one to MPSA, one
+to APSR, one to your parents) without requiring that spawn many copies
+of the same document and risk confusion and clobbering. Clobbering is
+what happens when your future self or your other collaborators saves
+an old version of a file over a new version --- erasing good work by
+accident.
+
+Of course if you rely on Dropbox or ``track changes'' for version
+control, you must communicate with other folks in your group before
+you edit existing files. Only one of you can edit and save a given
+file at a time. This prevents your work (or your colleagues work) from
+getting lost when you both try to save the same file on top of each
+other. If you find that you are needing to work on the same files at
+the same time, then you should work on establishing your own shared
+version control system. Free options include launchpad, github,
+sourceforge for open source projects (i.e. papers you are writing
+which you are happy to share with others). Each of those services
+include paid versions too. One may also use Dropbox as a kind of
+server for version control: checking out files from the Dropbox
+directory into a local working directory. (Notice that this is
+different from directly working on files within your Dropbox managed
+directories.)
 
 % (the bazaar system appears particularly well suited for use with DropBox http://marcioandreyoliveira.blogspot.com/2009/05/get-your-own-bazaar-hosting-service-for.html)
 
 
-We use subversion with our own research group, and I use it for all of my own projects. Subversion and bazaar and git are  all great. They mainly differ in the extent to which you need to run a server. Subversion requires a server and we are lucky that the National Center for Supercomputing Applications provides such a  server for us. However, the price of such hosting may not be that much using one of the many webhosting services out there.
+We use subversion with our own research group, and I use it for all of
+my own projects. Subversion and bazaar and git are all great. They
+mainly differ in the extent to which you need to run a
+server. Subversion requires a server and we are lucky that the
+National Center for Supercomputing Applications provides such a server
+for us. However, the price of such hosting may not be that much using
+one of the many webhosting services out there. 
 
-An excellent, simple, and robust version control system is to merely rename your files with the date and time of saving them:  thedoc.txt becomes thedoc25092009-22:40.txt. And then when you reach certain milestones you can rename the file accordingly: thedocAPSA2009.txt [for the one sent to discussants at APSA] or thedocAPSR2015.txt [for the version eventually sent to the APSR six years after you presented it at APSA]. The systems I mentioned above all allow this kind of thing and are more elegant, but you can do it by hand too as long as you don't mind taking up a lot of disk space and having many many ``thedoc...'' files around.
+Fancy version control systems are not required, however. I suspect
+that Google Docs allows a kind of version tracking and collaboration
+as well.  An excellent, simple, and robust version control system is
+to merely rename your files with the date and time of saving them:
+thedoc.tex becomes thedoc25092009-22:40.tex.  If you are wise enough to have saved your documents as plain text (Such as LaTeX source (with or without R/Stata code chunks) \footnote{A quick Google search of ``Sweave for Stata'' turned up lots of resources for literate programming with Stata.} then you can easily compare documents using the many utilities available for comparing text files [FileMerge on OS X is pretty, but ediff and diff for Unix are very useful, I am sure that Windows has many other options]. Adobe Acrobat allows one to compare differences in pdf files. OpenOffice supports a ``Compare Documents'' option.
+
+When you reach certain milestones you can rename the file accordingly:
+thedocAPSA2009.tex [for the one sent to discussants at APSA] or
+thedocAPSR2015.tex [for the version eventually sent to the APSR six
+years after you presented it at APSA]. The systems I mentioned above
+all allow this kind of thing and are much more elegant and capable,
+but you can do it by hand too as long as you don't mind taking up a
+lot of disk space and having many many ``thedoc...''  files around.
 
 \section{Obey Nagler's Maxims}
 Read \citet{nagler1995coding}. Comment your code. Luckily, if you are
 using a literate programming practice (Sweave, odfWeave, using R2HTML,
-etc..), you can write paragraphs to surround your code. If not, then
-use whatever commenting system exists in your analysis system.
+etc..), you can write paragraphs to surround your code as well a
+technical comments in the code itself. If you are not using a strictly
+literate programming practice then use whatever commenting protocol
+exists in your analysis language.
 
 A given analysis of a given collection is a long series of
 decisions. You need to be able to justify them. Often you justify them
@@ -134,25 +257,32 @@ documented in the code itself.
 
 Using R within Sweave, for example, the comment is marked using the pound sign. Notice that I've left in a regression not run for the paper directly, but run as a part of the due diligence process of writing the paper.
 
-\begin{verbatim}
-<<reg1>>
+\begin{Verbatim}
+<<reg1>> =
 ##Fitting the regression with x/1000 for ease of interpretation
-thelm<-lm(y~I(x/1000))
-##Fits using a quadratic term as suggested by Blah(1965) did not enhance the fit of the model
-##thelmsq<-lm(y~I(x/1000)^2)
-
+thelm<-lm(y~I(x/1000)+z,data=fabulous.df)
+##Fits using a quadratic term as suggested by Blah(1865) did not enhance the fit of the model
+##thelmsq<-lm(y~I(x/1000)^2+z,data=fabulous.df)
 @
-\end{verbatim}
+\end{Verbatim}
 
 If you need to sleuth down something more than a small detail, but yet the sleuthing is really a footnote to the article, then you can create another file to explore and report on those questions for the research group. The writing in such a memo can be more informal, but the norms of reproducibility ought to be the same as for the main paper. After all you will be releasing both documents (probably) publicly upon publication of the article if not before.
 
-(and read Jonathan Nagler's piece on this too)
-
 \section{File Naming}
 
-(6) Name your files with evocative and descriptive names. Your collaborators are less likely to call you at midnight asking for help if your files are named ``regressions.R'' than if your files are called ``temp'' (note the use of the extension .R to tell us that the file contains R commands. use extensions like this as a standard practice to help you and your computer get along.)
+Name your files with evocative and descriptive names. Your
+collaborators are less likely to call you at midnight asking for help
+if your files are named ``regressions.R'' than if your files are
+called ``temp9'' or ``supercalifragilisticexpialidocious'' (note the
+use of the extension .R to tell us that the file contains R
+commands. use extensions like this as a standard practice to help you
+and your computer get along.)
 
 (other stuff I've forgotten?)
+
+\section{Exemplars}
+
+Lots of people are thinking about ``reproducible research'' and ``literate programming'' these days. Google those terms. I have experimented with three systems so far: (1) for one paper I simply included my Sweave document and data files into a compressed archive; (2) for another more computing intensive paper...
 
 [examples: Examples of reprodible research using R vignette system [jake's Manifest Effects paper?], and a more complex system that required more time instensive simulation using a Makefile [jake and ben and marks's JASA archive]?]
 
