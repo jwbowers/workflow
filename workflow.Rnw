@@ -1,9 +1,9 @@
 \documentclass[12pt]{article}
 \usepackage{fancyvrb,natbib,url,array,dcolumn,float,booktabs}
 
-\title{Collaboration}
+\title{A paper is to write}
 
-\author{Jake Bowers\thanks{Many thanks to Kevin Quinn for direct help on this document, Mika LaVaque-Manty, Ben Hansen, and Mark Fredrickson for many useful discussions on this topic, and Kieran Healy for inspiration from afar.}}
+\author{Jake Bowers\thanks{Many thanks to Kevin Quinn and Cara Wong for direct help on this document, Mika LaVaque-Manty, Ben Hansen, and Mark Fredrickson for many useful discussions on this topic, and Kieran Healy for inspiration from afar.}}
 
 \date{\today}
 
@@ -64,20 +64,21 @@ Very well then I contradict myself, \\
 \citep{whitman1855song}
 \end{verse}
 
-An idea is born in a coffee shop, a seminar, a quiet walk. It is winter 2011. This idea inspires a seminar paper in the spring. And a conference paper arises from the seminar paper in 2012. A dissertation chapter descends from the conference paper in 2013. Other dissertation chapters take up 2014. A submission to a journal happens in 2015. Revision and resubmission wait until 2017 while harried editors, reviewers and author strive to balance teaching, service, and life. In 2018 a child is born and a paper is published. In 2020 a graduate student in a coffee shop reads the paper and has an idea that challenges the analysis in the paper. What would happen if only the author had thought to control for X? Or run one more MCMC chain? Or chosen a different likelihood function? Will the United Nations (now eager to act based the paper) make a wrong move? Time to go back to the analyses run sometime between 2011 and 2020 to check. Easy. Right? Collaboration between the past self and the present self should be simple --- after all you are the same person in 2011 and 2020, right? And the way Microsoft Word/Stata/SPSS/R/LISREL stores files and the way that your Windows/Mac machine reads and writes them is the same, right? And you know exactly which bit of code produced which table and which figure, right? And you wrote your code following Nagler's Maxims \citet{nagler1995coding} and being following King's Replication Standard \citet{king1995replication} right? 
+An idea is born in a coffee shop, a seminar, a quiet walk. It is a cold winter in 2011, but the idea energizes the student. The idea is why he went to graduate school.
 
-Just in case one has some doubt about answering these questions, this piece aims to amplify some of what we already ought to know \citet{nagler1995coding}, and to update some of those ideas given current practices, platforms, and propensities.
+This idea inspires a seminar paper in the spring. And a conference paper arises from the seminar paper in collaboration with another student in 2012. A dissertation chapter descends from the conference paper in 2013. Other dissertation chapters take up 2014. A submission to a journal with the original co-author and a new collaborator happens in 2015. Revision and resubmission wait until 2017 while harried editors, reviewers and authors strive to balance teaching, service, and life. The three collaborators have luckily found work in three different universities around the world. In 2018 a child is born and a paper is published. In 2020 a graduate student in a coffee shop reads the paper and has an idea that challenges the analysis in the paper. What would happen if only the first author had thought to control for X? Or run one more MCMC chain? Or chosen a different likelihood function? Will the United Nations (now eager to act based the paper) make a wrong move? 
 
-\vspace{4em}
+The first author convenes a three way video conference with the other collaborators while commuting home in his flying car. The group must go back to the analyses. Which ones? The ones from 2011? Or 2012? Or 2018? Where are the files? The next day, one member of the group finds some of the files. Now the checks and re-analyses should be easy. Right? The student-now-faculty member is the same person and should remember the reason for those bits of code (or at least should remember which series of mouse clicks were used to produce the numbers for that crucial table). And, of course, the way Microsoft Word/Stata/SPSS/R/LISREL stores files and the way that your Windows/Mac machine reads and writes them is the same, right? (And Windows and Mac are still relevant operating systems.) And the group knows exactly which bit of code produced which table and which figure, right? And they wrote their code following Nagler's Maxims \citet{nagler1995coding} and being following King's Replication Standard \citet{king1995replication} right? 
+
+Just in case one has some doubt about answering these questions, this piece aims to amplify some of what we already ought to know from \citet{nagler1995coding} and \citet{king1995replication}, and to update some of those ideas given current practices, platforms, and propensities.
+
+\section{Why should we believe each other?}
 
 When we call some piece of work ``scientific'' we are talking about how it was done. By calling it ``scientific'' we are also using a short-hand to suggest that (1) the findings of the work are not a matter of opinion and (2) other people could reproduce the findings. That is, what the work represents is not a matter of opinion but is a shared experience --- and an experience shared without respect to the identities of others (although requiring some shared technical training and research resources). This short-hand means that ``scientific'' work should make us change how we act --- or at least, it ought to stand on stronger epistemological ground than other claims about experiences which ought to be shared or shareable.
 
 Assume we want other scientists to believe us when we say something. More narrowly, assume we want other people to believe us when we say something about data: ``data'' here can be words, numbers, musical notes, images, ideas, etc \ldots The point is that we are making some claims about patterns that we see in some collection of stuff. Now, it might be easy to convince other people that ``this collection of stuff is different from this collection of stuff'' if those people were looking over our shoulders the whole time that we made decisions about collecting the stuff and analyzed it [where ``analyze'' means something like ``break it up into understandable parts'']. Unfortunately, we can't assume that people are willing to shadow a researcher throughout her career. Rather, we do our work alone or in small groups and want to convince other distant people about our analyses.
 
 Now, say your collections of stuff are large or complex and where your chosen tools of analyses are computer programs. How can we convince people that what we did with some data with some program is credible: not a matter of whim or opinion, and reproducible by others who didn't shadow us as we wrote our papers? Here are a few concrete actions that people can take to enhance the believeability of their work. In addition, these actions make collaboration within research groups more effective (since believeability comes in part from reproducibility and research groups often need to be able to reproduce in part or in whole what different people in the group have done).
-
-Here is some advice that is not currently emphasized but which might be profitably added to previous advice.
-
 
 \section{Show me the data.}
 All files containing commands operating on data must refer to a data file. A reference to a data file is a line of code the analysis program will use to operate on (``load''/ ``open'' / ``get'' / ``use'') the data file. One should not have to edit this line on different computers or platforms in order to execute this command.  Using R, for example, all analysis files should have load('thedata.rda') or \Verb+read.csv('http://www.mywebsite.org/Data/thedata.csv')+ or some equivalent line in them, and 'thedata.csv' should be stored in some place easy to find (like in the same directory as the file or perhaps in 'Data/thedata.rda'). 
@@ -103,9 +104,9 @@ dev.off()
 
 Now, in the future if I wonder how ``that plot on page 10'' was created, if I suitably commented my manuscript or inserted text into my MANIFEST.txt file I will know (1) ``that plot'' is from a file called ``fig1.pdf'' and (2) fig1.pdf was created in \Verb+figs1and2.R+. In the future, if I wanted to quickly change fig1.pdf, I could edit the commands quickly and easily to do so. [Another good practice is to name the files descriptively, so that we don't in fact have ``fig1.pdf'' but ``political participation by education in the south.pdf'' although such a name may prove burdensome to operating systems which do not care for spaces in file names or to folks who are used to typing full filenames rather than using command line completion facilities in modern shells.]
 
-An even nicer way to ensure that figures and tables are reproducible or easily modifiable by your older and wiser but more harried self is to use literate programming. For example, one may insert the following chunk of code into either a LaTeX or an OpenOffice document, ask R to process the document, and then produce a pdf file in which the code has disappeared to be replaced with an actual figure:
+An even nicer way to ensure that figures and tables are reproducible or easily modifiable by your older and wiser but more harried self is to use literate programming. For example, to produce the Figure~\ref{fig:giniprot}, I insert the following chunk of code into the  LaTeX document, and then I asked R to process the document, and then produce a pdf file in which the code has disappeared to be replaced with an actual figure.\footnote{One can insert the same code chunk in an OpenOffice document and use the odfWeave package to produce OpenOffice documents in which figures and tables replace code. One may also use the LyX interface to LaTeX to write LaTeX documents within a WYSIWYG environment.}
 
-<<read.data>>=
+<<read.data,echo=FALSE,results=hide>>=
 
 ##This read.csv line is slightly more complex than needed because of
 ##the particular encoding used for characters in the source file.
@@ -142,9 +143,9 @@ with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
 The principle here is to know where tables and figures came from --- to know what commands created which figures and tables.
 
 \section{Fishing rods and not fish}
-The source code of any pdf document exchanged by the group must be available and executable. Say you run some command and then make a table or a graph. Then you produce a nice little report on your work for use among the working group. Eventually we want to use pieces of that report (tables, graphs, paragraphs) in a publishable paper. Thus, that report must not have been created using copying and pasting. It must be created using LaTeX (or HTML or OpenOffice or something else that the working group standardizes on). And, in fact, it must be created using the reproducible markup system like Sweave (if you are using LaTeX and R as your working group tools). Alternatively, you can put comments into your report detailing where the figures and tables came from (i.e. which command file produced them). Or include details about which code produced which figures in your MANIFEST.txt.
+The source code of any pdf document exchanged by the group must be available and executable. Say you run some command and then make a table or a graph. Then you produce a nice little report on your work for use among the working group. Eventually we want to use pieces of that report (tables, graphs, paragraphs) in a publishable paper. Thus, that report must not have been created using copying and pasting. It must be created using LaTeX (or HTML or OpenOffice or something else that the working group standardizes on). And, in fact, it must be created using the reproducible markup system like Sweave (if you are using LaTeX and R as your working group tools) \citep{Leis:2005}. Alternatively, you can put comments into your report detailing where the figures and tables came from (i.e. which command file produced them). Or include details about which code produced which figures in your MANIFEST.txt.
 
-In order to know that ``that plot on page 10'' is from a file called ``fig1.pdf'' you need to document it somehow. I can imagine a system with very disciplined use of Word/OpenOffice --- perhaps using special auxiliary ``listoffigures.txt'' files or something. In my experience, it is much easier to just use LaTeX (which can be used in a very user friendly way via LyX).
+In order to know that ``that plot on page 10'' is from a file called ``fig1.pdf'' you need to document it somehow. I can imagine a system with very disciplined use of a word processor (like Open Office or Word) --- perhaps using special auxiliary ``listoffigures.txt'' files or something. In my experience, it is much easier to just use LaTeX (which can be used in a very user friendly way via LyX).
 
 The Sweave system is even nicer because you can have a LaTeX file with R code right inside of it! I showed Sweave with plotting above so here is an example in which a regression table is produced automagically:
 
@@ -187,7 +188,7 @@ Right now it is hard to beat Sweave as a system for enhancing the collaboration 
 
 Group work requires version control.\footnote{See X for more
   discussion of what version control is.} Many people are familiar
-with ``Track Changes'' feature in OpenOffice/Word/Pages or the fact that
+with ``Track Changes'' feature in modern WYSIWYG word processors or the fact that
 Dropbox allows one to recover previous versions of files. These are
 both kinds of version control. When collaborating with yourself or
 others, it is useful to see what has changed, to feel free to
@@ -282,22 +283,35 @@ and your computer get along.)
 
 \section{Exemplars}
 
-Lots of people are thinking about ``reproducible research'' and ``literate programming'' these days. Google those terms. I have experimented with three systems so far: (1) for one paper I simply included my Sweave document and data files into a compressed archive; (2) for another more computing intensive paper...
+Lots of people are thinking about ``reproducible research'' and ``literate programming'' these days. Google those terms. Of course the devil is the details: Here I list a few of my own attempts at enabling reproducible research. You'll find many other inspiring examples on the web.
 
-[examples: Examples of reprodible research using R vignette system [jake's Manifest Effects paper?], and a more complex system that required more time instensive simulation using a Makefile [jake and ben and marks's JASA archive]?]
+I have experimented with three systems so far: (1) for one paper we simply included a Sweave document and data files into a compressed archive \cite{bowers2005dataverse}; (2) for another more computing intensive paper we assembled a set of files which enabled reproduction of our results using the ``make'' system \citep{bowers2008dataverse}; and (3) recently I have tried the ``compendium'' approach \citep{gentleman2005reproducible,gentleman2007statistical} which embeds an academic paper with the R package system \cite{bowers2011dataverse}. The benefit of this last system is that one is not required to have access to unix: one may download, run, and view the paper from within R --- which is platform independent. 
+
 
 \section{Constructive Collaboration}
 
 We all always collaborate. Many of us collaborate with groups of people at one moment in time as we race to produce a paper in time for some deadline. All of us collaborate with ourselves over time. An idealized version of self-collaboration goes something like this: We begin a project with a few notes. We write a conference paper. We revise this paper and send it to a journal. The journal asks for revisions. We revise and resubmit. Our paper is accepted. We revise a bit more. The paper is published. Later another scholar reacts to our paper. We write another paper based on said reactions (draft, conference paper, submission, revision, acceptance, revision). These processes occur over years of time. So, I collaborate with a self 5 or 10 or even more years hence when I write a paper. [Ask anyone who has turned their dissertation into a book how long it took from them from dissertation prospectus to physical published book for an example of a common time span in which self-collaboration is required.]
 
-The time-frames over which collaboration are required --- whether among a group of people working together or within a single scholar's productive life --- are much longer than any given version of any given software will easily exist. All except for plain text. Thus, even as we extol version control systems, one must have a way to ensure future access to them in a form that will still be around when the cockroaches take over political science departments (and thereby finally make C-x M-x C-c  a reasonable way to instruct Emacs to do something [insert url citing this argument --- that Emacs was really made for cockroaches or other six legged creatures.]
+The time-frames over which collaboration are required --- whether
+among a group of people working together or within a single scholar's
+productive life --- are much longer than any given version of any
+given software will easily exist. All except for plain text. Thus,
+even as we extol version control systems, one must have a way to
+ensure future access to them in a form that will still be around when
+the cockroaches take over political science departments.\footnote{
+  (and thereby finally make Ctrl-a Ctrl-x Esc-x Ctrl-c a reasonable
+  way to instruct Emacs to do something
+  (\url{http://kieran.healy.usesthis.com/} )}
 
-In the end, following these practices allows your analyses of your collections to be credible --- and, in the case of criticism, you can always tell antagonists to go redo your analysis if they really don't believe you. 
+In the end, following these practices allows your analyses of your collections to be credible --- and, in the case of criticism, you can always tell antagonists to go redo your analysis if they really don't believe you.  Let me end with the most pithy statement in favor of the idea that collaboration is at the heart of our endeavor that I have found:
 
-"[I]f the empiricalbasis for an articleor book cannotbe reproduced,of what use to the discipline are its conclusions? What purposedoes an articlelike this serve? \cite[445]{king1995replication}
+"[I]f the empirical basis for an article or book cannot be reproduced, of what use to the discipline are its conclusions? What purpose does an article like this serve?'' \cite[445]{king1995replication}
 
 \bibliographystyle{asa} 
 \bibliography{/Users/jwbowers/Documents/BIB/trunk/big}
 
 
 \end{document}
+<<>>=
+options(prompt="> ",continue="+ ")
+@ 
