@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{fancyvrb,natbib,url,array,dcolumn,float,booktabs}
+\usepackage{hyperref}
 
 \title{A paper is to write}
 
@@ -241,7 +242,7 @@ all allow this kind of thing and are much more elegant and capable,
 but you can do it by hand too as long as you don't mind taking up a
 lot of disk space and having many many ``thedoc...''  files around.
 
-\section{Obey Nagler's Maxims}
+\section{Write code for your audience.}
 Read \citet{nagler1995coding}. Comment your code. Luckily, if you are
 using a literate programming practice (Sweave, odfWeave, using R2HTML,
 etc..), you can write paragraphs to surround your code as well a
@@ -268,6 +269,41 @@ thelm<-lm(y~I(x/1000)+z,data=fabulous.df)
 \end{Verbatim}
 
 If you need to sleuth down something more than a small detail, but yet the sleuthing is really a footnote to the article, then you can create another file to explore and report on those questions for the research group. The writing in such a memo can be more informal, but the norms of reproducibility ought to be the same as for the main paper. After all you will be releasing both documents (probably) publicly upon publication of the article if not before.
+
+\section{Unit Testing}
+
+Imagine that you reported  bootstrap confidence intervals in your famous article. Now the statisticians at the UN are worrying about your bootstrap confidence interval. You'd like to evaluate your bootstrap procedure. Although nice code exists for bootstrapping linear models, no nice code exists to bootstrap the bootstrap. Of course, the code required is not complex, but since you are writing your own code you worry about getting it right. Now, 9 years after the idea, you've had lots of time to appreciate problems arising from bugs and errors in data analysis code. 
+
+Now, if you had a moment to think in between teaching that new class, reading books for the awards committee, reading application files for the admissions committee, staying home with a sick child, and your own current research, you might say to yourself, ``Before I write new code, I should write a test of the code. I should write a little bit of code that let's me know that my double-bootstrap procedure actually does what it is supposed to do.''
+
+Of course, this idea, like most others is not new. When large groups of programmers write code for multi-million dollar programs the question about avoiding error looms large. The idea of \href{http://en.wikipedia.org/wiki/Test-driven_development}{test driven development} and the idea that one ought to create tests of \href{http://en.wikipedia.org/wiki/Unit_testing}{small parts of one's code} arose to address such concerns. For the social scientist collaborating with her future self and/or a small group of collaborators.
+
+Here is an example of this idea in a very simple form. I want to write a function to multiply a number by 2. If my function works, when I give it the number 4, I should see it return the number 8 and when I give it -4, I should get -8.
+
+<<unit.test>>=
+times.2.fn<-function(thenumber){
+  thenumber+2
+}
+
+test.times.2.fn<-function(){
+  if(times.2.fn(thenumber=4) == 8 &
+     times.2.fn(thenumber=-4) == -8){
+    print("It works!")
+  }else{print("It does not work!")}
+}
+
+
+test.times.2.fn()
+@ 
+
+Ack! I mistyped ``+'' for ``*''. Good thing I wrote the test!
+
+
+
+
+
+
+
 
 \section{File Naming}
 
