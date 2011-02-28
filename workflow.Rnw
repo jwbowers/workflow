@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{fancyvrb,natbib,url,array,dcolumn,float,booktabs,listings}
-\usepackage{hyperref}
+\usepackage[colorlinks=TRUE]{hyperref}
 
 \title{A Few Easy Pieces: \\ How to enhance your relationship with your future self.}
 
