@@ -1,0 +1,10 @@
+*.pdf
+*.eps
+*.aux
+*.tex
+*.bbl
+*.blg
+*.fdb_latexmk
+*.log
+*.out
+
