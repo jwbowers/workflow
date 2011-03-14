@@ -109,7 +109,86 @@ Just in case one has some doubt about answering these questions, this
 piece aims to amplify some of what we already ought to know from
 \citet{nagler1995coding} and \citet{king1995replication}, and to
 update some of those ideas given current practices, platforms, and
-propensities.
+propensities
+
+%%% This data frame will be used throughout the analyses.
+%%% Putting it up top, so we can use it in the comments section.
+
+<<read.data,echo=FALSE,results=hide>>=
+##  This read.csv line is slightly more complex than needed because of
+##  the particular encoding used for characters in the source file.
+dem.nations.df<-read.csv(url("http://www.hks.harvard.edu/fs/pnorris/Data/Democracy%20CrossNational%20Data/Democracy%20Crossnational%20Data%20Spring%202009.csv",encoding="ISO_8859-1"),as.is=TRUE)
+
+row.names(dem.nations.df)<-dem.nations.df$Natabrv ##make the row names more helpful
+
+good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
+@.
+
+\section{No data analyst is an island.}
+% MMF: My original title before I saw you had you own comment section
+% \section{Comment on your own work. }
+
+Comments, or text inside of a file that is not executed, are a message to your
+future self and other consumers of your work. 
+Read \citet{nagler1995coding}. Comment your code. Luckily, if you are
+using a literate programming practice (Sweave, odfWeave, using R2HTML,
+etc..), you can write paragraphs to surround your code as well a
+technical comments in the code itself. If you are not using a strictly
+literate programming practice then use whatever commenting protocol
+exists in your analysis language. Here are some examples:
+\begin{verbatim}
+# This is a comment in R.
+# With a a second line.
+
+* This is a comment in a Stata .do file
+* You can also embed comments at the ends of lines using /* ... */
+
+/* SAS uses a similar convention to Stata
+   and allows multi-line comments like this.
+*/
+
+% Finally, the percent symbol is a comment in TeX.
+\end{verbatim}
+
+A given analysis of a given collection is a long series of
+decisions. You need to be able to justify them. Often you justify them
+in the paper you are writing (in the text surrounding the R code
+chunks in your Sweave document). Some decisions will be too small and
+technical for inclusion in the paper itself. These need to be
+documented in the code itself.
+
+Using R within Sweave, for example, the comment is marked using the
+pound sign. Notice that I've left in a regression not run for the
+paper directly, but run as a part of the due diligence process of
+writing the paper.
+ 
+<<reg1,echo=TRUE,results=verb>>=
+
+ ##  Repeat the regression run for Table~\ref{tab:protest}
+ ##  Do political rights predict protest reporting?
+ lm1<-lm(protac2000 ~ I(Gini2004/100) + meanpr, data=good.df)
+ ##  Q: Was it worthwhile controlling for political rights?
+ lm2<-lm(protac2000~I(Gini2004/100),data=good.df)
+ coef(lm2)[2]-coef(lm1)[2]
+ ##  A: Yes (around 3/4 an act of protest difference)
+@
+
+If you need to track down something more than a small detail, but yet
+the sleuthing is really a footnote to the article, then you can create
+another file to explore and report on those questions for the research
+group. The writing in such a memo can be more informal, but the norms
+of reproducibility ought to be the same as for the main paper. After
+all you will be releasing both documents (probably) publicly upon
+publication of the article if not before.
+
+Notice one another benefit of coding for an audience: we learn by
+teaching. By assuming that others will look at your code, you will be
+more likely to write clearer code, or perhaps even to learn more about
+what you are doing as you do it.
+
+Comment liberally. Comments are discarded when R runs analysis or LaTeX turns
+your poignant writings into a PDF, so only those who dig into your work will
+see them. They are footnotes on the process of producing your research.
 
 \section{Meaningful code requires data.}
 
@@ -124,6 +203,7 @@ load('thedata.rda') or
 equivalent line in them, and 'thedata.csv' should be stored in some
 place easy to find (like in the same directory as the file or perhaps
                     in 'Data/thedata.rda').
+It never hurts to drop in a comment about where the data is, if in doubt.
 
 Where should you store the data files? A very obvious solution is to
 always make sure that the data file used by a command file is in the
@@ -207,15 +287,7 @@ replaced with an actual figure.\footnote{One can insert the same code
   code. One may also use the LyX interface to LaTeX to write LaTeX
   documents within a WYSIWYG environment.}
 
-<<read.data,echo=FALSE,results=hide>>=
-##  This read.csv line is slightly more complex than needed because of
-##  the particular encoding used for characters in the source file.
-dem.nations.df<-read.csv(url("http://www.hks.harvard.edu/fs/pnorris/Data/Democracy%20CrossNational%20Data/Democracy%20Crossnational%20Data%20Spring%202009.csv",encoding="ISO_8859-1"),as.is=TRUE)
 
-row.names(dem.nations.df)<-dem.nations.df$Natabrv ##make the row names more helpful
-
-good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
-@
 
 <<fig1code,echo=TRUE,fig=FALSE>>=
 ##  Make a scatterplot of Protest by Inequality
@@ -390,50 +462,7 @@ If you are wise enough to have saved your documents as plain text
  but you can do it by hand too as long as you don't mind taking up a
 lot of disk space and having many many ``thedoc...''  files around.
 
-\section{No data analyst is an island.}
 
-Read \citet{nagler1995coding}. Comment your code. Luckily, if you are
-using a literate programming practice (Sweave, odfWeave, using R2HTML,
-etc..), you can write paragraphs to surround your code as well a
-technical comments in the code itself. If you are not using a strictly
-literate programming practice then use whatever commenting protocol
-exists in your analysis language.
-
-A given analysis of a given collection is a long series of
-decisions. You need to be able to justify them. Often you justify them
-in the paper you are writing (in the text surrounding the R code
-chunks in your Sweave document). Some decisions will be too small and
-technical for inclusion in the paper itself. These need to be
-documented in the code itself.
-
-Using R within Sweave, for example, the comment is marked using the
-pound sign. Notice that I've left in a regression not run for the
- paper directly, but run as a part of the due diligence process of
- writing the paper.
- 
-<<reg1,echo=TRUE,results=verb>>=
-
- ##  Repeat the regression run for Table~\ref{tab:protest}
- ##  Do political rights predict protest reporting?
- lm1<-lm(protac2000 ~ I(Gini2004/100) + meanpr, data=good.df)
- ##  Q: Was it worthwhile controlling for political rights?
- lm2<-lm(protac2000~I(Gini2004/100),data=good.df)
- coef(lm2)[2]-coef(lm1)[2]
- ##  A: Yes (around 3/4 an act of protest difference)
-@
-
- If you need to track down something more than a small detail, but yet
- the sleuthing is really a footnote to the article, then you can create
- another file to explore and report on those questions for the research
- group. The writing in such a memo can be more informal, but the norms
- of reproducibility ought to be the same as for the main paper. After
- all you will be releasing both documents (probably) publicly upon
- publication of the article if not before.
-
- Notice one another benefit of coding for an audience: we learn by
- teaching. By assuming that others will look at your code, you will be
- more likely to write clearer code, or perhaps even to learn more about
- what you are doing as you do it.
 
  \section{Minimize error by testing.}
 
