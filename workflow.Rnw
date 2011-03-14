@@ -123,6 +123,76 @@ row.names(dem.nations.df)<-dem.nations.df$Natabrv ##make the row names more help
 
 good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
 @.
+\section{Type, don't click.}
+
+All tables and graphs should be generated from code and not clicking
+(let alone copying and pasting). If I wanted to re-create the figure
+you created but with red lines, and only for people in the South, I
+should be able to do so with just a few edits to the code.
+
+Using R, for example, I might specify that the file \Verb+fig1.pdf+
+  was produced by the command, where the \Verb+please-plot+ function was
+loaded elsewhere.
+
+\begin{Verbatim}[fontsize=\small]
+pdf('fig1.pdf')
+please-plot(outcome by explanatory)
+dev.off()
+\end{Verbatim}
+
+Now, in the future if I wonder how ``that plot on page 10'' was
+created, if I suitably commented my manuscript or inserted text into
+my MANIFEST.txt file I will know (1) ``that plot'' is from a file
+called ``fig1.pdf'' and (2) fig1.pdf was created in
+\Verb+figs1and2.R+. In the future, if I wanted to quickly change
+fig1.pdf, I could edit the commands quickly and easily to do
+so. Another good practice is to name the files descriptively, so that
+we don't in fact have ``fig1.pdf'' but ``political participation by
+education in the south.pdf'' although such a name may prove burdensome
+to operating systems which do not care for spaces in file names or to
+folks who are used to typing full filenames rather than using command
+line completion facilities in modern shells.
+
+An even nicer way to ensure that figures and tables are reproducible
+or easily modifiable by your older and wiser but more harried self is
+to use literate programming. For example, to produce the
+Figure~\ref{fig:giniprot}, I insert the following chunk of code into
+the LaTeX document, and then I asked R to process the document, and
+then produce a pdf file in which the code has disappeared to be
+replaced with an actual figure.\footnote{One can insert the same code
+  chunk in an OpenOffice document and use the odfWeave package to
+  produce OpenOffice documents in which figures and tables replace
+  code. One may also use the LyX interface to LaTeX to write LaTeX
+  documents within a WYSIWYG environment.}
+
+
+
+<<fig1code,echo=TRUE,fig=FALSE>>=
+##  Make a scatterplot of Protest by Inequality
+with(good.df,plot(Gini2004/100,protac2000,
+                  xlab='Gini Coefficient 2004 (UNDP)',
+                  ylab='Mean Protest Activities\n(World Values Survey 1980-2000)',
+                  cex=.8))
+
+##  Label a few interesting points
+with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
+     text(Gini2004/100,protac2000,labels=Nation,srt=0,cex=.6,pos=3,offset=.1))
+@
+
+
+\begin{figure}[H]
+  \begin{center}
+<<fig1plot,echo=FALSE,fig=TRUE,width=3,height=3>>=
+par(bty="n",xpd=TRUE,pty="s",tcl=-.25)
+<<fig1code>>
+@
+    \caption{Protest activity by income inequality \citep[from]{norris2009data}.}\label{fig:giniprot}
+  \end{center}
+\end{figure}
+
+
+The principle here is to know where tables and figures came from ---
+to know what commands created which figures and tables.
 
 \section{No data analyst is an island.}
 % MMF: My original title before I saw you had you own comment section
@@ -245,76 +315,6 @@ I do not know where var1 var2 come from.\footnote{The command
                                                   \Verb+may-I-please-have-a-plot+ can be required using
                                                   \Verb+options(politeness=99)+ }
 
-\section{Type, don't click.}
-
-All tables and graphs should be generated from code and not clicking
-(let alone copying and pasting). If I wanted to re-create the figure
-you created but with red lines, and only for people in the South, I
-should be able to do so with just a few edits to the code.
-
-Using R, for example, I might specify that the file \Verb+fig1.pdf+
-  was produced by the command, where the \Verb+please-plot+ function was
-loaded elsewhere.
-
-\begin{Verbatim}[fontsize=\small]
-pdf('fig1.pdf')
-please-plot(outcome by explanatory)
-dev.off()
-\end{Verbatim}
-
-Now, in the future if I wonder how ``that plot on page 10'' was
-created, if I suitably commented my manuscript or inserted text into
-my MANIFEST.txt file I will know (1) ``that plot'' is from a file
-called ``fig1.pdf'' and (2) fig1.pdf was created in
-\Verb+figs1and2.R+. In the future, if I wanted to quickly change
-fig1.pdf, I could edit the commands quickly and easily to do
-so. Another good practice is to name the files descriptively, so that
-we don't in fact have ``fig1.pdf'' but ``political participation by
-education in the south.pdf'' although such a name may prove burdensome
-to operating systems which do not care for spaces in file names or to
-folks who are used to typing full filenames rather than using command
-line completion facilities in modern shells.
-
-An even nicer way to ensure that figures and tables are reproducible
-or easily modifiable by your older and wiser but more harried self is
-to use literate programming. For example, to produce the
-Figure~\ref{fig:giniprot}, I insert the following chunk of code into
-the LaTeX document, and then I asked R to process the document, and
-then produce a pdf file in which the code has disappeared to be
-replaced with an actual figure.\footnote{One can insert the same code
-  chunk in an OpenOffice document and use the odfWeave package to
-  produce OpenOffice documents in which figures and tables replace
-  code. One may also use the LyX interface to LaTeX to write LaTeX
-  documents within a WYSIWYG environment.}
-
-
-
-<<fig1code,echo=TRUE,fig=FALSE>>=
-##  Make a scatterplot of Protest by Inequality
-with(good.df,plot(Gini2004/100,protac2000,
-                  xlab='Gini Coefficient 2004 (UNDP)',
-                  ylab='Mean Protest Activities\n(World Values Survey 1980-2000)',
-                  cex=.8))
-
-##  Label a few interesting points
-with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
-     text(Gini2004/100,protac2000,labels=Nation,srt=0,cex=.6,pos=3,offset=.1))
-@
-
-
-\begin{figure}[H]
-  \begin{center}
-<<fig1plot,echo=FALSE,fig=TRUE,width=3,height=3>>=
-par(bty="n",xpd=TRUE,pty="s",tcl=-.25)
-<<fig1code>>
-@
-    \caption{Protest activity by income inequality \citep[from]{norris2009data}.}\label{fig:giniprot}
-  \end{center}
-\end{figure}
-
-
-The principle here is to know where tables and figures came from ---
-to know what commands created which figures and tables.
 
 \section{Enjoy literate data analysis.}
 
