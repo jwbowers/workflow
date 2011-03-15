@@ -4,7 +4,12 @@
 
 \title{A Few Easy Pieces: \\ How to enhance your relationship with your future self.}
 
-\author{Jake Bowers\thanks{Many thanks to Kevin Quinn and Cara Wong for direct help on this document, Mika LaVaque-Manty, Ben Hansen, and Mark Fredrickson for many useful discussions on this topic, and Kieran Healy for inspiration from afar. The source code for this document may be freely downloaded from \url{https://github.com/jwbowers/workflow}.}}
+\author{Jake Bowers\thanks{Many thanks to Mark Fredrickson, Brian
+    Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on
+    this document, Mika LaVaque-Manty, Ben Hansen, and Mark
+    Fredrickson for many useful discussions on this topic. The source
+    code for this document may be freely downloaded from
+    \url{https://github.com/jwbowers/workflow}.}}
 
 \date{\today}
 
@@ -99,7 +104,7 @@ should remember the reason for those bits of code (or at least should
                                                    2015?). And, of course, the way Microsoft Word/Stata/SPSS/R/LISREL
 stores files and the way that your machine reads and writes them is
 the same, right --- since Windows and Mac OS X have always existed and
-will always continue to exist more or less as they current exist. And
+will always continue to exist more or less as they currently exist? And
 the group knows exactly which bit of code produced which table and
 which figure, right? And they wrote their code following Nagler's
 Maxims \citet{nagler1995coding} and being following King's Replication
@@ -125,7 +130,7 @@ good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
 @.
 \section{Type, don't click.}
 
-All tables and graphs should be generated from code and not clicking
+All tables and graphs should be generated from code, not clicking
 (let alone copying and pasting). If I wanted to re-create the figure
 you created but with red lines, and only for people in the South, I
 should be able to do so with just a few edits to the code.
@@ -184,7 +189,7 @@ with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
 par(bty="n",xpd=TRUE,pty="s",tcl=-.25)
 <<fig1code>>
 @
-    \caption{Protest activity by income inequality \citep[from]{norris2009data}.}\label{fig:giniprot}
+    \caption{Protest activity by income inequality \citep[from][]{norris2009data}.}\label{fig:giniprot}
   \end{center}
 \end{figure}
 
@@ -245,7 +250,7 @@ the sleuthing is really a footnote to the article, then you can create
 another file to explore and report on those questions for the research
 group. The writing in such a memo can be more informal, but the norms
 of reproducibility ought to be the same as for the main paper. After
-all you will be releasing both documents (probably) publicly upon
+all, you will be releasing both documents (probably) publicly upon
 publication of the article if not before.
 
 Notice one another benefit of coding for an audience: we learn by
@@ -278,7 +283,7 @@ In order to know that ``that plot on page 10'' is from a file called
 ``fig1.pdf'' you need to document it somehow. I can imagine a system
 with very disciplined use of a word processor (like Open Office or
 Word) --- perhaps using special auxiliary ``listoffigures.txt'' files
-or something. In my experience, it is much easier to just use LaTeX
+or something. In my experience, it is much easier just to use LaTeX
 (which can be used in a very user friendly way via LyX).
 
 The Sweave system is even nicer because you can have a LaTeX file with
@@ -342,44 +347,44 @@ program will use to operate on (``load''/ ``open'' / ``get'' /
                                 ``use'') the data file. One should not have to edit this line on
 different computers or platforms in order to execute this command.
 Using R, for example, all analysis files should have
-load('thedata.rda') or
+\Verb+load('thedata.rda')+ or
 \Verb+read.csv('http://www.mywebsite.org/Data/thedata.csv')+ or some
-equivalent line in them, and 'thedata.csv' should be stored in some
+equivalent line in them, and `thedata.csv' should be stored in some
 place easy to find (like in the same directory as the file or perhaps
-                    in 'Data/thedata.rda').
+                    in \Verb+'Data/thedata.rda'+).
 It never hurts to drop in a comment about where the data is, if in doubt.
 
-Where should you store the data files? A very obvious solution is to
-always make sure that the data file used by a command file is in the
+Where should one store data files? A very obvious solution is
+always to make sure that the data file used by a command file is in the
 same directory as the command file. More elegant solutions (pointed to
                                                             below) require all co-authors to have the same directory structure so
-that load('Data/thedata.rda') means the same thing on all computers
+that \Verb+load('Data/thedata.rda')+ means the same thing on all computers
 used to work on said project.
 
 The principle of modularity \cite{nagler1995coding} suggests that you
 separate data cleaning, processing, recoding, and merging from
 analysis in different files. So, perhaps your analysis oriented files
-will load('cleandata.rda') or something but with a comment in the code
+will \Verb+load('cleandata.rda')+ or something but with a comment in the code
 telling the future you (among others) that cleandata.rda was created
 from create-cleandata.R which in turn begins with
-read.csv('dirtydata.csv') which, from a comment in the file, was
+\Verb+read.csv('dirtydata.csv')+ which, from a comment in the file, was
 downloaded from
 \Verb+http://www.greatfreedata.gov/dirtydata.csv+ on April 1,
 2011. Such a data processing file will typically end with something
 like \Verb+save('cleandata.rda')+ so that we are doubly certain about
 the provenance of the data.
 
-Now, if in 5 years we wonder where 'cleandata.rda' came from, we might
+Now, if in 5 years we wonder where `cleandata.rda' came from, we might
 \Verb+ grep cleandata *.R+ to search for occurrences of this file on
 our Unix/OS X system. However, if such searching among files is a
-burden, and even nicer solution is to maintain a file for each project
+burden, an even nicer solution is to maintain a file for each project
 called ``MANIFEST.txt'' or ``INDEX.txt'' or ``README.txt'' which lists
 the data and command files with brief descriptions of their functions
 and relations.
 
 The principle regarding data is to know where the data came from and
 what operations were performed on which set of data. I have seen
-command files which do not begin with a call to load data and I have
+command files which do not begin with a call to load data, and I have
 despaired. What is the meaning of \Verb+please-fit(var1 with var2)+ if
 I do not know where var1 var2 come from.\footnote{The command
                                                   \Verb+please-fit+ and some other R functions used in this essay come
@@ -466,7 +471,7 @@ lot of disk space and having many many ``thedoc...''  files around.
 
  Imagine that you reported  bootstrap confidence intervals in your famous article. Now the statisticians at the UN are worrying about your bootstrap confidence interval. You'd like to evaluate your bootstrap procedure. Although nice code exists for bootstrapping linear models, no nice code exists to bootstrap the bootstrap. Of course, the code required is not complex, but since you are writing your own code you worry about getting it right. Now, 9 years after the idea, you've had lots of time to appreciate problems arising from bugs and errors in data analysis code.
 
- Now, if you had a moment to think in between teaching that new class, reading books for the awards committee, reading application files for the admissions committee, staying home with a sick child, and your own current research, you might say to yourself, ``Before I write new code, I should write a test of the code. I should write a little bit of code that let's me know that my double-bootstrap procedure actually does what it is supposed to do.''
+ Now, if you had a moment to think in between teaching that new class, reading books for the awards committee, reading application files for the admissions committee, staying home with a sick child, and undertaking the odd bit of your own current research, you might say to yourself, ``Before I write new code, I should write a test of the code. I should write a little bit of code that let's me know that my double-bootstrap procedure actually does what it is supposed to do.''
 
          Of course, this idea, like most others is not new. When large groups of programmers write code for multi-million dollar programs the question about avoiding error looms large. The idea of \href{http://en.wikipedia.org/wiki/Test-driven_development}{test driven development} and the idea that one ought to create tests of \href{http://en.wikipedia.org/wiki/Unit_testing}{small parts of one's code} arose to address such concerns. For the social scientist collaborating with her future self and/or a small group of collaborators.
 
@@ -501,7 +506,7 @@ Ack! I mistyped ``+'' for ``*''. Good thing I wrote the test!
 Name your files with evocative and descriptive names. Your
 collaborators are less likely to call you at midnight asking for help
 if your files are named ``inequality-and-protest-analyses.R'' than if your files are
-called ``temp9'' or ``supercalifragilisticexpialidocious'' (Note the
+called ``temp9'' or ``supercalifragilisticexpialidocious.'' (Note the
                                                             use of the extension .R to tell us that the file contains R
                                                             commands. Use extensions like this as a standard practice to help you
                                                             and your computer get along.)
@@ -565,14 +570,14 @@ uploads).\footnote{The arrival of the six-legged social scientists
   Esc-x Ctrl-c a \href{http://kieran.healy.usesthis.com/}{reasonable
     key combination}.}
 
-Now, imagine that the UN never hears of your work, or even that your
-article does not spawn debate. Why then would you spend time to
+But what if the UN never hears of your work, or, by some cruel fate, that your
+article does not spawn debate? Why then would you spend time to
 communicate with your future self and others? My own answer to this
-question is because I want my work to be credible and useful to myself
+question is that I want my work to be credible and useful to myself
 and other scholars even if each article does not immediately change
 the world.  What I report in my data analyses should have two main
 characteristics: (1) the findings of the work should not be a matter
-of opinion and (2) other people could reproduce the findings. That is,
+of opinion; and, (2) other people should be able to reproduce the findings. That is,
 what the work represents is not a matter of opinion but is a shared
 experience --- and an experience shared without respect to the
 identities of others (although requiring some shared technical
@@ -616,15 +621,15 @@ your work (in still intelligible plain text, analyzed using commented
 code so that folks can translate to whatever system succeeds R, or
 since you used R, you can include a copy of R and all of the R
 packages you used in your final analyses in 2018 in the archive
-itself.) You can say, "Here is everything you need to reproduce my
-work." To be extra helpful you can add "Read the README file for
+itself.) You can say, ``Here is everything you need to reproduce my
+work." To be extra helpful you can add ``Read the README file for
 futher instructions." And then you can get on with your life: maybe
-the next great idea will occur when your 4 year old asks a wacky
-question after stripping and painting her overly cooperative 1 year
-old brother purple, or teaching a class, or in a coffee shop, or on a
-quiet walk.
+the next great idea will occur when your 4-year-old asks a wacky
+question after stripping and painting her overly cooperative
+1-year-old brother purple, or teaching a class, or in a coffee shop,
+or on a quiet walk.
 
-\bibliographystyle{asa}
+\bibliographystyle{apsr}
 \bibliography{/Users/jwbowers/Documents/BIB/trunk/big}
 
 
