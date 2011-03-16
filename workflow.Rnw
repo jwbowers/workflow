@@ -96,7 +96,7 @@ collaborators while commuting home in his flying car. The group must
 go back to the analyses. Which ones? The ones from 2011? Or 2012? Or
 2018? Where are the files? The next day, one member of the group finds
 some of the files. Now the checks and re-analyses should be
-easy. Right? The student-now-faculty member is the same person and
+easy. Right? The student, now professor, is the same person and
 should remember the reason for those bits of code (or at least should
                                                    remember which series of mouse clicks were used to produce the numbers
                                                    for that crucial table --- and those mouse clicks should not be time
@@ -107,8 +107,8 @@ the same, right --- since Windows and Mac OS X have always existed and
 will always continue to exist more or less as they currently exist? And
 the group knows exactly which bit of code produced which table and
 which figure, right? And they wrote their code following Nagler's
-Maxims \citet{nagler1995coding} and being following King's Replication
-Standard \citet{king1995replication} right?
+Maxims \citep{nagler1995coding} and  King's Replication
+Standard \citep{king1995replication} right?
 
 Just in case one has some doubt about answering these questions, this
 piece aims to amplify some of what we already ought to know from
@@ -132,7 +132,7 @@ good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
 
 All tables and graphs should be generated from code, not clicking
 (let alone copying and pasting). If I wanted to re-create the figure
-you created but with red lines, and only for people in the South, I
+you created but with red lines, including a new variable or specification, I
 should be able to do so with just a few edits to the code.
 
 Using R, for example, I might specify that the file \Verb+fig1.pdf+
@@ -288,8 +288,8 @@ or something. In my experience, it is much easier just to use LaTeX
 
 The Sweave system is even nicer because you can have a LaTeX file with
 R code right inside of it! I showed Sweave with plotting in
-Figure~\ref{fig:giniprot}, those who view the code for this essay will
-see how the Table~\ref{tab:protest} was also generated directly from a
+Figure~\ref{fig:giniprot}. Those who view the code for this essay will
+see how Table~\ref{tab:protest} was also generated directly from a
 regression object.
 
 <<maketable, echo=FALSE, results=hide>>=
@@ -335,8 +335,8 @@ thextab<-xtable(themat,align=c("l",rep(".",4)),
 
 Right now it is hard to beat Sweave as a system for enhancing the
 collaboration of research groups doing quantitative work in political
-science. Something will make our lives easier than Sweave (or
-                                                           odfWeave) in the future. Then we'll change.
+science. Something other than than Sweave will make our lives easier
+in the future. Then we'll change.
 
 
 \section{Meaningful code requires data.}
@@ -396,28 +396,28 @@ I do not know where var1 var2 come from.\footnote{The command
 
 
 
-\section{Enabling revision to prevent clobbering.}
+\section{Enabling revision to prevent clobbering and record history.}
 
-Group work requires version control.\footnote{See X for more
-  discussion of what version control is.} Many people are familiar
-with the ``Track Changes'' feature in modern WYSIWYG word processors
-or the fact that Dropbox allows one to recover previous versions of
-files. These are both kinds of version control. When collaborating
-with yourself or others, it is useful to see what has changed, to feel
-free to experiment and then to dump the experiment in favor of
-previous work, to have multiple ``releases'' of the same document (one
-to MPSA, one to APSR, one to your parents) without requiring that
-spawn many copies of the same document and risk confusion and
-clobbering. Clobbering is what happens when your future self or your
-other collaborators saves an old version of a file over a new version
---- erasing good work by accident.
+Group work requires version control.\footnote{See X and Y in this
+  issue for more discussion of what version control is.} Many people
+are familiar with the ``Track Changes'' feature in modern WYSIWYG word
+processors or the fact that Dropbox allows one to recover previous
+versions of files. These are both kinds of version control. When
+collaborating with yourself or others, it is useful to see what has
+changed, to feel free to experiment and then to dump the experiment in
+favor of previous work, to have multiple ``releases'' of the same
+document (one to MPSA, one to APSR, one to your parents) without
+requiring that spawn many copies of the same document and risk
+confusion and clobbering. Clobbering is what happens when your future
+self or your other collaborators saves an old version of a file over a
+new version --- erasing good work by accident.
 
 Of course if you rely on Dropbox or ``track changes'' for version
 control, you must communicate with other folks in your group before
 you edit existing files. Only one of you can edit and save a given
 file at a time. This prevents your work (or your colleagues work) from
 getting lost when you both try to save the same file on top of each
-other. If you find that you are needing to work on the same files at
+other. If you find that you need to work on the same files at
 the same time, then you should work on establishing your own shared
 version control system. Free options include launchpad, github,
 sourceforge for open source projects (i.e. papers you are writing
@@ -445,7 +445,10 @@ thedoc.tex becomes thedoc25-12-2011-23:50.tex.  Be sure to include
 year in the file names --- remember, the life of an idea is measured
 in years. Also, if you use this method, spend a little extra time to
 ensure that you do not clobber files when you make typos in the
-file-names.
+file-names. And, you will find yourself spending extra time
+reconciling changes made by different collaborators by hand that
+modern version control systems (particularly the distributed kind
+these days) take care of quickly and easily.
 
 If you are wise enough to have saved your documents as plain text
 (Such as LaTeX source (with or without R/Stata code chunks)
@@ -469,11 +472,33 @@ lot of disk space and having many many ``thedoc...''  files around.
 
  \section{Minimize error by testing.}
 
- Imagine that you reported  bootstrap confidence intervals in your famous article. Now the statisticians at the UN are worrying about your bootstrap confidence interval. You'd like to evaluate your bootstrap procedure. Although nice code exists for bootstrapping linear models, no nice code exists to bootstrap the bootstrap. Of course, the code required is not complex, but since you are writing your own code you worry about getting it right. Now, 9 years after the idea, you've had lots of time to appreciate problems arising from bugs and errors in data analysis code.
+ Imagine that you reported bootstrap confidence intervals in your
+ famous article. Now the statisticians at the UN are worrying about
+ your bootstrap confidence interval. You'd like to evaluate your
+ bootstrap procedure. Although nice code exists for bootstrapping
+ linear models, no nice code exists to bootstrap the bootstrap. Of
+ course, the code required is not complex, but since you are writing
+ your own code you worry about getting it right. Now, 9 years after
+ the idea, you've had lots of time to appreciate problems arising from
+ bugs and errors in data analysis and code.
 
- Now, if you had a moment to think in between teaching that new class, reading books for the awards committee, reading application files for the admissions committee, staying home with a sick child, and undertaking the odd bit of your own current research, you might say to yourself, ``Before I write new code, I should write a test of the code. I should write a little bit of code that let's me know that my double-bootstrap procedure actually does what it is supposed to do.''
+ Now, if you had a moment to think in between teaching that new class,
+ reading books for the awards committee, reading application files for
+ the admissions committee, staying home with a sick child, and
+ undertaking the odd bit of your own current research, you might say
+ to yourself, ``Before I write new code, I should write a test of the
+ code. I should write a little bit of code that let's me know that my
+ double-bootstrap procedure actually does what it is supposed to do.''
 
-         Of course, this idea, like most others is not new. When large groups of programmers write code for multi-million dollar programs the question about avoiding error looms large. The idea of \href{http://en.wikipedia.org/wiki/Test-driven_development}{test driven development} and the idea that one ought to create tests of \href{http://en.wikipedia.org/wiki/Unit_testing}{small parts of one's code} arose to address such concerns. For the social scientist collaborating with her future self and/or a small group of collaborators.
+ Of course, this idea, like most others, is not new. When large groups
+ of programmers write code for multi-million dollar programs the
+ question about avoiding error looms large. The idea of
+ \href{http://en.wikipedia.org/wiki/Test-driven_development}{test
+   driven development} and the idea that one ought to create tests of
+ \href{http://en.wikipedia.org/wiki/Unit_testing}{small parts of one's
+   code} arose to address such concerns. For the social scientist
+ collaborating with her future self and/or a small group of
+ collaborators.
 
 Here is an example of this idea in a very simple form. I want to write a function to multiply a number by 2. If my function works, when I give it the number 4, I should see it return the number 8 and when I give it -4, I should get -8.
 
