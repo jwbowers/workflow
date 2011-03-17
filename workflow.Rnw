@@ -4,25 +4,25 @@
 
 \title{A Few Easy Pieces: \\ How to enhance your relationship with your future self.}
 
-\author{Jake Bowers\thanks{Many thanks to Mark Fredrickson, Brian
-    Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on
-    this document, Mika LaVaque-Manty, Ben Hansen, and Mark
-    Fredrickson for many useful discussions on this topic. The source
-    code for this document may be freely downloaded from
-    \url{https://github.com/jwbowers/workflow}.}}
+\author{Jake Bowers\thanks{I owe many thanks to Mark Fredrickson,
+    Brian Gaines, Mark Fredrickson, Kieran Healy, Kevin Quinn and Cara
+    Wong for direct help on this document and to Mika LaVaque-Manty
+    and Ben Hansen for many useful discussions on this topic. The
+    source code for this document may be freely downloaded and
+    modified from \url{https://github.com/jwbowers/workflow}.}}
 
 \date{\today}
 
 \newcolumntype{.}{D{.}{.}{1.2}}
 
 \usepackage[noae,nogin]{Sweave} %Declaring this explicitly so that I can modify the Sweave environment here rather in Sweave.sty which will be c
-\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=.5em,fontsize=\footnotesize}
-\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=.5em,fontsize=\footnotesize}
-\DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=.5em,fontsize=\footnotesize}
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=.5em,fontsize=\small}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=.5em,fontsize=\small}
+\DefineVerbatimEnvironment{Scode}{Verbatim}  {xleftmargin=.5em,fontsize=\small}
 \fvset{listparameters={\setlength{\topsep}{0pt}}}
 \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
 \SweaveOpts{keep.source=TRUE}  %Show comments
-\fvset{fontsize=\normalsize} %slightly smaller verbatim font
+\fvset{fontsize=\small} %slightly smaller verbatim font
 
 %% These next lines tell latex that it is ok to have a single graphic
 %% taking up most of a page, and they also decrease the space arou
@@ -45,7 +45,6 @@
 
 <<initialize,echo=FALSE,results=hide>>=
   ##First, just setup the \R environment:
-
   options(SweaveHooks=list(
             fig=function(){
               par(mar=c(3.5, 3, 1.1, 0),
@@ -72,8 +71,8 @@ Very well then I contradict myself, \\
 \end{verse}
 
 An idea is born in a coffee shop, a seminar, a quiet walk. It is a
-cold winter in 2011, but the idea energizes the student. The idea is
-why he went to graduate school.
+gray winter in 2011, but the idea dispells February's doldrums and
+energizes the student.% Now he knows why he went to graduate school.
 
 This idea inspires a seminar paper in the spring. And a conference
 paper arises from the seminar paper in collaboration with another
@@ -82,33 +81,42 @@ paper in 2013. Other dissertation chapters take up 2014. A submission
 to a journal with the original co-author and a new collaborator
 happens in 2015. Revision and resubmission wait until 2017 while
 harried editors, reviewers and authors strive to balance teaching,
-service, and life. The three collaborators have luckily found work in
-three different universities around the world. In 2018 a child is born
-and a paper is published. In 2020 a graduate student in a coffee shop
-reads the paper and has an idea that challenges the analysis in the
-paper. What would happen if only the first author had thought to
-control for X? Or run one more MCMC chain? Or chosen a different
-likelihood function? Will the United Nations (now eager to act based
-                                              the paper) make a wrong move?
+service, and life. By now, the three lucky collaborators work as
+professors in three different universities. In 2018 a child is born
+and a paper is published. The United Nations takes an interest in the
+paper in 2019 and hosts a conference to discuss implications of the
+research. In 2020 a first year graduate student in a coffee shop has
+an idea that challenges the analysis in the now famous paper. What
+would happen if they had controlled for X? Or run one more MCMC chain?
+Or chosen a different likelihood function?  Will the United Nations
+(now eager to act based the paper) make a wrong move?
 
 The first author convenes a three way video conference with the other
-collaborators while commuting home in his flying car. The group must
-go back to the analyses. Which ones? The ones from 2011? Or 2012? Or
-2018? Where are the files? The next day, one member of the group finds
-some of the files. Now the checks and re-analyses should be
-easy. Right? The student, now professor, is the same person and
-should remember the reason for those bits of code (or at least should
-                                                   remember which series of mouse clicks were used to produce the numbers
-                                                   for that crucial table --- and those mouse clicks should not be time
-                                                   consuming to redo exactly as they were done in 2011, or was it
-                                                   2015?). And, of course, the way Microsoft Word/Stata/SPSS/R/LISREL
-stores files and the way that your machine reads and writes them is
-the same, right --- since Windows and Mac OS X have always existed and
-will always continue to exist more or less as they currently exist? And
-the group knows exactly which bit of code produced which table and
-which figure, right? And they wrote their code following Nagler's
-Maxims \citep{nagler1995coding} and  King's Replication
-Standard \citep{king1995replication} right?
+collaborators during his homeward commute while his flying car is in
+auto-drive mode (video chatting during manual driving having been
+outlawed in his state in 2017). The group must go back to the
+analyses. Which ones?  The ones from 2011? Or 2012? Or 2018? Where are
+the files? The next day, one member of the group who has kept some
+hard-drives around out of nostalgia (the same guy who still owns
+cassette tapes) finds some of the files. Now the checks and
+re-analyses should be easy. Right? The student, now professor, is the
+same person and should remember the reason for those bits of code (or
+at least should remember which series of mouse clicks were used to
+produce the numbers for that crucial table --- and those mouse clicks
+should not be time consuming to redo exactly as they were done in
+2011, or was it 2015?). Right? And, of course, the way Microsoft
+Word/Stata/SPSS/R/LISREL stores files and the way that current machines in 2020
+read and write them is the same --- since Windows and Mac OS
+X have always existed and will always continue to exist more or less
+as they currently exist? Right? And the group knows exactly which bit of code
+produced which table and which figure, right? And they wrote their
+code following Nagler's Maxims \citep{nagler1995coding} and King's
+Replication Standard \citep{king1995replication} right?
+
+Right? Wrong? If the collaborators find themselves answering ``wrong'' to many of those questions
+
+If the original analyses were not done via typing in commands in plain
+text files, these authors will be in a pickle in 2020. 
 
 Just in case one has some doubt about answering these questions, this
 piece aims to amplify some of what we already ought to know from
@@ -387,12 +395,12 @@ what operations were performed on which set of data. I have seen
 command files which do not begin with a call to load data, and I have
 despaired. What is the meaning of \Verb+please-fit(var1 with var2)+ if
 I do not know where var1 var2 come from.\footnote{The command
-                                                  \Verb+please-fit+ and some other R functions used in this essay come
-                                                  from the \Verb+MayIPleaseDoStatistics+ package which emphasizes
-                                                  politeness in data analysis. The commands \Verb+please-fit+ and
-                                                  \Verb+please-plot+ can be blocked and \Verb+would-you-please-fit+ or
-                                                  \Verb+may-I-please-have-a-plot+ can be required using
-                                                  \Verb+options(politeness=99)+ }
+  \Verb+please-fit+ and some other R functions used in this essay come
+  from the \Verb+MayIPleaseDoStatistics+ package which emphasizes
+  politeness in data analysis. The commands \Verb+please-fit+ and
+  \Verb+please-plot+ can be blocked and \Verb+would-you-please-fit+ or
+  \Verb+may-I-please-have-a-plot+ can be required using
+  \Verb+options(politeness=99)+ }
 
 
 
