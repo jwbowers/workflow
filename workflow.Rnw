@@ -2,7 +2,7 @@
 \usepackage{fancyvrb,natbib,url,array,dcolumn,float,booktabs,listings}
 \usepackage[colorlinks=TRUE]{hyperref}
 
-\title{A Few Easy Pieces: \\ How to enhance your relationship with your future self.}
+\title{How to improve your relationship with your future self.}
 
 \author{Jake Bowers\thanks{I owe many thanks to Mark Fredrickson,
     Brian Gaines, Mark Fredrickson, Kieran Healy, Kevin Quinn and Cara
@@ -70,11 +70,12 @@ Very well then I contradict myself, \\
 \citep{whitman1855song}
 \end{verse}
 
-An idea is born in a coffee shop, a seminar, a quiet walk. It is a
-gray winter in 2011, but the idea dispells February's doldrums and
-energizes the student.% Now he knows why he went to graduate school.
+An idea is born in a coffee shop, a seminar, a quiet walk. On this
+gray day in 2011, the idea dispells February's doldrums. The student
+rushes home, mind racing, the cold ignored.
+% Now he knows why he went to graduate school.
 
-This idea inspires a seminar paper in the spring. And a conference
+This idea inspires a seminar paper in the spring. A conference
 paper arises from the seminar paper in collaboration with another
 student in 2012. A dissertation chapter descends from the conference
 paper in 2013. Other dissertation chapters take up 2014. A submission
@@ -86,72 +87,74 @@ professors in three different universities. In 2018 a child is born
 and a paper is published. The United Nations takes an interest in the
 paper in 2019 and hosts a conference to discuss implications of the
 research. In 2020 a first year graduate student in a coffee shop has
-an idea that challenges the analysis in the now famous paper. What
-would happen if they had controlled for X? Or run one more MCMC chain?
+an idea that challenges the results in the now famous paper. What
+would happen if the authors had controlled for X? Or run one more MCMC chain?
 Or chosen a different likelihood function?  Will the United Nations
 (now eager to act based the paper) make a wrong move?
 
 The first author convenes a three way video conference with the other
-collaborators during his homeward commute while his flying car is in
-auto-drive mode (video chatting during manual driving having been
-outlawed in his state in 2017). The group must go back to the
-analyses. Which ones?  The ones from 2011? Or 2012? Or 2018? Where are
-the files? The next day, one member of the group who has kept some
-hard-drives around out of nostalgia (the same guy who still owns
-cassette tapes) finds some of the files. Now the checks and
-re-analyses should be easy. Right? The student, now professor, is the
-same person and should remember the reason for those bits of code (or
-at least should remember which series of mouse clicks were used to
-produce the numbers for that crucial table --- and those mouse clicks
-should not be time consuming to redo exactly as they were done in
-2011, or was it 2015?). Right? And, of course, the way Microsoft
-Word/Stata/SPSS/R/LISREL stores files and the way that current machines in 2020
-read and write them is the same --- since Windows and Mac OS
-X have always existed and will always continue to exist more or less
-as they currently exist? Right? And the group knows exactly which bit of code
-produced which table and which figure, right? And they wrote their
-code following Nagler's Maxims \citep{nagler1995coding} and King's
-Replication Standard \citep{king1995replication} right?
+collaborators during his homeward commute after putting his flying car
+in auto-drive mode.\footnote{One assumes that video chatting during
+  manual driving of flying cars will have been outlawed in his state
+  in 2017.} The group must go back to the analyses. Which ones?  The
+ones from 2011?  Or 2012? Or 2018? Where are the files? The next day,
+one member of the group who has kept some hard-drives around out of
+nostalgia finds some of the files.\footnote{This is the same guy who
+  still owns cassette tapes and compact discs.} Now the checks and
+re-analyses should be easy. Right? The student, now professor, should
+remember the reason for those bits of code (or at least should
+remember which series of mouse clicks were used to produce the numbers
+for that crucial table --- and that mousing should not be time
+consuming to redo exactly as they were done in 2011, or was it
+2015?). Right? And, of course, the way Microsoft
+Word/Stata/SPSS/R/LISREL stores files and the way that current
+machines in 2020 read and write them is the same --- since Windows and
+Mac OS X have always existed and will always continue to exist more or
+less as they currently exist? Right? And the group knows exactly which
+bit of code produced which table and which figure, right? And they
+wrote their code following Nagler's Maxims \citep{nagler1995coding}
+and King's Replication Standard \citep{king1995replication} right?
 
-Right? Wrong? If the collaborators find themselves answering ``wrong'' to many of those questions
-
-If the original analyses were not done via typing in commands in plain
-text files, these authors will be in a pickle in 2020. 
-
-Just in case one has some doubt about answering these questions, this
-piece aims to amplify some of what we already ought to know from
+Right? Wrong? If the collaborators find themselves answering ``wrong''
+to many of the questions posed here then reproducing the analyses will
+take a lot of time if such reproduction is possible at all. This essay
+provides some suggestions for practices which will make such
+reproduction occur much more easily and quickly in the event that
+famous papers require special scrutiny. Specifically, this piece aims
+to amplify some of what we already ought to know from
 \citet{nagler1995coding} and \citet{king1995replication}, and to
 update some of those ideas given current practices, platforms, and
-propensities
+propensities.
 
 %%% This data frame will be used throughout the analyses.
 %%% Putting it up top, so we can use it in the comments section.
-
 <<read.data,echo=FALSE,results=hide>>=
 ##  This read.csv line is slightly more complex than needed because of
 ##  the particular encoding used for characters in the source file.
 dem.nations.df<-read.csv(url("http://www.hks.harvard.edu/fs/pnorris/Data/Democracy%20CrossNational%20Data/Democracy%20Crossnational%20Data%20Spring%202009.csv",encoding="ISO_8859-1"),as.is=TRUE)
-
 row.names(dem.nations.df)<-dem.nations.df$Natabrv ##make the row names more helpful
-
 good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
-@.
-\section{Type, don't click.}
+@
 
-All tables and graphs should be generated from code, not clicking
-(let alone copying and pasting). If I wanted to re-create the figure
-you created but with red lines, including a new variable or specification, I
-should be able to do so with just a few edits to the code.
+\section{Data analysis is computer programming.}
+
+All results (numbers, comparisons, tables, figures) should arise
+generated from code, not series of mouse clicks or copying and
+pasting. If I wanted to re-create the figure you created but including
+a new variable or specification, I should be able to do so with just a
+few edits to the code rather than knowledge of how you used your
+pointing device in your graphical user interface.
 
 Using R, for example, I might specify that the file \Verb+fig1.pdf+
-  was produced by the command, where the \Verb+please-plot+ function was
-loaded elsewhere.
+was produced by the following commands in a file called \Verb+fig1.R+.
 
-\begin{Verbatim}[fontsize=\small]
+<<eval=FALSE>>=
+thedata<-read.csv("Data/thedata.csv")
 pdf('fig1.pdf')
-please-plot(outcome by explanatory)
+please-plot(outcome by explanatory using thedata)
 dev.off()
-\end{Verbatim}
+@ 
+
 
 Now, in the future if I wonder how ``that plot on page 10'' was
 created, if I suitably commented my manuscript or inserted text into
@@ -270,7 +273,7 @@ Comment liberally. Comments are discarded when R runs analysis or LaTeX turns
 your poignant writings into a PDF, so only those who dig into your work will
 see them. They are footnotes on the process of producing your research.
 
-\section{Enjoy literate data analysis.}
+\section{Data analysis is commnication.}
 
 The source code of any pdf document exchanged by the group must be
 available and executable. Say you run some command and then make a
@@ -404,7 +407,7 @@ I do not know where var1 var2 come from.\footnote{The command
 
 
 
-\section{Enabling revision to prevent clobbering and record history.}
+\section{Version control prevents clobbering and record history.}
 
 Group work requires version control.\footnote{See X and Y in this
   issue for more discussion of what version control is.} Many people
@@ -534,7 +537,7 @@ test.times.2.fn()
 
 Ack! I mistyped ``+'' for ``*''. Good thing I wrote the test!
 
-\section{Take advantage of file names to convey information to your future self.}
+\section{File names send messages to your future self.}
 
 Name your files with evocative and descriptive names. Your
 collaborators are less likely to call you at midnight asking for help
@@ -552,54 +555,54 @@ Lots of people are thinking about ``reproducible research'' and
 ``literate programming'' these days. Google those terms. Of course the
 devil is the details: Here I list a few of my own attempts at enabling
 reproducible research. You'll find many other inspiring examples on
-         the web. Luckily, the open source ethos aligns nicely with academic
-         incentives, so we are beginning to find more and more people offering
-         their files online for copying and improvement. By the way, if you do
-         copy and improve, it is polite to alert the person from whom you made
-         the copy about your work.
+the web. Luckily, the open source ethos aligns nicely with academic
+incentives, so we are beginning to find more and more people offering
+their files online for copying and improvement. By the way, if you do
+copy and improve, it is polite to alert the person from whom you made
+the copy about your work.
 
-         I have experimented with three systems so far: (1) for one paper we
-         simply included a Sweave document and data files into a compressed
-         archive \cite{bowers2005dataverse}; (2) for another more computing
-         intensive paper we assembled a set of files which enabled reproduction
-         of our results using the ``make'' system \citep{bowers2008dataverse};
-         and (3) recently I have tried the ``compendium'' approach
-         \citep{gentleman2005reproducible,gentleman2007statistical} which
-         embeds an academic paper with the R package system
-         \cite{bowers2011dataverse}. The benefit of this last system is that
-         one is not required to have access to unix: the compendium is
-         downloadable from within R using \Verb+install.packages()+ and it
-         viewable using the \Verb+vignette()+ function. The idea that one ought
-         to be able to install and run and use an academic paper just as one
-         installs and uses statistical software packages is very attractive and
-         I anticipate that it will become ever easier to turn papers into R
-         packages as creative and energetic folks turn their attention to the
-         question of reproducible research.
+I have experimented with three systems so far: (1) for one paper we
+simply included a Sweave document and data files into a compressed
+archive \cite{bowers2005dataverse}; (2) for another more computing
+intensive paper we assembled a set of files which enabled reproduction
+of our results using the ``make'' system \citep{bowers2008dataverse};
+and (3) recently I have tried the ``compendium'' approach
+\citep{gentleman2005reproducible,gentleman2007statistical} which
+embeds an academic paper with the R package system
+\cite{bowers2011dataverse}. The benefit of this last system is that
+one is not required to have access to unix: the compendium is
+downloadable from within R using \Verb+install.packages()+ and it
+viewable using the \Verb+vignette()+ function. The idea that one ought
+to be able to install and run and use an academic paper just as one
+installs and uses statistical software packages is very attractive and
+I anticipate that it will become ever easier to turn papers into R
+packages as creative and energetic folks turn their attention to the
+question of reproducible research.
 
-         \section{Remember that research ought to be credibile communication.}
-         \begin{quote}
-         [I]f the empirical basis for an article or book cannot
-         be reproduced, of what use to the discipline are its conclusions?
-         What purpose does an article like this serve?
-         \cite[445]{king1995replication}
-         \end{quote}
+\section{Remember that research ought to be credibile communication.}
+\begin{quote}
+  [I]f the empirical basis for an article or book cannot be
+  reproduced, of what use to the discipline are its
+  conclusions?  What purpose does an article like this serve?
+  \cite[445]{king1995replication}
+\end{quote}
 
-         We all always collaborate. Many of us collaborate with groups of
-         people at one moment in time as we race against a deadline. All of us
-         collaborate with ourselves over time.\footnote{What is a reasonable
-                                                        time-span for which to plan for self-collaboration on a single idea?
-                                                        Ask your advisers how long it took them from idea to dissertation to
-                                                        book (articles).}
-         The time-frames over which collaboration are required --- whether
-         among a group of people working together or within a single scholar's
-productive life or probably both --- are much longer than any given
-version of any given software will easily exist. \href{http://en.wikipedia.org/wiki/Plain_text#Usage}{Plain text} is the
-exception. Thus, even as we extol version control systems, one must
-have a way to ensure future access to them in a form that will still
-be around when sentient cockroaches finally join political science
-departments (by then dominated by cetaceans after humans are mostly
-uploads).\footnote{The arrival of the six-legged social scientists
-  revives Emacs and finally makes Ctrl-a Ctrl-x
+We all always collaborate. Many of us collaborate with groups of
+people at one moment in time as we race against a deadline. All of us
+collaborate with ourselves over time.\footnote{What is a reasonable
+  time-span for which to plan for self-collaboration on a single idea?
+  Ask your advisers how long it took them from idea to dissertation to
+  book (articles).}  The time-frames over which collaboration are
+required --- whether among a group of people working together or
+within a single scholar's productive life or probably both --- are
+much longer than any given version of any given software will easily
+exist. \href{http://en.wikipedia.org/wiki/Plain_text#Usage}{Plain
+  text} is the exception. Thus, even as we extol version control
+systems, one must have a way to ensure future access to them in a form
+that will still be around when sentient cockroaches finally join
+political science departments (by then dominated by cetaceans after
+humans are mostly uploads).\footnote{The arrival of the six-legged
+  social scientists revives Emacs and finally makes Ctrl-a Ctrl-x
   Esc-x Ctrl-c a \href{http://kieran.healy.usesthis.com/}{reasonable
     key combination}.}
 
