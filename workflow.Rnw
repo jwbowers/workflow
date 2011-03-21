@@ -138,84 +138,54 @@ good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
 
 \section{Data analysis is computer programming.}
 
-All results (numbers, comparisons, tables, figures) should arise
-generated from code, not series of mouse clicks or copying and
-pasting. If I wanted to re-create the figure you created but including
-a new variable or specification, I should be able to do so with just a
-few edits to the code rather than knowledge of how you used your
-pointing device in your graphical user interface.
+All results (numbers, comparisons, tables, figures) should arise from
+code, not series of mouse clicks or copying and pasting. If I wanted
+to re-create the figure you created but including a new variable or
+specification, I should be able to do so with just a few edits to the
+code rather than knowledge of how you used your pointing device in
+your graphical user interface.
 
 Using R, for example, I might specify that the file \Verb+fig1.pdf+
-was produced by the following commands in a file called \Verb+fig1.R+.
+was produced by the following commands in a file called
+\Verb+fig1.R+.\footnote{The command \Verb+please-plot+ and some other
+  R functions used in this essay come from the
+  \Verb+MayIPleaseDoStatistics+ package which emphasizes politeness in
+  data analysis. The short hand commands like \Verb+please-plot+ can
+  be blocked and \Verb+may-I-please-have-a-plot+ can be required using
+  \Verb+options(politeness=99)+ }
 
-<<eval=FALSE>>=
+\begin{Verbatim}[fontsize=\small]
 thedata<-read.csv("Data/thedata.csv")
 pdf('fig1.pdf')
-please-plot(outcome by explanatory using thedata)
+please-plot(outcome by explanatory using thedata. red lines please.)
 dev.off()
-@ 
+\end{Verbatim}
 
 
 Now, in the future if I wonder how ``that plot on page 10'' was
-created, if I suitably commented my manuscript or inserted text into
-my MANIFEST.txt file I will know (1) ``that plot'' is from a file
-called ``fig1.pdf'' and (2) fig1.pdf was created in
-\Verb+figs1and2.R+. In the future, if I wanted to quickly change
-fig1.pdf, I could edit the commands quickly and easily to do
-so. Another good practice is to name the files descriptively, so that
-we don't in fact have ``fig1.pdf'' but
-``political-participation-by-education-in-the-south.pdf''. Now, if Figure is
-moved to an appendix, the file name is still meaningful.
+created: (1) ``that plot'' is from a file called ``fig1.pdf'' and
+fig1.pdf was created in \Verb+fig1.R+. In a future where R still
+exists, if I wanted to change the figure, I could edit the commands
+quickly and easily to do so (since R commands are written in plain
+text, and plain text is a format that will be around for a long time
+to come). 
 
-% An even nicer way to ensure that figures and tables are reproducible
-% or easily modifiable by your older and wiser but more harried self is
-% to use literate programming. For example, to produce the
-% Figure~\ref{fig:giniprot}, I insert the following chunk of code into
-% the LaTeX document, and then I asked R to process the document, and
-% then produce a pdf file in which the code has disappeared to be
-% replaced with an actual figure.\footnote{One can insert the same code
-%   chunk in an OpenOffice document and use the odfWeave package to
-%   produce OpenOffice documents in which figures and tables replace
-%   code. One may also use the LyX interface to LaTeX to write LaTeX
-%   documents within a WYSIWYG environment.}
-
-
-
-<<fig1code,echo=TRUE,fig=FALSE>>=
-##  Make a scatterplot of Protest by Inequality
-with(good.df,plot(Gini2004/100,protac2000,
-                  xlab='Gini Coefficient 2004 (UNDP)',
-                  ylab='Mean Protest Activities\n(World Values Survey 1980-2000)',
-                  cex=.8))
-
-##  Label a few interesting points
-with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
-     text(Gini2004/100,protac2000,labels=Nation,srt=0,cex=.6,pos=3,offset=.1))
-@
-
-
-\begin{figure}[H]
-  \begin{center}
-<<fig1plot,echo=FALSE,fig=TRUE,width=3,height=3>>=
-par(bty="n",xpd=TRUE,pty="s",tcl=-.25)
-<<fig1code>>
-@
-    \caption{Protest activity by income inequality \citep[from][]{norris2009data}.}\label{fig:giniprot}
-  \end{center}
-\end{figure}
-
-
-The principle here is to know where tables and figures came from ---
-to know what commands created which figures and tables.
+\paragraph{Principle} Know the provenance of your results so that your
+future self or current collaborators can quickly and easily reproduce
+your work (and make changes).% --- to know what
+% commands created which figures and tables.
 
 \section{No data analyst is an island.}
-% MMF: My original title before I saw you had you own comment section
-% \section{Comment on your own work. }
+Data analysis involves a long series of decisions. Each decision
+requires justification.  The body of the paper or book or report will
+justify the most important decisions. Some decisions will be too small
+and technical for inclusion in the paper itself. These need to be
+documented in the code itself \citep{nagler1995coding}.
 
-Comments, or text inside of a file that is not executed, are a message to your
-future self and other consumers of your work. 
-Read \citet{nagler1995coding}. Comment your code. Luckily, if you are
-using a literate programming practice (Sweave, odfWeave, using R2HTML,
+Comments --- unexecuted text inside of a script --- are a message to
+your future self and other consumers of your work.  Read
+. Comment your code. Luckily, if you are using
+a literate programming practice (Sweave, odfWeave, using R2HTML,
 etc..), you can write paragraphs to surround your code as well a
 technical comments in the code itself. If you are not using a strictly
 literate programming practice then use whatever commenting protocol
@@ -234,11 +204,7 @@ exists in your analysis language. Here are some examples:
 % Finally, the percent symbol is a comment in TeX.
 \end{verbatim}
 
-A given analysis of a given collection is a long series of
-decisions. You need to be able to justify them. Often you justify them
-in the body of the paper you are writing. Some decisions will be too small and
-technical for inclusion in the paper itself. These need to be
-documented in the code itself.
+
 
 Using R, for example, the comment is marked using the
 pound sign. Notice that I've left in a regression not run for the
@@ -397,13 +363,7 @@ The principle regarding data is to know where the data came from and
 what operations were performed on which set of data. I have seen
 command files which do not begin with a call to load data, and I have
 despaired. What is the meaning of \Verb+please-fit(var1 with var2)+ if
-I do not know where var1 var2 come from.\footnote{The command
-  \Verb+please-fit+ and some other R functions used in this essay come
-  from the \Verb+MayIPleaseDoStatistics+ package which emphasizes
-  politeness in data analysis. The commands \Verb+please-fit+ and
-  \Verb+please-plot+ can be blocked and \Verb+would-you-please-fit+ or
-  \Verb+may-I-please-have-a-plot+ can be required using
-  \Verb+options(politeness=99)+ }
+I do not know where var1 var2 come from.
 
 
 
