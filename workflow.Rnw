@@ -150,15 +150,15 @@ was produced by the following commands in a file called
 \Verb+fig1.R+.\footnote{The command \Verb+please-plot+ and some other
   R functions used in this essay come from the
   \Verb+MayIPleaseDoStatistics+ package which emphasizes politeness in
-  data analysis. The short hand commands like \Verb+please-plot+ can
-  be blocked and \Verb+may-I-please-have-a-plot+ can be required using
+  data analysis. Functions like \Verb+please-plot+ can
+  be blocked and more polite versions such as \Verb+may-I-please-have-a-plot+ can be required using
   \Verb+options(politeness=99)+ }
 
 \begin{Verbatim}[fontsize=\small]
-thedata<-read.csv("Data/thedata.csv")
-pdf('fig1.pdf')
+thedata<-read.csv("Data/thedata-15-03-2011.csv") ## Read the data
+pdf('fig1.pdf') ## begin writing to the pdf file
 please-plot(outcome by explanatory using thedata. red lines please.)
-dev.off()
+dev.off() ## stop writing to the pdf file
 \end{Verbatim}
 
 
@@ -175,69 +175,74 @@ future self or current collaborators can quickly and easily reproduce
 your work (and make changes).% --- to know what
 % commands created which figures and tables.
 
-\section{No data analyst is an island.}
+\section{No data analyst is an island for long.}
 Data analysis involves a long series of decisions. Each decision
-requires justification.  The body of the paper or book or report will
+requires justification.  The text itself will
 justify the most important decisions. Some decisions will be too small
 and technical for inclusion in the paper itself. These need to be
 documented in the code itself \citep{nagler1995coding}.
 
 Comments --- unexecuted text inside of a script --- are a message to
-your future self and other consumers of your work.  Read
-. Comment your code. Luckily, if you are using
-a literate programming practice (Sweave, odfWeave, using R2HTML,
-etc..), you can write paragraphs to surround your code as well a
-technical comments in the code itself. If you are not using a strictly
-literate programming practice then use whatever commenting protocol
-exists in your analysis language. Here are some examples:
-\begin{verbatim}
-# This is a comment in R.
-# With a a second line.
+your future self and other consumers of your work. Luckily, if you are
+using a literate programming practice (ex. Sweave or odfWeave), you
+can write paragraphs to surround your code as well as technical
+comments in the code itself. If you are not using a strictly literate
+programming practice then use whatever commenting protocol exists in
+your analysis language. R, for example, considers text marked with
+``\#'' as a comment. Here for example I comment about a linear model
+run for a paper and also include comments about another model run for
+due diligence.
 
-* This is a comment in a Stata .do file
-* You can also embed comments at the ends of lines using /* ... */
-
-/* SAS uses a similar convention to Stata
-   and allows multi-line comments like this.
-*/
-
-% Finally, the percent symbol is a comment in TeX.
-\end{verbatim}
-
-
-
-Using R, for example, the comment is marked using the
-pound sign. Notice that I've left in a regression not run for the
-paper directly, but run as a part of the due diligence process of
-writing the paper.
  
 <<reg1,echo=TRUE,results=verb>>=
-
- ##  Repeat the regression run for Table~\ref{tab:protest}
- ##  Do political rights predict protest reporting?
- lm1<-lm(protac2000 ~ I(Gini2004/100) + meanpr, data=good.df)
- ##  Q: Was it worthwhile controlling for political rights?
- lm2<-lm(protac2000~I(Gini2004/100),data=good.df)
- coef(lm2)[2]-coef(lm1)[2]
- ##  A: Yes (around 3/4 an act of protest difference)
+##  Repeat the regression run for Table~\ref{tab:protest}
+##  Do political rights predict protest reporting?
+lm1 <- lm(protac2000 ~ I(Gini2004/100) + meanpr, data=good.df)
+##  Q: Was it worthwhile controlling for political rights?
+lm2 <- lm(protac2000~I(Gini2004/100),data=good.df)
+coef(lm2)[2]-coef(lm1)[2]
+##  A: Yes (around 3/4 an act of protest difference)
 @
 
-If you need to track down something more than a small detail, but yet
-the sleuthing is really a footnote to the article, then you can create
-another file to explore and report on those questions for the research
-group. The writing in such a memo can be more informal, but the norms
-of reproducibility ought to be the same as for the main paper. After
-all, you will be releasing both documents (probably) publicly upon
-publication of the article if not before.
+Why leave messages for yourself (or others)? These messages help you
+retrace and justify the steps of your data-analytic journey in case
+you ever need to revist them as the work moves from seminar paper to
+conference paper to poster back to paper to dissertation and
+onwards. Notice one another benefit of coding for an audience: we
+learn by teaching. By assuming that others will look at your code, you
+will be more likely to write clearer code, or perhaps even to learn
+more about what you are doing as you do it.
 
-Notice one another benefit of coding for an audience: we learn by
-teaching. By assuming that others will look at your code, you will be
-more likely to write clearer code, or perhaps even to learn more about
-what you are doing as you do it.
+Sometimes simple comments in the main command file are not enough:
+imagine if the authors had arrived at the bootstrap only after running
+simulations to assess the coverage of that procedure compared to a
+profiled likelihood based approach. Rather than include time consuming
+simulations in the main body of their Sweave document, they might have
+written some memos that discuss the tradeoffs and implementation
+decisions involved in such a comparison. In the main text they would
+have just read in the results of the simulation study with an
+appropriate comment:
 
-Comment liberally. Comments are discarded when R runs analysis or LaTeX turns
-your poignant writings into a PDF, so only those who dig into your work will
-see them. They are footnotes on the process of producing your research.
+<<bsreg1,echo=TRUE,results=verb,eval=FALSE>>=
+## We assessed the bootstrap against direct inspection of the likelihood profile
+## in the file Memos/shouldwebootstrap.Rnw. Here we read in the results of the bootstrap procedure:
+load("Memos/bsresults.rda") ## using a compressed binary format here for speed
+@ 
+
+Comment liberally. Comments are discarded when R runs analysis or
+LaTeX turns text into a pdf, so only those who dig into your work will
+see them. They are footnotes on the process of producing your
+research.
+
+% If you need to track down something more than a small detail, but yet
+% the sleuthing is really a footnote to the article, then you can create
+% another file to explore and report on those questions for the research
+% group. The writing in such a memo can be more informal, but the norms
+% of reproducibility ought to be the same as for the main paper. After
+% all, you will be releasing both documents (probably) publicly upon
+% publication of the article if not before.
+
+
 
 \section{Data analysis is commnication.}
 
