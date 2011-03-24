@@ -2,10 +2,10 @@
 \usepackage{fancyvrb,natbib,url,array,dcolumn,float,booktabs,listings}
 \usepackage[colorlinks=TRUE]{hyperref}
 
-\title{How to improve your relationship with your future self.}
+\title{Six steps to a better relationship with your future self.}
 
 \author{Jake Bowers\thanks{I owe many thanks to Mark Fredrickson,
-    Brian Gaines, Mark Fredrickson, Kieran Healy, Kevin Quinn and Cara
+    Brian Gaines, Kieran Healy, Kevin Quinn and Cara
     Wong for direct help on this document and to Mika LaVaque-Manty
     and Ben Hansen for many useful discussions on this topic. The
     source code for this document may be freely downloaded and
@@ -16,13 +16,13 @@
 \newcolumntype{.}{D{.}{.}{1.2}}
 
 \usepackage[noae,nogin]{Sweave} %Declaring this explicitly so that I can modify the Sweave environment here rather in Sweave.sty which will be c
-\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=.5em,fontsize=\small}
-\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=.5em,fontsize=\small}
-\DefineVerbatimEnvironment{Scode}{Verbatim}  {xleftmargin=.5em,fontsize=\small}
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=.5em,fontsize=\footnotesize}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=.5em,fontsize=\footnotesize}
+\DefineVerbatimEnvironment{Scode}{Verbatim}  {xleftmargin=.5em,fontsize=\footnotesize}
 \fvset{listparameters={\setlength{\topsep}{0pt}}}
 \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
 \SweaveOpts{keep.source=TRUE}  %Show comments
-\fvset{fontsize=\small} %slightly smaller verbatim font
+\fvset{fontsize=\footnotesize} %slightly smaller verbatim font
 
 %% These next lines tell latex that it is ok to have a single graphic
 %% taking up most of a page, and they also decrease the space arou
@@ -75,39 +75,40 @@ gray day in 2011, the idea dispells February's doldrums. The student
 rushes home, mind racing, the cold ignored.
 % Now he knows why he went to graduate school.
 
-This idea inspires a seminar paper in the spring. A conference
-paper arises from the seminar paper in collaboration with another
-student in 2012. A dissertation chapter descends from the conference
-paper in 2013. Other dissertation chapters take up 2014. A submission
-to a journal with the original co-author and a new collaborator
-happens in 2015. Revision and resubmission wait until 2017 while
-harried editors, reviewers and authors strive to balance teaching,
-service, and life. By now, the three lucky collaborators work as
-professors in three different universities. In 2018 a child is born
-and a paper is published. The United Nations takes an interest in the
-paper in 2019 and hosts a conference to discuss implications of the
-research. In 2020 a first year graduate student in a coffee shop has
-an idea that challenges the results in the now famous paper. What
-would happen if the authors had controlled for X? Or run one more MCMC chain?
-Or chosen a different likelihood function?  Will the United Nations
-(now eager to act based the paper) make a wrong move?
+This idea inspires a seminar paper in the spring. A conference paper
+arises from the seminar paper in collaboration with another student in
+2012. A dissertation chapter descends from the conference paper in
+2013. Other dissertation chapters take up 2014. A submission to a
+journal with the original co-author and a new collaborator happens in
+2015. Revision and resubmission wait until 2017 while harried editors,
+reviewers and authors strive to balance research, teaching, service,
+and life. By now, the three lucky collaborators work as professors in
+three different universities. In 2018 a child is born and a paper is
+published. The United Nations takes an interest in the paper in 2019
+and hosts a conference to discuss implications of the research. In
+2020 a first year graduate student in a coffee shop has an idea that
+challenges the results in the now famous paper. What would happen if
+the authors had controlled for X? Or included information now
+available but missing in 2012?  Or chosen a different likelihood
+function?  Will the United Nations (now eager to act based the paper)
+make a wrong move?
 
 The first author convenes a three way video conference with the other
 collaborators during his homeward commute after putting his flying car
 in auto-drive mode.\footnote{One assumes that video chatting during
   manual driving of flying cars will have been outlawed in his state
-  in 2017.} The group must go back to the analyses. Which ones?  The
+  by 2020.} The group must go back to the analyses. Which ones?  The
 ones from 2011?  Or 2012? Or 2018? Where are the files? The next day,
 one member of the group who has kept some hard-drives around out of
 nostalgia finds some of the files.\footnote{This is the same guy who
-  still owns cassette tapes and compact discs.} Now the checks and
+  still owns cassette tapes and compact discs.} Now
 re-analyses should be easy. Right? The student, now professor, should
 remember the reason for those bits of code (or at least should
 remember which series of mouse clicks were used to produce the numbers
 for that crucial table --- and that mousing should not be time
-consuming to redo exactly as they were done in 2011, or was it
+consuming to redo exactly as it was done in 2011 \ldots or was it
 2015?). Right? And, of course, the way Microsoft
-Word/Stata/SPSS/R/LISREL stores files and the way that current
+Word/Stata/SPSS/R/LISREL understands files and the way that 
 machines in 2020 read and write them is the same --- since Windows and
 Mac OS X have always existed and will always continue to exist more or
 less as they currently exist? Right? And the group knows exactly which
@@ -116,15 +117,17 @@ wrote their code following Nagler's Maxims \citep{nagler1995coding}
 and King's Replication Standard \citep{king1995replication} right?
 
 Right? Wrong? If the collaborators find themselves answering ``wrong''
-to many of the questions posed here then reproducing the analyses will
-take a lot of time if such reproduction is possible at all. This essay
-provides some suggestions for practices which will make such
-reproduction occur much more easily and quickly in the event that
-famous papers require special scrutiny. Specifically, this piece aims
-to amplify some of what we already ought to know from
-\citet{nagler1995coding} and \citet{king1995replication}, and to
-update some of those ideas given current practices, platforms, and
-propensities.
+to the questions posed here then reproducing, updating, or changing
+the analyses will take a lot of time. If reproduction is hard to do,
+then the reputations of the scholars will suffer and, more
+importantly, the UN will be unable to implement a master plan for
+world peace. This essay provides some suggestions for practices which
+will make such reproduction occur much more easily and quickly in the
+event that famous papers require special scrutiny. Specifically, this
+piece aims to amplify some of what we already ought to know from
+\citet{nagler1995coding} and \citet{king1995replication}, and to add
+to some of those ideas given current practices, platforms, and
+possibilities.
 
 %%% This data frame will be used throughout the analyses.
 %%% Putting it up top, so we can use it in the comments section.
@@ -154,23 +157,36 @@ was produced by the following commands in a file called
   be blocked and more polite versions such as \Verb+may-I-please-have-a-plot+ can be required using
   \Verb+options(politeness=99)+ }
 
-\begin{Verbatim}[fontsize=\small]
+\begin{Verbatim}[fontsize=\footnotesize]
 thedata<-read.csv("Data/thedata-15-03-2011.csv") ## Read the data
 pdf('fig1.pdf') ## begin writing to the pdf file
 please-plot(outcome by explanatory using thedata. red lines please.)
+please-add-a-line(using model1)
+## Note to self: the following is no different from model1
+## model2<-please-fit(outcome by explanatory+explanatory^2 using thedata
+## summary(abs(fitted(model1)-fitted(model2)))
 dev.off() ## stop writing to the pdf file
 \end{Verbatim}
 
 
 Now, in the future if I wonder how ``that plot on page 10'' was
-created: (1) ``that plot'' is from a file called \Verb+fig1.pdf+ and
-\Verb+fig1.pdf+ was created in \Verb+fig1.R+. In a future where R still
-exists, if I wanted to change the figure, I could edit the commands
-quickly and easily to do so (since R commands are written in plain
-text, and plain text is a format that will be around for a long time
-to come). 
+created, I will know: (1) ``that plot'' is from a file called
+\Verb+fig1.pdf+ and (2) \Verb+fig1.pdf+ was created in
+\Verb+fig1.R+. In a future where R still exists, if I wanted to change
+the figure, I could edit the commands quickly and easily to do so
+(since R commands are written in
+\href{http://en.wikipedia.org/wiki/Plain_text}{plain text}, and plain
+text is a format that will be around as long as computer programmers
+write computer programs). In a future where R does not exist, I will
+at least be able to read the plain text R commands and use them to
+write code in my new favorite statistical computing
+language.\footnote{A most, since R is open source, I will be able to
+  download R, download an old fashioned open-source operating systems
+  (like Ubuntu 10), and run the old-fashioned statistical computing
+  environment in the old-fashioned operating system in a virtual
+  machine on my new-fashioned actual machine.}
 
-\paragraph{Principle} Know the provenance of your results so that your
+\paragraph{Step 1} Know the provenance of your results so that your
 future self or current collaborators can quickly and easily reproduce
 your work (and make changes).% --- to know what
 % commands created which figures and tables.
@@ -179,42 +195,51 @@ your work (and make changes).% --- to know what
 
 \section{No data analyst is an island for long.}
 Data analysis involves a long series of decisions. Each decision
-requires justification.  The text itself will
-justify the most important decisions. Some decisions will be too small
-and technical for inclusion in the paper itself. These need to be
-documented in the code itself \citep{nagler1995coding}.
+requires justification.  Some decisions will be too small and
+technical for inclusion in the paper itself. These need to be
+documented in the code itself \citep{nagler1995coding}. Paragraphs and
+citations in the article itself will justify the most important
+decisions.
 
-\subsection{Comment your code.}
+\subsection{Code to communicate: Comment your code.}
 Comments --- unexecuted text inside of a script --- are a message to
-your future self and other consumers of your work. Luckily, if you are
-using a literate programming practice (ex. Sweave or odfWeave), you
-can write paragraphs to surround your code as well as technical
-comments in the code itself. If you are not using a strictly literate
-programming practice then use whatever commenting protocol exists in
-your analysis language. R, for example, considers text marked with
-``\#'' as a comment. Here for example I comment about a linear model
-run for a paper and also include comments about another model run for
-due diligence.
+collaborators (including your future self) and other consumers of your
+work. In the above code, I used comments to explain the lines to
+readers unfamiliar with R and to remember that I had tried a different
+specification but decided not to use it because adding the squared
+term did not really change the predictions.\footnote{R considers text
+  marked with ``\#'' as a comment.}
+
+
+% Luckily, if you are
+% using a literate programming practice (ex. Sweave or odfWeave), you
+% can write paragraphs to surround your code as well as technical
+% comments in the code itself. If you are not using a strictly literate
+% programming practice then use whatever commenting protocol exists in
+% your analysis language. R, for example, considers text marked with
+% ``\#'' as a comment. Here for example I comment about a linear model
+% run for a paper and also include comments about another model run for
+% due diligence.
 
  
-<<reg1,echo=TRUE,results=verb>>=
-##  Repeat the regression run for Table~\ref{tab:protest}
-##  Do political rights predict protest reporting?
-lm1 <- lm(protac2000 ~ I(Gini2004/100) + meanpr, data=good.df)
-##  Q: Was it worthwhile controlling for political rights?
-lm2 <- lm(protac2000~I(Gini2004/100),data=good.df)
-coef(lm2)[2]-coef(lm1)[2]
-##  A: Yes (around 3/4 an act of protest difference)
-@
+% <<reg1,echo=TRUE,results=verb>>=
+% ##  Repeat the regression run for Table~\ref{tab:protest}
+% ##  Do political rights predict protest reporting?
+% lm1 <- lm(protac2000 ~ I(Gini2004/100) + meanpr, data=good.df)
+% ##  Q: Was it worthwhile controlling for political rights?
+% lm2 <- lm(protac2000~I(Gini2004/100),data=good.df)
+% coef(lm2)[2]-coef(lm1)[2]
+% ##  A: Yes (around 3/4 an act of protest difference)
+% @
 
 Messages left for your future self (or near-future others) help
-retrace and justify the steps of your data-analytic journey in case
-you ever need to revist them as the work moves from seminar paper to
-conference paper to poster back to paper to dissertation and
-onwards. Notice one another benefit of coding for an audience: we
-learn by teaching. By assuming that others will look at your code, you
-will be more likely to write clearer code, or perhaps even to learn
-more about what you are doing as you do it.
+retrace and justify your decisions. If you ever need to revist
+them as the work moves from seminar paper to conference paper to
+poster back to paper to dissertation and onwards. Notice one another
+benefit of coding for an audience: we learn by teaching. By assuming
+that others will look at your code, you will be more likely to write
+clearer code, or perhaps even to learn more about what you are doing
+as you do it.
 
 Comment liberally. Comments are discarded when R runs analysis or
 LaTeX turns text into a pdf, so only those who dig into your work will
