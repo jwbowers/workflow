@@ -22,7 +22,7 @@
 \DefineVerbatimEnvironment{Scode}{Verbatim}  {xleftmargin=.5em,fontsize=\footnotesize}
 \fvset{listparameters={\setlength{\topsep}{0pt}}}
 \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
-\SweaveOpts{keep.source=TRUE}  %Show comments
+  %Show comments
 \fvset{fontsize=\footnotesize} %slightly smaller verbatim font
 
 %% These next lines tell latex that it is ok to have a single graphic
@@ -46,24 +46,6 @@
 \maketitle
 
 
-<<initialize,echo=FALSE,results=hide>>=
-  ##First, just setup the \R environment:
-  options(SweaveHooks=list(
-            fig=function(){
-              par(mar=c(3.5, 3, 1.1, 0),
-                  pty="s",
-                  mgp=c(1.5,0.5,0),
-                  oma=c(0,0,0,0))},#,
-            echo=function(){options(continue=" ") ##Don't show "+" prompts,
-                            options(prompt=" ")}
-            ),
-          digits=3,
-          scipen=8,
-          width=50,
-          error=function(){options(prompt="> ",continue="+ ");NULL}
-          )
-
-@
 
 
 \begin{verse}
@@ -132,15 +114,6 @@ those ideas given current practices, platforms, and possibilities.
 
 %%% This data frame will be used throughout the analyses.
 %%% Putting it up top, so we can use it in the comments section.
-<<read.data,echo=FALSE,results=hide>>=
-##  This read.csv line is slightly more complex than needed because of
-##  the particular encoding used for characters in the source file.
-dem.nations.df<-read.csv(url("http://www.hks.harvard.edu/fs/pnorris/Data/Democracy%20CrossNational%20Data/Democracy%20Crossnational%20Data%20Spring%202009.csv",encoding="ISO_8859-1"),as.is=TRUE)
-row.names(dem.nations.df)<-dem.nations.df$Natabrv ##make the row names more helpful
-good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
-good.df$gini04<-good.df$Gini2004/100
-good.df$protac00<-good.df$protac2000
-@
 
 \section{Data analysis is computer programming.}\label{sec:data-analys-comp}
 
@@ -331,24 +304,10 @@ called Sweave \citep{Leis:2005}.\footnote{Support for Sweave is
 \end{figure}
 \end{Verbatim}
 
-<<fig1code,echo=FALSE,fig=FALSE>>=
-##  Make a scatterplot of Protest by Inequality
-with(good.df,plot(gini04,protac00,
-                  xlab='Gini Coefficient 2004 (UNDP)',
-                  ylab='Mean Protest Activities\n(World Values Survey 1980-2000)',
-                  cex=.8))
-
-##  Label a few interesting points
-with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
-     text(gini04,protac00,labels=Nation,srt=0,cex=.6,pos=3,offset=.1))
-@
 
 \begin{figure}[H]
   \begin{center}
-<<fig1plot,echo=FALSE,fig=TRUE,width=4,height=4>>=
-par(bty="n",xpd=TRUE,pty="s",tcl=-.25)
-<<fig1code>>
-@
+\includegraphics{workflow-fig1plot}
     \caption{Protest activity by income inequality \citep[from][]{norris2009data}.}
     \label{fig:giniprot}
   \end{center}
@@ -365,46 +324,29 @@ see how Table~\ref{tab:protest} was also generated directly from a
 regression object.\footnote{\citet{beck2010reg} inspired this
   particular presentation of a linear model.}
 
-<<maketable, echo=FALSE, results=hide>>=
-  lm1<-lm(protac00~gini04+meanpr,data=good.df)  #  Run the regression
 
-##  The next lines extract relevant and useful output from the
-##  regression object, following Neal Beck's TPM article 2010.
-themat<-cbind(summary(lm1)$coef[,c("Estimate","Std. Error")],confint(lm1))
-n<-length(lm1$fitted.values)
-r2<-signif(summary(lm1)$r.squared,2)
-est.sigma<-signif(summary(lm1)$sigma,2)
-colnames(themat)[3:4]<-c("~{}","~{}")
-row.names(themat)<-c("Intercept","Income Inequality (lower=more equal)","Mean Political Rights (lower=more rights)")
 
-library(xtable)
-thextab<-xtable(themat,align=c("l",rep(".",4)),digits=1,
-                caption="People living in countries with unequal
+% latex table generated in R 2.12.2 by xtable 1.5-6 package
+% Sat Mar 26 09:57:24 2011
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{l....}
+   \toprule 
+ &
+             \multicolumn{1}{c}{Coef} &
+             \multicolumn{1}{c}{Std. Err.} &
+             \multicolumn{2}{c}{95\% CI} \\ \cmidrule(r){2-5} Intercept & 1.5 & 0.2 & 1.2 & 1.8 \\ 
+  Income Inequality (lower=more equal) & -1.0 & 0.4 & -1.9 & -0.2 \\ 
+  Mean Political Rights (lower=more rights) & -0.2 & 0.0 & -0.2 & -0.1 \\ 
+   & \multicolumn{4}{c}{n: 53,   resid.sd: 0.28, R$^2$: 0.57} \\ \bottomrule\end{tabular}
+\caption{People living in countries with unequal
   income distributions report less protest activity to World Values
   Survey interviewers than people living in countries with relatively
   more equal income distributions, adjusting for average political
-  rights as measured by Freedom House 1980--2000. Data from \\citep{norris2009data}.",label="tab:protest")
-@
-
-
-<<printtable,echo=FALSE,results=tex>>=
-  print(thextab,include.colnames=FALSE,
-        hline.after=NULL,
-        table.placement="H",
-        add.to.row=list(
-          pos=list(0,3),
-          command=c(
-            "\\toprule \n &
-             \\multicolumn{1}{c}{Coef} &
-             \\multicolumn{1}{c}{Std. Err.} &
-             \\multicolumn{2}{c}{95\\% CI} \\\\ \\cmidrule(r){2-5} ",
-            paste("& \\multicolumn{4}{c}{n: ",n,",",
-                  "   resid.sd: ",signif(est.sigma),
-                  ", R$^2$: ",r2,"} \\\\ \\bottomrule",sep="")
-            )
-          ))
-@
-
+  rights as measured by Freedom House 1980--2000. Data from \citep{norris2009data}.}
+\label{tab:protest}
+\end{center}
+\end{table}
 
 
 
@@ -653,27 +595,30 @@ Say I want to write a function to multiply a number by 2. If my
 function works, when I give it the number 4, I should see it return
 the number 8 and when I give it -4, I should get -8.
 
-<<unit.test>>=
-##  The test function:
-test.times.2.fn <- function(){
-  ##  This function tests times.2.fn
-  if (times.2.fn(thenumber=4) ==  8 &
-      times.2.fn(thenumber=-4) == -8) { 
-    print("It works!")
-  } else { print("It does not work!")
-         }
-}
-
-##  The function:
-times.2.fn <- function(thenumber){
-  ##  This function multiplies a scalar number by 2
-  ##  thenumber is a scalar number
-  thenumber+2
-}
-
-##  Use the test function
-test.times.2.fn()
-@
+\begin{Schunk}
+\begin{Sinput}
+ ##  The test function:
+ test.times.2.fn <- function(){
+   ##  This function tests times.2.fn
+   if (times.2.fn(thenumber=4) ==  8 &
+       times.2.fn(thenumber=-4) == -8) { 
+     print("It works!")
+   } else { print("It does not work!")
+          }
+ }
+ ##  The function:
+ times.2.fn <- function(thenumber){
+   ##  This function multiplies a scalar number by 2
+   ##  thenumber is a scalar number
+   thenumber+2
+ }
+ ##  Use the test function
+ test.times.2.fn()
+\end{Sinput}
+\begin{Soutput}
+[1] "It does not work!"
+\end{Soutput}
+\end{Schunk}
 
 Ack! I mistyped ``+'' for ``*''. Good thing I wrote the
 test!\footnote{A more common example of this kind of testing occur
@@ -823,6 +768,8 @@ or on a quiet walk.
 
 
 \end{document}
-<<>>=
-options(prompt="> ",continue="+ ")
-@
+\begin{Schunk}
+\begin{Sinput}
+ options(prompt="> ",continue="+ ")
+\end{Sinput}
+\end{Schunk}
