@@ -105,7 +105,7 @@ ones from 2011?  Or 2012? Or 2018? Where are the files? The next day,
 one member of the group who has kept some hard-drives around out of
 nostalgia finds some of the files.\footnote{This is the same guy who
   still owns cassette tapes and compact discs.} Now
-re-analyses should be easy. Right? The student, now professor, should
+re-analysis should be easy. Right? The student, now professor, should
 remember the reason for those bits of code (or at least should
 remember which series of mouse clicks were used to produce the numbers
 for that crucial table as it was done in 2011 \ldots or was it
@@ -118,7 +118,7 @@ bit of code produced which table and which figure, right? And they
 wrote their code following Nagler's Maxims \citep{nagler1995coding}
 and King's Replication Standard \citep{king1995replication}, right?
 
-If the collaborators find themselves say ``Wrong'' in
+If the collaborators find themselves saying ``Wrong'' in
 answer to the questions posed here then reproducing, updating, or
 changing the original analyses will take a lot of time. If
 reproduction is hard to do, then the reputations of the scholars will
@@ -224,7 +224,7 @@ work. In the above code chunk, I used comments to explain the lines to
 readers unfamiliar with R and to remember that I had tried a different
 specification but decided not to use it because adding the squared
 term did not really change the substantive story arising from the
-model.\footnote{R considers text marked with \Verb+#+ as a comment.}
+model.\footnote{R considers text marked with \texttt{\#} as a comment.}
 Messages left for your future self (or near-future others) help
 retrace and justify your decisions as the work moves from seminar
 paper to conference paper to poster back to paper to dissertation and
@@ -420,7 +420,7 @@ exactly the same way.\footnote{A quick Google search of ``Sweave for
   Stata.} If your workflow does not involve \LaTeX~ and R, you can
 still implement some of the principles here. Imagine creating a style
 in Microsoft Word called ``code'' which hides your code when you print
-your document, but which allows you do at least run each code chunk
+your document, but which allows you to at least run each code chunk
 piece by piece [or perhaps there are ways to extract all text of style
 ``code'' from a Microsoft Word document]. Or imagine just using some
 other kind of indication linking paragraphs to specific places in code
@@ -462,7 +462,7 @@ some place easy to find (like in the same directory as the file or
 perhaps in \Verb+'Data/thedata.rda'+). Of course, it never hurts to
 drop in a comment pointing to the data file.
 
-Where should one store data files? Anobvious solution is always to
+Where should one store data files? An obvious solution is always to
 make sure that the data file used by a command file is in the same
 directory as the command file. More elegant solutions require all
 co-authors to have the same directory structure so that
@@ -495,7 +495,7 @@ nicer solution is to maintain a file for each project called
 data and command files with brief descriptions of their functions and
 relations.
 
-\paragraph{Step \thesection} We should know data where the data came
+\paragraph{Step 3} We should know where the data came
 from and what operations were performed on which set of data.
 
 In the good old days, when we executed our LISREL code in batch mode,
@@ -755,7 +755,7 @@ mostly uploads).\footnote{The arrival of the six-legged social
   Ctrl-c a \href{http://kieran.healy.usesthis.com/}{reasonable key
     combination}.}
 
-But what if the UN never hears of your work, or, by some cruel fate, that your
+But what if the UN never hears of your work, or, by some cruel fate, your
 article does not spawn debate? Why then would you spend time to
 communicate with your future self and others? My own answer to this
 question is that I want my work to be credible and useful to myself
