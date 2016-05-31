@@ -10,96 +10,79 @@ author:
   affiliation: <jwbowers@illinois.edu>, University of Illinois at Urbana-Champaign and White House Social and Behavioral Sciences Team
 - name: Maarten Voors
   affiliation: Wageningen University
-date: 20 May 2016
+bibliography: ../BIB/references.bib
+csl: american-political-science-review.csl
+date: 19 May 2016
 ...
 
-```{r initialize,echo=FALSE,results=hide}
-  ##First, just setup the \R environment:
-  options(SweaveHooks=list(
-            fig=function(){
-              par(mar=c(3.5, 3, 1.1, 0),
-                  pty="s",
-                  mgp=c(1.5,0.5,0),
-                  oma=c(0,0,0,0))},#,
-            echo=function(){options(continue=" ") ##Don't show "+" prompts,
-                            options(prompt=" ")}
-            ),
-          digits=3,
-          scipen=8,
-          width=50,
-          error=function(){options(prompt="> ",continue="+ ");NULL}
-          )
 
+
+```{r include=FALSE, cache=FALSE}
+# Some customization.  You can alter or delete as desired (if you know what you are doing).
+# knitr settings to control how R chunks work.
+
+## To make the html file do
+## render("exploration4.Rmd",output_format=html_document(fig_retina=FALSE))
+## To make the pdf file do
+## render("exploration4.Rmd",output_format=pdf_document())
+
+require(knitr)
+opts_chunk$set(
+  tidy=FALSE,     # display code as typed
+  size="small",    # slightly smaller font for code
+  echo=TRUE,
+  results='markup',
+  strip.white=TRUE,
+  fig.path='figs/fig',
+  cache=FALSE,
+  highlight=TRUE,
+  width.cutoff=132,
+  size='footnotesize',
+  out.width='.9\\textwidth',
+  message=FALSE,
+  comment=NA)
 ```
 
+```{r initialize,echo=FALSE}
+##First, just setup the R environment for today:
+if(!file.exists('figs')) dir.create('figs')
 
-\begin{verse}
-Do I contradict myself? \\
-Very well then I contradict myself, \\
-(I am large, I contain multitudes.) \\
-\citep{whitman1855song}
-\end{verse}
+options(SweaveHooks=list(fig=function(){
+			   par(mar=c(3.5, 3, 1.1, 0),
+			       pty="s",
+			       mgp=c(1.5,0.5,0),
+			       oma=c(0,0,0,0))},
+			 echo=function(){options(continue=" ") ##Don't show "+" prompts,
+			 options(prompt=" ")
+			 }),
+	digits=4,
+	scipen=8,
+	width=132
+	)
+options(error=function(){options(prompt="> ",continue="+ ");NULL})
+```
 
-An idea is born in a coffee shop, a seminar, a quiet walk. On this
-gray day in 2011, the idea dispels February's doldrums. The student
-rushes home, mind racing, the cold ignored.
-% Now he knows why he went to graduate school.
+| Do I contradict myself?
+| Very well then I contradict myself,
+| (I am large, I contain multitudes.)
+| [@whitman1855song]
 
-This idea inspires a seminar paper in the spring. A conference paper
-arises from the seminar paper in collaboration with another student in
-2012. A dissertation chapter descends from the conference paper in
-2013. Other dissertation chapters take up 2014. A submission to a
-journal with the original co-author and a new collaborator happens in
-2015. Revision and resubmission wait until 2017 while harried editors,
-reviewers and authors strive to balance research, teaching, service,
-and life. By now, the three lucky collaborators work as professors in
-three different universities. In 2018 a child is born and a paper is
-published. The United Nations takes an interest in the paper in 2019
-and hosts a conference to discuss implications of the research. In
-2020 a first year graduate student in a coffee shop has an idea that
-challenges the results in the now famous paper. She presents her paper
-at a conference in 2021. What would happen if the authors had
-controlled for X? Or included information now available but missing in
-2012?  Or chosen a different likelihood function?  Will the United
-Nations (now eager to act based the paper) make a wrong move?
 
-The first author convenes a three way video conference with the other
-collaborators during his homeward commute after putting his flying car
-in auto-drive mode.\footnote{One assumes that video chatting during
-  manual driving of flying cars will have been outlawed in his state
-  by 2020.} The group must go back to the analyses. Which ones?  The
-ones from 2011?  Or 2012? Or 2018? Where are the files? The next day,
-one member of the group who has kept some hard-drives around out of
-nostalgia finds some of the files.\footnote{This is the same guy who
-  still owns cassette tapes and compact discs.} Now
-re-analysis should be easy. Right? The student, now professor, should
-remember the reason for those bits of code (or at least should
-remember which series of mouse clicks were used to produce the numbers
-for that crucial table as it was done in 2011 \ldots or was it
-2015?). Right? And, of course, the way Microsoft
-Word/Stata/SPSS/R/LISREL understands files and the way that 
-machines in 2021 read and write them is the same --- since Windows and
-Mac OS X have always existed and will always continue to exist more or
-less as they currently exist. Right? And the group knows exactly which
-bit of code produced which table and which figure, right? And they
-wrote their code following Nagler's Maxims \citep{nagler1995coding}
-and King's Replication Standard \citep{king1995replication}, right?
+> If you tell the truth, you don't have to remember anything. [@twain1976book]^[<https://www.marktwainhouse.org/man/famous_twain_quotes.php>] 
 
-If the collaborators find themselves saying ``Wrong'' in
-answer to the questions posed here then reproducing, updating, or
-changing the original analyses will take a lot of time. If
-reproduction is hard to do, then the reputations of the scholars will
-suffer and, more importantly, world peace will have been delayed. This
-essay provides some suggestions for practices that will make such
-reproduction occur much more easily and quickly in the event that
-famous papers require special scrutiny. Specifically, this piece aims
-to amplify some of what we already ought to know
-\citep{king1995replication,nagler1995coding}, and to add to some of
-those ideas given current practices, platforms, and possibilities.
+> Never memorize what you can look up in books -Albert Einstein^[<https://en.wikiquote.org/wiki/Albert_Einstein>]
 
-%%% This data frame will be used throughout the analyses.
-%%% Putting it up top, so we can use it in the comments section.
-```{r read.data,echo=FALSE,results=hide}
+
+Memory is tricky. When we really want to remember something we should practice it until it becomes internalized. In fact, learning requires effort. When we do not practice, we tend to be overconfident in our recall abilities [@koriat2005illusions] and false memories can be implanted.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php>. On false memory see Wikipedia and linked studies <https://en.wikipedia.org/wiki/False_memory>.]
+
+How long does it take from planning a study to publication and to the first reproduction of the study after publication? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a study in faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, that it will occur after publication, and that this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, years past the initial publication of the article.^[We note that sometimes this reproduction occurs within the context of classes and learning about statistics and data analysis. Othertimes, this process is organized more broadly (cite IIIE program, cite Open Science Foundation on psychology).]
+
+If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised version of @bowers2011tpm and provides some suggestions for practices that will make such reproduction occur much more easily and quickly in the event that famous papers require special scrutiny.  Specifically, this piece aims to amplify some of what we already ought to know,  and to add to some of those ideas
+given current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with teh DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese1007replication and @asendorpf2013recommendations.] This essay is an attempt at providing practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on other bad past decisions but not on decisions about data analysis and the production of scholarly papers.
+
+%```{r read.data,echo=FALSE,results=hide}
+## This data frame will be used throughout the analyses.
+## Putting it up top, so we can use it in the comments section.
 ##  This read.csv line is slightly more complex than needed because of
 ##  the particular encoding used for characters in the source file.
 dem.nations.df<-read.csv(url("http://www.hks.harvard.edu/fs/pnorris/Data/Democracy%20CrossNational%20Data/Democracy%20Crossnational%20Data%20Spring%202009.csv",encoding="ISO_8859-1"),as.is=TRUE)
