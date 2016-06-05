@@ -1,18 +1,23 @@
 ---
 title: How to improve your relationship with your future self.
-author: 
-- name: Jake Bowers\thanks{I owe many thanks to Mark Fredrickson,
-    Brian Gaines, Kieran Healy, Kevin Quinn and Cara
-    Wong for direct help on this document and to Mika LaVaque-Manty
-    and Ben Hansen for many useful discussions on this topic. The
-    source code for this document may be freely downloaded and
-    modified from \url{https://github.com/jwbowers/workflow}.}
-  affiliation: <jwbowers@illinois.edu>, University of Illinois at Urbana-Champaign and White House Social and Behavioral Sciences Team
+author:
+- name: Jake Bowers
+  affiliation: <jwbowers@illinois.edu>, University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team. Many thanks to Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on this document and to Mika LaVaque-Manty and Ben Hansen for many useful discussions on this topic. The source code for this document may be freely downloaded and modified from <https://github.com/jwbowers/workflow>.
 - name: Maarten Voors
-  affiliation: Wageningen University
-bibliography: ../BIB/references.bib
+  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics
+bibliography: references.bib
 csl: american-political-science-review.csl
-date: 19 May 2016
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+    pdf_document:
+      number_sections: true
+      fig_width: 7
+      fig_height: 7
+      fig_caption: true
+      template: bowersarticletemplate.latex
+      pandoc_args: [
+      "--filter", "/usr/local/bin/pandoc-crossref"
+    ]
 ...
 
 
@@ -25,6 +30,7 @@ date: 19 May 2016
 ## render("exploration4.Rmd",output_format=html_document(fig_retina=FALSE))
 ## To make the pdf file do
 ## render("exploration4.Rmd",output_format=pdf_document())
+## to debug, try render("thefile.Rmd", clean=FALSE) so that you can see the intermediate files
 
 require(knitr)
 opts_chunk$set(
@@ -59,40 +65,40 @@ options(SweaveHooks=list(fig=function(){
 	scipen=8,
 	width=132
 	)
-options(error=function(){options(prompt="> ",continue="+ ");NULL})
+
+#options(error=function(){options(prompt="> ",continue="+ ");NULL})
 ```
 
-| Do I contradict myself?
+> | Do I contradict myself?
 | Very well then I contradict myself,
 | (I am large, I contain multitudes.)
 | [@whitman1855song]
 
 
-> If you tell the truth, you don't have to remember anything. [@twain1976book]^[<https://www.marktwainhouse.org/man/famous_twain_quotes.php>] 
+> If you tell the truth, you don't have to remember anything. [@twain1975mark]
 
-> Never memorize what you can look up in books -Albert Einstein^[<https://en.wikiquote.org/wiki/Albert_Einstein>]
-
-
-Memory is tricky. When we really want to remember something we should practice it until it becomes internalized. In fact, learning requires effort. When we do not practice, we tend to be overconfident in our recall abilities [@koriat2005illusions] and false memories can be implanted.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php>. On false memory see Wikipedia and linked studies <https://en.wikipedia.org/wiki/False_memory>.]
+Memory is tricky. When we really want to remember something we should practice it until it becomes internalized. In fact, learning requires effort. When we do not practice, we tend to be overconfident in our recall abilities [@koriat2005illusions] and false memories can be implanted.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php>. On false memory see Wikipedia and linked studies <https://en.wikipedia.org/wiki/False_memory>.] If we cannot count on memory, then how can we do science?
 
 How long does it take from planning a study to publication and to the first reproduction of the study after publication? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a study in faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, that it will occur after publication, and that this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, years past the initial publication of the article.^[We note that sometimes this reproduction occurs within the context of classes and learning about statistics and data analysis. Othertimes, this process is organized more broadly (cite IIIE program, cite Open Science Foundation on psychology).]
 
 If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised version of @bowers2011tpm and provides some suggestions for practices that will make such reproduction occur much more easily and quickly in the event that famous papers require special scrutiny.  Specifically, this piece aims to amplify some of what we already ought to know,  and to add to some of those ideas
-given current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with teh DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese1007replication and @asendorpf2013recommendations.] This essay is an attempt at providing practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on other bad past decisions but not on decisions about data analysis and the production of scholarly papers.
+given current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations.] This essay is an attempt at providing practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on other bad past decisions but not on decisions about data analysis and the production of scholarly papers.
 
-%```{r read.data,echo=FALSE,results=hide}
+```{r read.data,echo=FALSE,results='hide', cache=TRUE}
 ## This data frame will be used throughout the analyses.
 ## Putting it up top, so we can use it in the comments section.
-##  This read.csv line is slightly more complex than needed because of
-##  the particular encoding used for characters in the source file.
-dem.nations.df<-read.csv(url("http://www.hks.harvard.edu/fs/pnorris/Data/Democracy%20CrossNational%20Data/Democracy%20Crossnational%20Data%20Spring%202009.csv",encoding="ISO_8859-1"),as.is=TRUE)
+library(readstata13)
+dem.nations.df<-read.dta13("https://www.dropbox.com/s/huhqag5rudwtbno/Democracy%20Cross-National%20Data%20V4.1%2009092015.dta?dl=1&pv=1&raw=1",convert.factors=FALSE)
+
 row.names(dem.nations.df)<-dem.nations.df$Natabrv ##make the row names more helpful
-good.df<-na.omit(dem.nations.df[,c("Gini2004","protac2000","Nation","meanpr")])
+good.df<-na.omit(dem.nations.df[,c("Gini2004","WVS5_protest","Nation","meanpr")])
 good.df$gini04<-good.df$Gini2004/100
-good.df$protac00<-good.df$protac2000
+good.df$protest05<-good.df$WVS5_protest
 ```
 
-\section{Data analysis is computer programming.}\label{sec:data-analys-comp}
+We organize the paper around a series of homilies that lead to certain concrete actions.
+
+# Data analysis is computer programming. {#sec:data-analys-comp}
 
 All results (numbers, comparisons, tables, figures) should arise from
 code, not from a series of mouse clicks or copying and pasting. If I wanted
@@ -101,125 +107,101 @@ specification, I should be able to do so with just a few edits to the
 code rather than knowledge of how I (or you) used a pointing device in
 your graphical user interface some years ago.
 
-Using R \citep{R:2011}, for example, I might specify that the file
-\Verb+fig1.pdf+ was produced by the following commands in a file
-called \Verb+fig1.R+.\footnote{The command \Verb+please-plot+ and some
-  other R functions used in this essay come from the
-  \Verb+MayIPleaseDoStatistics+ package which emphasizes politeness in
-  data analysis. Functions like \Verb+please-plot+ can be blocked and
-  more polite versions such as \Verb+may-I-please-have-a-plot+ can be
-  required using \Verb+options(politeness=99)+ }
+Using R [@R:2011], for example, I might specify that the file `fig1.pdf` was
+produced by the following commands in a file called `fig1.R`.^[The command
+`please-plot`and some other R functions used in this essay come from the
+`MayIPleaseDoStatistics` package which emphasizes politeness in data analysis.
+Functions like `please-plot`can be blocked and more polite versions such as
+`may-I-please-have-a-plot`can be required using `options(politeness=99)`. We do
+not recommend setting negative values for the politeness option should you use this package.]
 
-\begin{Verbatim}[fontsize=\footnotesize]
+```{r eval=FALSE}
+## This file produces a plot relating the explanatory variable to the outcome.
 thedata <- read.csv("Data/thedata-15-03-2011.csv") ## Read the data
-pdf('fig1.pdf') ## begin writing to the pdf file
+pdf("fig1.pdf") ## begin writing to the pdf file
 please-plot(outcome by explanatory using thedata. red lines please.)
 please-add-a-line(using model1)
 ## Note to self: a quadratic term does not add to the substance
-## model2<-please-fit(outcome by explanatory+explanatory^2 using thedata
+## model2 <- please-fit(outcome by explanatory+explanatory^2 using thedata
 ## summary(abs(fitted(model1)-fitted(model2)))
 dev.off() ## stop writing to the pdf file
-\end{Verbatim}
+```
 
 
-Now, in the future if I wonder how ``that plot on page 10'' was
-created, I will know: (1) ``that plot'' is from a file called
-\Verb+fig1.pdf+ and (2) \Verb+fig1.pdf+ was created in
-\Verb+fig1.R+. In a future where R still exists, changing the figure
+Now, in the future if I wonder how 'that plot on page 10' was
+created, I will know: (1) 'that plot' is from a file called
+`fig1.pdf`and (2) `fig1.pdf`was created in
+`fig1.R`. In a future where R still exists, changing the figure
 will require quick edits of commands already written.  In a future
 where R does not exist, I will at least be able to read the plain text
 R commands and use them to write code in my new favorite statistical
 computing language: R scripts are written in
-\href{http://en.wikipedia.org/wiki/Plain_text}{plain text}, and plain
+[plain text](http://en.wikipedia.org/wiki/Plain_text), and plain
 text is a format that will be around as long as computer programmers
-write computer programs.\footnote{Since R is open
+write computer programs.^[Since R is open
   source, I will also be able to download an old version of R, download an
   old-fashioned open-source operating system (like Ubuntu 10), and
   run the old-fashioned statistical computing environment in the
   old-fashioned operating system in a virtual machine on my
-  new-fashioned actual machine.}
+  new-fashioned actual machine.]
 
-Moreover, realize that file names send messages to your future
-self. Name your files with evocative and descriptive names. Your
-collaborators are less likely to call you at midnight asking for help
-if your files are named \Verb+inequality-and-protest-figures.R+ than
-if your files are called \Verb+temp9+ or
-\Verb+supercalifragilisticexpialidocious+. The extension
-\Verb+.R+ tells us and the operating system that the file contains R
+Moreover, realize that *file names send messages* to your future
+self. This means that if you name your files with evocative and descriptive names, your
+collaborators are less likely to call you at midnight asking for help and you will remove some regret from your future self. For example, if you are studying inequalit and protest, you might try naming a file something like  `inequality-and-protest-figures.R` instead of  `temp9`or
+`supercalifragilisticexpialidocious`.  By the way, the extension
+`.R` tells us and the operating system that the file contains R
 commands. This part of the filename enables us to quickly search our
 antique hard drives for files containing R scripts.
 
-\paragraph{Step \thesection} If we know the provenance of results, 
+**Step 1** If we know the provenance of results,
 future  or current collaborators can quickly and easily reproduce
 and thus change and improve upon the work.
 
-\section{No data analyst is an island for long.}
+# No data analyst is an island for long.
+
 Data analysis involves a long series of decisions. Each decision
 requires justification.  Some decisions will be too small and
 technical for inclusion in the published article itself. These need to
-be documented in the code itself \citep{nagler1995coding}. Paragraphs
+be documented in the code itself [@nagler1995coding]. Paragraphs
 and citations in the publication will justify the most important
 decisions. So, one must code to communicate with yourself and
 others. There are two main ways to avoid forgetting the reasons you
 did something with data: comment your code and tightly link your code
-with your writing.\footnote{One can also try the R command
-  \Verb+put-it-in-my-mind(reason,importance='high')+ to firmly place a
+with your writing.^[One can also try the R command
+  `put-it-in-my-mind(reason,importance="high")` to firmly place a
   reason for a decision into the mind of the analyst. I myself have
-  not had much luck with this function.}
+  not had much luck with this function.]
 
-\subsection{Code to communicate: Comment your code.}
+## Code is communication: Comment code
+
 Comments --- unexecuted text inside of a script --- are a message to
 collaborators (including your future self) and other consumers of your
 work. In the above code chunk, I used comments to explain the lines to
 readers unfamiliar with R and to remember that I had tried a different
 specification but decided not to use it because adding the squared
 term did not really change the substantive story arising from the
-model.\footnote{R considers text marked with \texttt{\#} as a comment.}
+model.^[R considers text marked with `#` as a comment.]
 Messages left for your future self (or near-future others) help
 retrace and justify your decisions as the work moves from seminar
 paper to conference paper to poster back to paper to dissertation and
 onwards.
-
-
-% Luckily, if you are
-% using a literate programming practice (ex. Sweave or odfWeave), you
-% can write paragraphs to surround your code as well as technical
-% comments in the code itself. If you are not using a strictly literate
-% programming practice then use whatever commenting protocol exists in
-% your analysis language. R, for example, considers text marked with
-% ``\#'' as a comment. Here for example I comment about a linear model
-% run for a paper and also include comments about another model run for
-% due diligence.
-
- 
-% ```{r reg1,echo=TRUE,results=verb}
-% ##  Repeat the regression run for Table~\ref{tab:protest}
-% ##  Do political rights predict protest reporting?
-% lm1 <- lm(protac00 ~ gini04 + meanpr, data=good.df)
-% ##  Q: Was it worthwhile controlling for political rights?
-% lm2 <- lm(protac00~gini04,data=good.df)
-% coef(lm2)[2]-coef(lm1)[2]
-% ##  A: Yes (around 3/4 an act of protest difference)
-% ```
 
 Notice one other benefit of coding for an audience: we learn by
 teaching. By assuming that others will look at your code, you will be
 more likely to write clearer code, or perhaps even to think more
 deeply about what you are doing as you do it.
 
-Comment liberally. Comments are discarded when R runs analysis or
-\LaTeX~turns plain text into page images, so only those who dig into
+Comment liberally. Comments are discarded when R runs analysis or LaTeX or pandoc
+turns plain text into pdf or html files so only those who dig into
 your work will see them.
 
-\subsection{Code to communicate: Literate programming.}
+## Code to communicate: Literate programming.
 
-\begin{quote}
-  Let us change our traditional attitude to the construction of
+> Let us change our traditional attitude to the construction of
   programs: Instead of imagining that our main task is to instruct a
   computer what to do, let us concentrate rather on explaining to
   human beings what we want a computer to do.
-  \citep[][p. 97]{knuth1984literate}
-\end{quote}
+  [@knuth1984literate, p.97]
 
 Imagine you discover something new (or confirm something old). You
 produce a nice little report on your work for use in discussions of
@@ -231,92 +213,91 @@ paragraphs) ought to show up in, or at least inform, the publishable
 paper. Re-creating those analyses by pointing, clicking, copying, or
 pasting would invite typing error and waste time. Re-creating your
 arguments justifying your analysis decisions would also waste
-time. More importantly, we and others want to know why we did what we
+time.
+
+More importantly, we and others want to know why we did what we
 did. Such explanations may not be very clear if we have some pages of
 printed code in one hand and a manuscript in the other. Keep in mind
-the distinction between the ``source code'' of a document (i.e. what
+the distinction between the 'source code' of a document (i.e. what
 computation was required to produce it) and the visible, type-set page
 image. Page images are great for reading, but not great for
 reproducing or collaborating. The source code of any document
-exchanged by the group must be available and executable.
+exchanged by the group must be available and executable.^[As of the 2016 version of this paper, this idea is now widespread and made much easier than before via online services for code sharing and collaboration such as [GitHub](http://github.com) and [BitBucket](http://bitbucket.org).]
 
 How might one avoid these problems?
-\href{http://en.wikipedia.org/wiki/Literate_programming}{Literate
-  programming} is the practice of weaving code into a document ---
+[Literate programming](http://en.wikipedia.org/wiki/Literate_programming) is the practice of weaving code into a document ---
 paragraphs, equations, and diagrams can explain the code, and the code
 can produce numbers, figures, and tables (and diagrams and even equations and
 paragraphs). Literate programming is not merely fancy commenting but
 is about enabling the practice of programming itself to facilitate easy
 reproduction and communication.
 
-For example, in \S\ref{sec:data-analys-comp}, I suggested that we know
-where ``that plot on page 10'' comes from by making sure we had a
-\Verb+fig1.pdf+ file produced from a clearly commented plain text file
-called something like \Verb+fig1.R+.  An even easier solution would be to
+For example, in [@sec:data-analys-comp], I suggested that we know
+where 'that plot on page 10 'comes from by making sure we had a
+`fig1.pdf` file produced from a clearly commented plain text file
+called something like `fig1.R`.  An even easier solution would be to
 directly include a chunk of code to produce the figure inside of the
 paper itself. This paper, for example, was written in plain text using
 \LaTeX~ markup with R code chunks to make things like
-Figure~\ref{fig:giniprot}. This combination of \LaTeX and R is called
-Sweave \citep{Leis:2005}.\footnote{Support for Sweave is included with
-  R.}
+Figure~\ref{fig:giniprot}. This combination of LaTeX and R is called
+Sweave [@leis:2005].^[Support for Sweave is included with R.]
 
-\begin{Verbatim}[fontsize=\footnotesize]
-This paper, for example, was written in plain text using \LaTeX
+```
+This paper, for example, was written in plain text using Markdown
 markup with R code chunks to make things like
-Figure~\ref{fig:giniprot}. This combination of \LaTeX and R is
-called Sweave \citep{Leis:2005}.\footnote{Support for Sweave is
-  included with R.}
+Figure~\ref{fig:giniprot}. This combination of Markdown and R is
+called [R markdown](http://rmarkdown.rstudio.com/).\footnote{Support for R markdown is
+  included with R. For nicer documents, use the `rmarkdown` R package or click `Knit to PDF` or `Knit to HTML` using the free and open-source [RStudio IDE](http://rstudio.com) for R.}
 \begin{figure}[h]
 \centering
- ```{r fig1plot,fig=TRUE}
- ##  Make a scatterplot of Protest by Inequality
- with(good.df,plot(gini04,protac00,xlab='Gini Coefficient 2004 (UNDP)',
-                   ylab='Mean Protest Activities\n(World Values Survey 1980-2000)'))
- ##  Label a few interesting points
- with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
-      text(gini04,protac00,labels=Nation))
- ```
-\caption{Protest activity by income inequality \citep[from][]{norris2009data}.}
+\`\`\`{r fig1plota,fig=TRUE}
+##  Make a scatterplot of Protest by Inequality
+with(good.df,plot(gini04,protest05,xlab='Gini Coefficient 2004 (UNDP)',
+                  ylab='Mean Protest Activities\n(World Values Survey 2005--2010)'))
+##  Label a few interesting points
+with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
+     text(gini04,protest05,labels=Nation))
+\`\`\`
+\caption{Protest activity by income inequality [@norris2009data].}
 \label{fig:giniprot}
 \end{figure}
-\end{Verbatim}
+```
 
 ```{r fig1code,echo=FALSE,fig=FALSE}
 ##  Make a scatterplot of Protest by Inequality
-with(good.df,plot(gini04,protac00,
+with(good.df,plot(gini04,protest05,
                   xlab='Gini Coefficient 2004 (UNDP)',
                   ylab='Mean Protest Activities\n(World Values Survey 1980-2000)',
                   cex=.8))
 
 ##  Label a few interesting points
 with(good.df[c("EGY","JOR","USA","SWE","CHL"),],
-     text(gini04,protac00,labels=Nation,srt=0,cex=.6,pos=3,offset=.1))
+     text(gini04,protest05,labels=Nation,srt=0,cex=.6,pos=3,offset=.1))
 ```
 
 \begin{figure}[H]
   \begin{center}
-```{r fig1plot,echo=FALSE,fig=TRUE,width=4,height=4}
+```{r fig1plot, ref.label="fig1code",echo=FALSE,fig=TRUE,width=4,height=4}
 par(bty="n",xpd=TRUE,pty="s",tcl=-.25)
-```{r fig1code>>
 ```
-    \caption{Protest activity by income inequality \citep[from][]{norris2009data}.}
+    \caption{Protest activity by income inequality @norris2009data.}
     \label{fig:giniprot}
   \end{center}
 \end{figure}
 
 
-By using \Verb+\label{fig:giniprot}+, I do not need to keep track of
+By using `\label{fig:giniprot}`, I do not need to keep track of
 the figure number, nor do extra work when I reorganize the document in
 response to reviewer suggestions. Nor do I need a separate
-\Verb+fig1.R+ file or \Verb+fig1.pdf+ file.  Tables and other
+`fig1.R`file or `fig1.pdf` file.  Tables and other
 numerical results are also possible to generate within the source
 code of a scholarly paper. Those who view the code for this essay will
 see how Table~\ref{tab:protest} was also generated directly from a
-regression object.\footnote{\citet{beck2010reg} inspired this
+regression object.\footnote{@beck2010reg inspired this
   particular presentation of a linear model.}
 
-```{r maketable, echo=FALSE, results=hide}
-  lm1<-lm(protac00~gini04+meanpr,data=good.df)  #  Run the regression
+```{r maketable, echo=FALSE, results='hide'}
+  lm1<-lm(protest05~gini04+meanpr,data=good.df)  #  Run the regression
 
 ##  The next lines extract relevant and useful output from the
 ##  regression object, following Neal Beck's TPM article 2010.
@@ -333,11 +314,11 @@ thextab<-xtable(themat,align=c("l",rep(".",4)),digits=1,
   income distributions report less protest activity to World Values
   Survey interviewers than people living in countries with relatively
   more equal income distributions, adjusting for average political
-  rights as measured by Freedom House 1980--2000. Data from \\citep{norris2009data}.",label="tab:protest")
+  rights as measured by Freedom House 1980--2000. Data from [@norris2009data].",label="tab:protest")
 ```
 
 
-```{r printtable,echo=FALSE,results=tex}
+```{r printtable,echo=FALSE,results='asis'}
   print(thextab,include.colnames=FALSE,
         hline.after=NULL,
         table.placement="H",
@@ -359,34 +340,28 @@ thextab<-xtable(themat,align=c("l",rep(".",4)),digits=1,
 
 
 Literate data analysis is not the same as Sweave, even if Sweave is a
-nice implementation.\footnote{The R project has a task view devoted to
-  \href{http://cran.r-project.org/web/views/ReproducibleResearch.html}{reproducible
-    research} listing many of the different approaches to literate
-  programming for R.}  \href{http://www.lyx.org/}{LyX} offers a
-WYSIWYG environment for \LaTeX~ that supports Sweave. And the
-\Verb+odfWeave+ package in R allows the use of OpenOffice documents in
-exactly the same way.\footnote{A quick Google search of ``Sweave for
-  Stata'' turned up lots of resources for literate programming with
-  Stata.} If your workflow does not involve \LaTeX~ and R, you can
+nice implementation.^[The R project has a task view devoted to
+  [reproducible research](http://cran.r-project.org/web/views/ReproducibleResearch.html) listing many of the different approaches to literate
+  programming for R.}  If your workflow does not involve R, you can
 still implement some of the principles here. Imagine creating a style
-in Microsoft Word called ``code'' which hides your code when you print
+in Microsoft Word called 'code 'which hides your code when you print
 your document, but which allows you to at least run each code chunk
-piece by piece [or perhaps there are ways to extract all text of style
-``code'' from a Microsoft Word document]. Or imagine just using some
+piece by piece (or perhaps there are ways to extract all text of style
+code from a Microsoft Word document). Or imagine just using some
 other kind of indication linking paragraphs to specific places in code
 files. There are many ways that creative people can program in a
-literate way. 
+literate way.
 
 Literate programming need not go against the principle of modular data
-analysis \citep{nagler1995coding}. In my own work I routinely have
+analysis [@nagler1995coding]. In my own work I routinely have
 several different Sweave files that fulfill different functions, some
-of them create \LaTeX code that I can \Verb+\input+ into my
-\Verb+main.tex+ file, others setup the data, run simulations, or allow
+of them create \LaTeX code that I can `\input` into my
+`main.tex` file, others setup the data, run simulations, or allow
 me to record my journeys down blind alleys. Of course, when we have
 flying cars running on autopilot, perhaps something other than
 Sweave will make our lives even easier. Then we'll change.
 
-\paragraph{Step \thesection}
+** Step 2 **
 
 We analyze data in order to explain something about the world to other
 scholars and policy makers. If we focus on explaining how we got our
@@ -394,58 +369,58 @@ computers to do data analysis to human beings, we will do a better job
 with the data analysis itself: we will learn as we focus on teaching,
 and we will avoid errors and save time as we ensure that others
 (including our future selves) can retrace our steps. A document than
-can be ``run'' to reproduce all of the analyses also instills
+can be 'run 'to reproduce all of the analyses also instills
 confidence in readers and can more effectively spur discussion and
 learning and cumulation of research.
 
-\section{Meaningful code requires data.}
+# Meaningful code requires data.
 
 All files containing commands operating on data must refer to a data
 file. A reference to a data file is a line of code the analysis
-program will use to operate on (``load''/ ``open'' / ``get'' /
-``use'') the data file. One should not have to edit this line on
+program will use to operate on ('load'/ 'open '/ 'get '/
+'use') the data file. One should not have to edit this line on
 different computers or platforms in order to execute this command.
 Using R, for example, all analysis files should have
-\Verb+load('thedata.rda')+ or \Verb+read.csv('thedata.csv')+ or some
-equivalent line in them, and \Verb+thedata.csv+ should be stored in
+`load("thedata.rda")`or `read.csv("thedata.csv")`or some
+equivalent line in them, and `thedata.csv`should be stored in
 some place easy to find (like in the same directory as the file or
-perhaps in \Verb+'Data/thedata.rda'+). Of course, it never hurts to
+perhaps in `"Data/thedata.rda"`). Of course, it never hurts to
 drop in a comment pointing to the data file.
 
 Where should one store data files? An obvious solution is always to
 make sure that the data file used by a command file is in the same
 directory as the command file. More elegant solutions require all
 co-authors to have the same directory structure so that
-\Verb+load('Data/thedata.rda')+ means the same thing on all computers
+`load("Data/thedata.rda")` means the same thing on all computers
 used to work on the project. This kind of solution is one of the
 things that formal version control systems do well (as discussed
-a bit more in \S\ref{sec:vers-contr-prev}).
+a bit more in [@sec:vers-contr-prev]).
 
 The principle of modularity suggests that you separate data cleaning,
 processing, recoding, and merging from analysis in different files
-\citep{nagler1995coding}. So, perhaps your analysis oriented files
-will \Verb+load('cleandata.rda')+ and a comment in the code will alert
-the future you (among others) that \Verb+cleandata.rda+ was created
-from \Verb+create-cleandata.R+ which in turn begins with
-\Verb+read.csv(\url('http://www.greatfreedata.gov/dirtydata.csv'))+. Such
+[@nagler1995coding]. So, perhaps your analysis oriented files
+will `load("cleandata.rda")`and a comment in the code will alert
+the future you (among others) that `cleandata.rda`was created
+from `create-cleandata.R` which in turn begins with
+`read.csv(\url("http://www.greatfreedata.gov/dirtydata.csv"))`. Such
 a data processing file will typically end with something like
-\Verb+save('cleandata.rda')+ so that we are doubly certain about the
+`save("cleandata.rda")`so that we are doubly certain about the
 provenance of the data.\footnote{Of course, if you need math or
   paragraphs to explain what is happening in these files, you might
   prefer to make them into Sweave files, for which the conventional
-  extension is .Rnw. So you'd have \Verb+create-cleandata.Rnw+ which
+  extension is .Rnw. So you'd have `create-cleandata.Rnw` which
   might explain and explore the different coding decisions you made,
   perhaps involving a factor analysis and diagnostic plots.}
 
-Now, if in the future we wonder where \Verb+cleandata.rda+ came from, we
-might search for occurrences of `cleandata' in the files on our
+Now, if in the future we wonder where `cleandata.rda`came from, we
+might search for occurrences of `cleandata` in the files on our
 system. However, if such searching among files is a burden, an even
 nicer solution is to maintain a file for each project called
-``MANIFEST.txt'' or ``INDEX.txt'' or ``README.txt'' which lists the
+`MANIFEST.txt` or INDEX.txt or README.txt which lists the
 data and command files with brief descriptions of their functions and
 relations.
 
-\paragraph{Step 3} We should know where the data came
+** Step 3** We should know where the data came
 from and what operations were performed on which set of data.
 
 In the good old days, when we executed our LISREL code in batch mode,
@@ -453,42 +428,39 @@ we had no choice but to tell the machine clearly, in a few easy to
 understand and informative lines, what files (with filenames no longer
 than 8 characters) to use:
 
-\begin{Verbatim}[fontsize=\footnotesize]
+```
 DA NI=19 NO=199 MA=CM
 LA=basic.lab
 CM FI=basic.cov
-\end{Verbatim}
+```
 
 The fact that I need to articulate this idea at all arises because of
 graphical user interfaces: it is all too easy to use the mouse to load
 a data file into memory and then to write a script to analyze this
 file without ever noting the actual name or location of the data file.
 
-\section{Version control prevents clobbering and reconciles history.}\label{sec:vers-contr-prev}
+# Version control prevents clobbering and reconciles history. {#sec:vers-contr-prev}
 
-Group work requires version control.\footnote{
-  \citet{fredrickson2011tpm} and \citet{healy2011tpm} in this issue
-  also explain what version control is and why we might want to use
-  it.} Many people are familiar with the ``track changes'' feature in
-modern WYSIWYG word processors or the fact that Dropbox allows one to
-recover previous versions of files. These are both kinds of version
-control. More generally, when we collaborate, we'd like to do a variety
-of actions with our shared files. Collaboration on data analytic
-projects is more productive and better when (1) it is easy to see what
-has changed between versions of files; (2) members of the team feel
-free to experiment and then to dump parts of the experiment in favor
-of previous work while merging the successful parts of the experiment
-into the main body of the paper; (3) the team can produce have
-``releases'' of the same document (one to MPSA, one to APSR,
-one to your parents) without spawning many possibly conflicting copies
-of the same document; (4) people can work on the same files at
-the same time without conflicting with one another (and can reconcile
-their changes without too much confusion and clobbering).  Clobbering
-is what happens when your future self or your current collaborator
-saves an old version of a file over a new version, erasing good
-work by accident.
+Group work requires version control.^[@fredrickson2011tpm and
+@healy2011tpm in this issue also explain what version control is and why we
+might want to use it.] Many people are familiar with the track changes
+feature in modern WYSIWYG word processors or the fact that Dropbox allows one
+to recover previous versions of files. These are both kinds of version control.
+More generally, when we collaborate, we'd like to do a variety of actions with
+our shared files. Collaboration on data analytic projects is more productive
+and better when (1) it is easy to see what has changed between versions of
+files; (2) members of the team feel free to experiment and then to dump parts
+of the experiment in favor of previous work while merging the successful parts
+of the experiment into the main body of the paper; (3) the team can produce
+have 'releases 'of the same document (one to MPSA, one to APSR, one to your
+parents) without spawning many possibly conflicting copies of the same
+document; (4) people can work on the same files at the same time without
+conflicting with one another (and can reconcile their changes without too much
+confusion and clobbering).  Clobbering is what happens when your future self or
+your current collaborator saves an old version of a file over a new version,
+erasing good work by accident.
 
-Of course if you rely on Dropbox or ``track changes'' for version
+Of course if you rely on Dropbox or 'track changes 'for version
 control, you must communicate with other folks in your group before
 you edit existing files. Only one of you can edit and save a given
 file at a time. This prevents your work (or your colleagues work) from
@@ -504,17 +476,8 @@ Dropbox directory into a local working directory so as to avoid
 clobbering and then work on merging changes by hand before copying
 back to the Dropbox directory and replacing existing files.
 
-We use subversion with our own research group, and I use it for all of
-my own projects (except this one, for which I am experimenting with
-git). Subversion and bazaar and git are all great. They mainly differ
-in the extent to which you need to run a server. Subversion requires a
-server.\footnote{If you already pay to host a website, you may already
-  have the right to run a subversion or git server there. Your
-  university or institute may have a version control system running
-  somewhere on campus. And Google will direct you to many helpful
-  people who have installed such servers on their own diverse desktop
-  machines. Github requires that you pay to host private
-  repositories.}
+We use git with our own research group, and I use it for all of
+my own projects.MORE ON GITHUB
 
 Of course, one may take advantage of many of the benefits of formal
 version control systems with some disciplined systems for file and
@@ -524,17 +487,17 @@ saving them: thedoc.tex becomes thedoc25-12-2011-23:50.tex.  Be sure
 to include year in the file names --- remember, the life of an idea is
 measured in years. If you are wise enough to have saved your documents
 as plain text then you can easily compare documents using the many
-utilities available for comparing text files.\footnote{Adobe Acrobat
+utilities available for comparing text files.^[Adobe Acrobat
   allows one to compare differences in pdf files. OpenOffice supports
-  a ``Compare Documents'' option. And Google Docs will report on the
-  version history of a document.} When you reach certain milestones
+  a 'Compare Documents 'option. And Google Docs will report on the
+  version history of a document.] When you reach certain milestones
 you can rename the file accordingly: thedocAPSA2009.tex --- for the
 one sent to discussants at APSA --- or thedocAPSR2015.tex --- for the
 version eventually sent to the APSR six years after you presented it
 at APSA. The formal version control systems I mentioned above all
 allow this kind of thing and are much more elegant and capable, but
 you can do it by hand too as long as you don't mind taking up a lot of
-disk space and having many ``thedoc...''  files around. If you do
+disk space and having many 'thedoc... ' files around. If you do
 version control by hand, spend a little extra time to ensure that you
 do not clobber files when you make mistakes typing in the
 file-names. And, if you find yourself spending extra time reconciling
@@ -543,7 +506,7 @@ task that modern version control systems take care of quickly and
 easily.
 
 
-\paragraph{Step \thesection} Writing is rewriting. Thus, all writing
+** Step 5** Writing is rewriting. Thus, all writing
 involves versions. When we collaborate with ourselves and others we
 want to avoid clobbering and we want to enable graceful reconciliation
 of rewriting. One can do these things with formal systems of software
@@ -554,26 +517,18 @@ will take up less disk space, and be easier to read for the future
 you.
 
 
-% This is so true that the
-% source of the quote is unclear.\footnote{Could it be Paul Abbott?
-%   \url{http://www.bbc.co.uk/writersroom/insight/paul_abbott.shtml}}
-% Here is a quote with a known source: ``Writing and rewriting are a constant search for what it is one is
-% saying'' (John Updike but ??Writing With Style: Conversations on the Art of Writing, 1975 
-% by John Trimble ??)
-
-
-\section{Minimize error by testing.}
+# Minimize error by testing.
 
 Now, back to that famous article of 2018. After reading the conference
 paper critique of 2021 (that came from the seminar paper of 2020), the
 statisticians at the UN worry about the bootstrap confidence intervals
-presented in the original paper.\footnote{Perhaps they should be
+presented in the original paper.^[Perhaps they should be
   worried about the deeper substantive critiques offered by the
   student, but they are statisticians and so focus on the stats. The
   policy makers of 2021 were cowed by the methodological virtuosity of
   the 2018 article, and so, even though they had the same substantive
   concerns as the student, they kept their mouths shut at the
-  mini-conference to avoid looking dumb in front of their bosses.} So,
+  mini-conference to avoid looking dumb in front of their bosses.] So,
 now the authors would like to evaluate their bootstrap procedure. Although
 nice code exists for bootstrapping linear models, no nice code exists
 to bootstrap the bootstrap. Of course, the code required is not
@@ -586,17 +541,15 @@ Now, if they had a moment to think in between teaching that new class,
 reading books for an awards committee, evaluating application files
 for the admissions committee, feeding popsicles to a sick child, and
 undertaking the odd bit of research, they might say to themselves,
-``Before I write new code, I should write a test of the code. I should
+"Before I write new code, I should write a test of the code. I should
 write a little bit of code that lets me know that my double-bootstrap
-procedure actually does what it is supposed to do.''
+procedure actually does what it is supposed to do."
 
 Of course, this idea, like most others, is not new. The desire to
 avoid error looms large when large groups of programmers write code
 for multi-million dollar programs. The idea of
-\href{http://en.wikipedia.org/wiki/Test-driven_development}{test
-  driven development} and the idea that one ought to create tests of
-\href{http://en.wikipedia.org/wiki/Unit_testing}{small parts of one's
-  code} arose to address such concerns. For the social scientist
+[test driven development](http://en.wikipedia.org/wiki/Test-driven_development) and the idea that one ought to create tests of
+[small parts of one's code](http://en.wikipedia.org/wiki/Unit_testing) arose to address such concerns. For the social scientist
 collaborating with her future self and/or a small group of
 collaborators, here is an example of this idea in a very simple form:
 Say I want to write a function to multiply a number by 2. If my
@@ -608,7 +561,7 @@ the number 8 and when I give it -4, I should get -8.
 test.times.2.fn <- function(){
   ##  This function tests times.2.fn
   if (times.2.fn(thenumber=4) ==  8 &
-      times.2.fn(thenumber=-4) == -8) { 
+      times.2.fn(thenumber=-4) == -8) {
     print("It works!")
   } else { print("It does not work!")
          }
@@ -625,20 +578,20 @@ times.2.fn <- function(thenumber){
 test.times.2.fn()
 ```
 
-Ack! I mistyped ``+'' for ``*''. Good thing I wrote the
-test!\footnote{A more common example of this kind of testing occur
+Ack! I mistyped '+' for '*'. Good thing I wrote the
+test!^[A more common example of this kind of testing occur
   everyday when we recode variables into new forms but look at a
-  crosstab of the old vs. new variable before proceeding.}
+  crosstab of the old vs. new variable before proceeding.]
 
-\paragraph{Step \thesection} No one can forsee all of the ways that a
+**Step 6** No one can forsee all of the ways that a
 computer program can fail. One can, however, at least make sure that
 it succeeds in doing the task motivating the writing of the code in
 the first place.
 
-\section{Copy and improve on others' examples.}
+# Copy and improve on others' examples.
 
-Lots of people are thinking about ``reproducible research'' and
-``literate programming'' these days. Google those terms. Of course, the
+Lots of people are thinking about 'reproducible research'and
+'literate programming' these days. Google those terms. Of course, the
 devil is in the details: Here I list a few of my own attempts at enabling
 reproducible research. You'll find many other inspiring examples on
 the web. Luckily, the open source ethos aligns nicely with academic
@@ -647,45 +600,39 @@ their files online for copying and improvement. By the way, if you do
 copy and improve, it is polite to alert the person from whom you made
 the copy about your work.
 
-I have experimented with three systems so far: (1) for one paper we
-simply included a Sweave document and data files into a compressed
-archive \citep{bowers2005dataverse}; (2) for another more computing
-intensive paper we assembled a set of files that enabled reproduction
-of our results using the \texttt{make} system
-\citep{bowers2008dataverse}; and (3) recently I have tried the
-``compendium'' approach
-\citep{gentleman2005reproducible,gentleman2007statistical} which
-embeds an academic paper within the R package system
-\citep{bowers2011dataverse}. The benefit of this last approach is that
-one is not required to have access to a command line for \Verb+make+:
-the compendium is downloadable from within R using
-\Verb+install.packages()+ and is viewable using the \Verb+vignette()+
-function in any operating system than runs R.\footnote{Notice that my
-  reproduction archives and/or instructions for using them are hosted
-  on the
-  \href{http://thedata.org/book/learn-about-project}{Dataverse}, which
-  is another system designed to enhance academic collaboration across
-  time and space.}  The idea that one ought to be able to install and
-run and use an academic paper just as one installs and uses
-statistical software packages is very attractive, and I anticipate
-that it will become ever easier to turn papers into R packages as
-creative and energetic folks turn their attention to the question of
+I have experimented with three systems so far: (1) for one paper we simply
+included a Sweave document and data files into a compressed archive
+[@bowers2005dataverse]; (2) for another more computing intensive paper we
+assembled a set of files that enabled reproduction of our results using the
+`make` system [@bowers2008dataverse]; and (3) recently I have tried the
+"compendium" approach [@gentleman2005reproducible,@gentleman2007statistical]
+which embeds an academic paper within the R package system
+[@bowers2011dataverse]. The benefit of this last approach is that one is not
+required to have access to a command line for `make`: the compendium is
+downloadable from within R using `install.packages()` and is viewable using the
+`vignette()` function in any operating system than runs R.^[Notice that my
+reproduction archives and/or instructions for using them are hosted on the
+[Dataverse](http://thedata.org/book/learn-about-project), which is another
+system designed to enhance academic collaboration across time and space.]  The
+idea that one ought to be able to install and run and use an academic paper
+just as one installs and uses statistical software packages is very attractive,
+and I anticipate that it will become ever easier to turn papers into R packages
+as creative and energetic folks turn their attention to the question of
 reproducible research.
 
-\paragraph{Step \thesection} We all learn by doing. When we share
+**Step 6** We all learn by doing. When we share
 reproduction materials we improve both cumulation of knowledge and our
 methods for doing social science
-\citep{freese2007replication,king1995replication}.  As we copy and
+[@freese2007replication,king1995replication}.  As we copy and
 improve upon each other's modes of doing work we enhance our collective
 ability to believe each other and for future scholars to believe us, too.
 
-\section{Remember that research ought to be credible communication.}
-\begin{quote}
-  [I]f the empirical basis for an article or book cannot be
+# Remember that research ought to be credible communication.
+
+> [I]f the empirical basis for an article or book cannot be
   reproduced, of what use to the discipline are its
   conclusions?  What purpose does an article like this serve?
-  \cite[445]{king1995replication}
-\end{quote}
+  [@king1995replication, p. 445]
 
 We all always collaborate. Many of us collaborate with groups of
 people at one moment in time as we race against a deadline. All of us
@@ -700,10 +647,9 @@ text is the exception. Thus, even as we extol version control systems,
 one must have a way to ensure future access to them in a form that
 will still be around when sentient cockroaches finally join political
 science departments (by then dominated by cetaceans after humans are
-mostly uploads).\footnote{The arrival of the six-legged social
+mostly uploads).^[The arrival of the six-legged social
   scientists revives Emacs and finally makes Ctrl-a Ctrl-x Esc-x
-  Ctrl-c a \href{http://kieran.healy.usesthis.com/}{reasonable key
-    combination}.}
+  Ctrl-c a [reasonable key combination](http://kieran.healy.usesthis.com/).]
 
 But what if the UN never hears of your work, or, by some cruel fate, your
 article does not spawn debate? Why then would you spend time to
@@ -717,6 +663,7 @@ the work represents a shared
 experience --- and an experience shared without respect to the
 identities of others (although requiring some common technical
 training and research resources).
+
 % Such work should make us change how
 % we act --- or at least, it ought to stand on stronger epistemological
 % ground than other claims about experiences which ought to be shared or
@@ -724,11 +671,11 @@ training and research resources).
 
 Assume we want others to believe us when we say something. More
 narrowly, assume we want other people to believe us when we say
-something about data: ``data'' here can be words, numbers, musical
+something about data: 'data 'here can be words, numbers, musical
 notes, images, ideas, etc \ldots The point is that we are making some
 claims about patterns in some collection of stuff. Now, it might be
-easy to convince others that ``this collection of stuff is different
-from that collection of stuff'' if those people were looking over our
+easy to convince others that 'this collection of stuff is different
+from that collection of stuff 'if those people were looking over our
 shoulders the whole time that we made decisions about collecting the
 stuff and broke it up into understandable parts and reorganized and
 summarized it. Unfortunately, we can't assume that people are willing
@@ -749,30 +696,25 @@ often need to be able to reproduce in part or in whole what different
 people in the group have done or what they, themselves, did in the past.
 
 In the end, following these practices and those recommended by
-\citet{fredrickson2011tpm} and \citet{healy2011tpm} in this issue
+@fredrickson2011tpm and @healy2011tpm in this issue
 allows your computerized analyses of your collections of stuff to be
 credible.  Finally, if the UN quibbles with your analyses, your future
 self can shoot them the archive required to reproduce your
-work.\footnote{Since you used plain text, the files will still be
+work.^[Since you used plain text, the files will still be
   intelligible, analyzed using commented code so that folks can
   translate to whatever system succeeds R, or since you used R, you
   can include a copy of R and all of the R packages you used in your
   final analyses in 2018 in the archive itself. You can even throw in
   a copy of Ubuntu 10 and an open source virtual machine running the
-  whole environment.} You can say, ``Here is everything you need to
-reproduce my work." To be extra helpful you can add ``Read the README
-file for further instructions." And then you can get on with your life:
+  whole environment.] You can say, 'Here is everything you need to
+reproduce my work.' To be extra helpful you can add 'Read the README
+file for further instructions.' And then you can get on with your life:
 maybe the next great idea will occur when your 4-year-old asks a wacky
 question after stripping and painting her overly cooperative
 1-year-old brother purple, or teaching a class, or in a coffee shop,
 or on a quiet walk.
 
-\bibliographystyle{apsr}
-\bibliography{/Users/jwbowers/Documents/BIB/trunk/big}
 
 
+#References
 
-\end{document}
-```{r }
-options(prompt="> ",continue="+ ")
-```
