@@ -115,7 +115,7 @@ xetex]{hyperref}
   pdftitle={$title-meta$},
   colorlinks=true,
   linkcolor=BrickRed,
-  citecolor=MidnightBlue,
+  citecolor=blue, %MidnightBlue,
   urlcolor=BrickRed,
   % urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
   % linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
@@ -134,10 +134,13 @@ $endif$
 %\setlength{\parskip}{6pt plus 2pt minus 1pt}
 \usepackage{parskip}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
-$if(numbersections)$
-$else$
-\setcounter{secnumdepth}{3}
-$endif$
+
+%$if(number_sections)$
+\setcounter{secnumdepth}{5}
+%$else$
+%\setcounter{secnumdepth}{0}
+%$endif$
+
 $if(verbatim-in-note)$
 \VerbatimFootnotes % allows verbatim text in footnotes
 $endif$
