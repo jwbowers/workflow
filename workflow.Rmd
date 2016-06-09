@@ -2,9 +2,9 @@
 title: How to improve your relationship with your future self.
 author:
 - name: Jake Bowers
-  affiliation: <jwbowers@illinois.edu>, University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team. Many thanks to Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on this document and to Mika LaVaque-Manty and Ben Hansen for many useful discussions on this topic. The source code for this document may be freely downloaded and modified from <https://github.com/jwbowers/workflow>.
+  affiliation: <jwbowers@illinois.edu>,  University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team. Many thanks to Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on this document and to Mika LaVaque-Manty and Ben Hansen for many useful discussions on this topic. The source code for this document may be freely downloaded and modified from <https://github.com/jwbowers/workflow>.
 - name: Maarten Voors
-  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics
+  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics Group
 bibliography: references.bib
 csl: american-political-science-review.csl
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
@@ -150,7 +150,7 @@ write computer programs.^[Since R is open
 
 Moreover, realize that *file names send messages* to your future
 self. This means that if you name your files with evocative and descriptive names, your
-collaborators are less likely to call you at midnight asking for help and you will remove some regret from your future self. For example, if you are studying inequalit and protest, you might try naming a file something like  `inequality-and-protest-figures.R` instead of  `temp9`or
+collaborators are less likely to call you at midnight asking for help and you will remove some regret from your future self. For example, if you are studying inequality and protest, you might try naming a file something like  `inequality-and-protest-figures.R` instead of  `temp9`or
 `supercalifragilisticexpialidocious`.  By the way, the extension
 `.R` tells us and the operating system that the file contains R
 commands. This part of the filename enables us to quickly search our
