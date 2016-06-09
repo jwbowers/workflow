@@ -156,8 +156,7 @@ collaborators are less likely to call you at midnight asking for help and you wi
 commands. This part of the filename enables us to quickly search our
 antique hard drives for files containing R scripts.
 
-**Step 1** If we know the provenance of results,
-future  or current collaborators can quickly and easily reproduce
+**Step 1** If we know the provenance of results, future or current collaborators can quickly and easily reproduce
 and thus change and improve upon the work.
 
 # No data analyst is an island for long.
