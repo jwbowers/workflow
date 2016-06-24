@@ -149,7 +149,7 @@ write computer programs.^[Since R is open
   new-fashioned actual machine.]
 
 Moreover, coding saves time. Often, a lot of time, especially if projects increase (in the number of files, partners, analysis). Manually importing
-a data file into R, may be effortless. Importing 100 files is another issue and the costs of each manual action add up quickly.   
+a data file into R, may be effortless. Importing 100 files is another issue, and the costs of each manual action add up quickly.  
 
 Also, realize that *file names send messages* to your future self. This means that if you name your files with evocative and descriptive names, your
 collaborators are less likely to call you at midnight asking for help and you will remove some regret from your future self. For example, if you are studying inequality and protest, you might try naming a file something like  `inequality-and-protest-figures.R` instead of  `temp9`or
@@ -159,7 +159,7 @@ antique hard drives for files containing R scripts.
 
 Finally, coding helps us to avoid making mistakes. For example, say in our example above we are interested in how many people protest. We may use a data file containing all protests for several years. We can then create a table with the number of protesters by copying the results manually to a document you use to write your paper. In copying we can make mistakes. So a better approach is to ask R to automatically create the table (in the format you like, with horizontal lines, 3 decimals, a title, etc) and output this in whatever file type you need (.pdf, .rtf, etc). Now when we obtain new data (for additional years, or updated figures for existing data) a new table can be created quickly, so we make less mistakes and save time!
 
-NOTE we could include some code here to provide an example of automation of results?
+[NOTE we could include some code here to provide an example of automation of results?]
 
 **Step 1** Code everything that can be coded. If we know the provenance of results, future or current collaborators make less mistakes and can quickly and easily reproduce (and thus change and improve) upon the work.
 
@@ -176,14 +176,14 @@ did something with data: comment your code and tightly link your code
 with your writing.^[One can also try the R command
   `put-it-in-my-mind(reason,importance="high")` to firmly place a
   reason for a decision into the mind of the analyst. I myself have
-  not had much luck with this function.]
+  not had much luck with this function.] [I FEEL THIS COMMENT IS FUNNY BUT CONFUSING FOR OUR LATIN AMERICAN READERS PROBABLY]
 
 ## Code is communication: Comment code
 
 Comments, unexecuted text inside of a script, are a message to
 collaborators (including your future self) and other consumers of your
-work. In the above code chunk, I used comments to explain the lines to
-readers unfamiliar with R and to remember that I had tried a different
+work. In the above code chunk, we used comments to explain the lines to
+readers unfamiliar with R and to remember that we had tried a different
 specification but decided not to use it because adding the squared
 term did not really change the substantive story arising from the
 model.^[R considers text marked with `#` as a comment.]
@@ -229,6 +229,7 @@ computation was required to produce it) and the visible, type-set page
 image. Page images are great for reading, but not great for
 reproducing or collaborating. The source code of any document
 exchanged by the group must be available and executable.^[As of the 2016 version of this paper, this idea is now widespread and made much easier than before via online services for code sharing and collaboration such as [GitHub](http://github.com) and [BitBucket](http://bitbucket.org).]
+[I FEEL WE CAN MOVE THIS TO THE MAIN TEXT AND (BRIEFLY) INTRODUCE GITHUB]
 
 How might one avoid these problems?
 [Literate programming](http://en.wikipedia.org/wiki/Literate_programming) is the practice of weaving code into a document ---
@@ -241,7 +242,7 @@ reproduction and communication.
 For example, in [@sec:data-analys-comp], I suggested that we know
 where 'that plot on page 10 'comes from by making sure we had a
 `fig1.pdf` file produced from a clearly commented plain text file
-called something like `fig1.R`.  An even easier solution would be to
+called something like `makefig1.R`.  An even easier solution would be to
 directly include a chunk of code to produce the figure inside of the
 paper itself. This paper, for example, was written in plain text using
 markdown markup with R code chunks to make things like
@@ -342,18 +343,18 @@ files. There are many ways that creative people can program in a
 literate way.
 
 Literate programming need not go against the principle of modular data
-analysis [@nagler1995coding]. In my own work I routinely have
+analysis [@nagler1995coding]. Jake routinely uses
 several different Sweave files that fulfill different functions, some
-of them create \LaTeX code that I can `\input` into my
+of them create \LaTeX code that he can `\input` into his
 `main.tex` file, others setup the data, run simulations, or allow
-me to record my journeys down blind alleys. Of course, when we have
+him to record his journeys down blind alleys. Of course, when we have
 flying cars running on autopilot, perhaps something other than
 Sweave will make our lives even easier. Then we'll change.
 
 **Step 2**
 We analyze data in order to explain something about the world to other
 scholars and policy makers. If we focus on explaining how we got our
-computers to do data analysis to human beings, we will do a better job
+computers to do data analysis, we will do a better job
 with the data analysis itself: we will learn as we focus on teaching,
 and we will avoid errors and save time as we ensure that others
 (including our future selves) can retrace our steps. A document than
@@ -372,8 +373,8 @@ Using R, for example, all analysis files should have
 `load("thedata.rda")`or `read.csv("thedata.csv")`or some
 equivalent line in them, and `thedata.csv`should be stored in
 some place easy to find (like in the same directory as the file or
-perhaps in `"Data/thedata.rda"`). Of course, it never hurts to
-drop in a comment pointing to the data file.
+perhaps in `"Data/thedata.rda"`). Of course, its even better to
+include a comment pointing to the data file.
 
 [MAARTEN IDEAS HERE? PLUS ANOTHER SECTION ABOUT ORGANIZATION?]
 
@@ -424,7 +425,7 @@ LA=basic.lab
 CM FI=basic.cov
 ```
 
-The fact that I need to articulate this idea at all arises because of
+The fact that we need to articulate this idea at all arises because of
 graphical user interfaces: it is all too easy to use the mouse to load
 a data file into memory and then to write a script to analyze this
 file without ever noting the actual name or location of the data file.
@@ -509,10 +510,9 @@ you.
 
 # Minimize error by testing.
 
-Anyone writing custom code should worry about getting it right. The more code one writes, the more time one has to appreciate problems arising from bugs, errors, and typos in data analysis
-and code.
+Anyone writing custom code should worry about getting it right. The more code one writes, the more time one has to appreciate problems arising from bugs, errors, and typos in data analysis and code. Mistakes will always be made we should just recognize we need more standardization of practice to minimise the mistakes and help others find them. One thing we can do is to include testing in our coding.
 
-Now, if one has a moment to think in between teaching that new class,
+If one has a moment to think in between teaching that new class,
 reading books for an awards committee, evaluating application files
 for the admissions committee, feeding popsicles to a sick child, and
 undertaking the odd bit of research, one might say to oneself,
@@ -527,9 +527,9 @@ for multi-million dollar programs. The idea of
 [small parts of one's code](http://en.wikipedia.org/wiki/Unit_testing) arose to address such concerns.^[There are now R packages to help R package writers do this, see for example <https://github.com/hadley/testthat> and the article on it <https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf>.] For the social scientist
 collaborating with her future self and/or a small group of
 collaborators, here is an example of this idea in a very simple form:
-Say I want to write a function to multiply a number by 2. If my
-function works, when I give it the number 4, I should see it return
-the number 8 and when I give it -4, I should get -8.
+Say you want to write a function to multiply a number by 2. If the
+function works, when you give it the number 4, you should see it return
+the number 8 and when you give it -4, you should get -8.
 
 ```{r unit.test}
 ##  The test function:
@@ -553,7 +553,7 @@ times.2.fn <- function(thenumber){
 test.times.2.fn()
 ```
 
-Ack! I mistyped '+' for '*'. Good thing I wrote the
+Ack! we mistyped '+' for '*'. Good thing I wrote the
 test!^[A more common example of this kind of testing occur
   everyday when we recode variables into new forms but look at a
   crosstab of the old vs. new variable before proceeding.]
@@ -567,7 +567,8 @@ the first place.
 
 # Copy and improve on others' examples.
 
-Lots of people are thinking about 'reproducible research'and
+[IS THIS SECTION MORE MORE ON CREATING AN INTEGRATED REPRODUCABLE WORKFLOW RATHER THAN COPYING AND IMPROVING?]
+Lots of people are thinking about 'reproducible research', creating a 'reproducable workflow' and
 'literate programming' these days. Google those terms. Of course, the
 devil is in the details: Here I list a few of my own attempts at enabling
 reproducible research. You'll find many other inspiring examples on
@@ -600,12 +601,16 @@ and I anticipate that it will become ever easier to turn papers into R packages
 as creative and energetic folks turn their attention to the question of
 reproducible research.^[See for example <http://r-pkgs.had.co.nz/>]
 
-**Step 6** We all learn by doing. When we share
+[ADD OPEN SCIENCE FRAMEWORK, COLLABORATING ON DROPBOX AND NEW INITIATIVES LIKE Dynamic Documents (R Markdown/KnitR in R Studio,
+Markdoc in Stata), Jupyter Notebook, Docker for Cross-Platform Reproducibility)]
+
+**Step 6** We all learn by doing. When we create a reproducible workflow and share
 reproduction materials we improve both cumulation of knowledge and our
 methods for doing social science
 [@freese2007replication,king1995replication}.  As we copy and
 improve upon each other's modes of doing work we enhance our collective
 ability to believe each other and for future scholars to believe us, too.
+[I FEEL LIKE THE COPY COMMENT IS PERHAPS ANOTHER POINT TO MAKE (OR LEAVE)]
 
 # Remember that research ought to be credible communication.
 
@@ -633,14 +638,12 @@ mostly uploads).^[The arrival of the six-legged social
 
 But what if no one ever hears of your work, or, by some cruel fate, your
 article does not spawn debate? Why then would you spend time to
-communicate with your future self and others? My own answer to this
-question is that I want my work to be credible and useful to myself
-and other scholars even if each article does not immediately change
-the world.  What I report in my data analyses should have two main
+communicate with your future self and others? Our own answer to this
+question is that we want our work to be credible and useful to ourself
+and other scholars regardless.  What we report in our data analyses should have two main
 characteristics: (1) the findings of the work should not be a matter
 of opinion; and (2) other people should be able to reproduce the findings. That is,
-the work represents a shared
-experience --- and an experience shared without respect to the
+the work represents a shared experience --- and an experience shared without respect to the
 identities of others (although requiring some common technical
 training and research resources).
 
@@ -648,17 +651,17 @@ Assume we want others to believe us when we say something. More narrowly,
 assume we want other people to believe us when we say something about data:
 'data' here can be words, numbers, musical notes, images, ideas, etc \ldots The
 point is that we are making some claims about patterns in some collection of
-stuff. For example, when I was invited into the homes and offices of ordinary
+stuff. For example, when Jake was invited into the homes and offices of ordinary
 people in Chile in 1991, the "stuff" was recordings of conversations that we
-had about life during the first year of democracy and I was comparing the
+had about life during the first year of democracy and Jake was comparing the
 responses of people who had experienced the Pinochet dictatorship differently.
-Now, it might be easy to convince others that 'this collection of stuff is
-different from that collection of stuff' if those people were looking over our
+Now, it might be easy to convince others that 'this collection of stuff' is
+different from 'that collection of stuff' if those people were looking over our
 shoulders the whole time that we made decisions about collecting the stuff and
 broke it up into understandable parts and reorganized and summarized it.
 Unfortunately, we can't assume that people are willing to shadow a researcher
 throughout her career. Rather, we do our work alone or in small groups and want
-to convince other distant and future people about our analyses.
+to convince other distant and future people about our analyses and findings.
 
 Now, say your collections of stuff are large or complex and your
 chosen tools of analyses are computer programs. How can we convince
