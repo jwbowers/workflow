@@ -576,7 +576,7 @@ copy and improve, it is polite to alert the person from whom you made
 the copy about your work.
 
 We have experimented with several systems so far: (1) we wrote this paper in R markdown (Jake) and Atom (Maarten) and organized our files and collaboration on Github. The source code can be accessed, downloaded and modified from <https://github.com/jwbowers/workflow>. The program also allowed us to send notes to each other. The nice thing about github is that is enables you to make "releases" of a project which enable you to smooth the reproduction of all of the
-products of your research (simulations, data analyses, tables, figures, etc..). Similar features are offered by the Open Science Framework (https://osf.io/), Maarten recently participated in a workshop on research transparency organized by the Berkeley Institute for Transparency in the Social Sciences (www.bitss.org), all course material was accessible through OSF (https://osf.io/qh2nr/). Both platforms, OSF and Github nicely integrate and a key benefit is that they have been created to remain for a long time (unlike perhaps your university drive); (2) for one paper Jake simply included a Sweave document and data files into a compressed archive [@bowers2005dataverse] [SAY ABIT MORE ABOUT WHAT SWEAVE IS IN PRINCIPLE]; (3) for another more computing intensive paper Jake
+products of your research (simulations, data analyses, tables, figures, etc..). Similar features are offered by the Open Science Framework (https://osf.io/), Maarten recently participated in a workshop on research transparency organized by the Berkeley Institute for Transparency in the Social Sciences (www.bitss.org), all course material was accessible through OSF (https://osf.io/qh2nr/). Both platforms, OSF and Github nicely integrate and a key benefit is that they have been created to remain for a long time (unlike perhaps your university drive) JAKES PROJECT; (2) for one paper Jake simply included a Sweave document and data files into a compressed archive [@bowers2005dataverse] [SAY ABIT MORE ABOUT WHAT SWEAVE IS IN PRINCIPLE]; (3) for another more computing intensive paper Jake
 assembled a set of files that enabled reproduction of our results using the
 `make` system [@bowers2008dataverse] [EXPLAIN A BIT MORE OR INCLUDE REF TO WEBSITE?]; (4) Jake also tried the "compendium"
 approach [@gentleman2005reproducible,@gentleman2007statistical] which embeds an
@@ -592,9 +592,9 @@ just as one installs and uses statistical software packages is very attractive,
 and we anticipate that it will become ever easier to turn papers into R packages
 as creative and energetic folks turn their attention to the question of
 reproducible research.^[See for example <http://r-pkgs.had.co.nz/>]
-Finally, (5) Maarten has been using Dropbox for most of his collaborative projects (https://www.dropbox.com/). ALREADY ABOVE?
+Finally, (5) Maarten has been using Dropbox for most of his collaborative projects (https://www.dropbox.com/). ALREADY ABOVE? NOTE BACK
 
-There are some new noteworthy developments also. For example, and similar to R Markdown/KnitR in R Studio, there is Markdoc for STATA users (https://github.com/haghish/MarkDoc). People at UC Berkeley have been developing a is a web app, Jupyter Notebook (http://jupyter.org/), that enables you to make and share documents that include text, code, equations and visualizations in one. For researchers working across difference platforms, there is Docker (https://www.docker.com/).
+There are some new noteworthy developments also. For example, and similar to R Markdown/KnitR in R Studio, there is Markdoc for STATA users (https://github.com/haghish/MarkDoc). People at UC Berkeley have been developing a is a web app, Jupyter Notebook (http://jupyter.org/), that enables you to make and share documents that include text, code, equations and visualizations in one INCLUDE REF TO GITHUB - USING PYTHON. For researchers working across difference platforms, there is Docker (https://www.docker.com/).
 
 **Step 6** We all learn by doing. When we create a reproducible workflow and share
 reproduction materials we improve both cumulation of knowledge and our
