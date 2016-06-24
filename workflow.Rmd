@@ -5,7 +5,6 @@ author:
   affiliation: <jwbowers@illinois.edu>,  University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team. Nothing in this paper reflect the official position of the US Government. Many thanks to Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on this document and to Mika LaVaque-Manty and Ben Hansen for many useful discussions on this topic. The source code for this document may be freely downloaded and modified from <https://github.com/jwbowers/workflow>.
 - name: Maarten Voors
   affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics Group. Special thanks, the EGAP Learning Days 2016 participants in Santiago Chile,  to the BITSS team and the Department of Economics and Ted Miguel at UC Berkeley where Maarten was a visiting researcher during spring 2016.
-  <!-- Separate the thanks sections from affiliation and integrate? Wasnt sure how to do this here-->
 bibliography: references.bib
 csl: american-political-science-review.csl
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
@@ -27,6 +26,7 @@ output:
 
 <!-- An example comment -->
 
+  <!-- Separate the thanks sections from affiliation and integrate? Wasnt sure how to do this here-->
 ```{r include=FALSE, cache=FALSE}
 # Some customization.  You can alter or delete as desired (if you know what you are doing).
 # knitr settings to control how R chunks work.
