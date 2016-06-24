@@ -163,7 +163,7 @@ collaborators are less likely to call you at midnight asking for help and you wi
 `.R` tells us and the operating system that the file contains R commands. This part of the filename enables us to quickly search our
 antique hard drives for files containing R scripts.
 
-Finally, coding helps us to avoid making mistakes. For example, in our example above we may be interested in how many people protest. We may use a data file containing all protests for several years. We can then create a table with the number of protesters by copying the results manually to a document you use to write your paper. In copying we can make mistakes. So a better approach is to ask R to automatically create the table (in the format you like, with horizontal lines, 3 decimals, a title, etc) and output this in whatever file type you need (.pdf, .rtf, etc). Now when we obtain new data (for additional years, or updated figures for existing data) a new table can be created quickly, so we make less mistakes and save time!
+Coding helps us to avoid making mistakes. For example, in our example above we may be interested in how many people protest. We may use a data file containing all protests for several years. We can then create a table with the number of protesters by copying the results manually to a document you use to write your paper. In copying we can make mistakes. So a better approach is to ask R to automatically create the table (in the format you like, with horizontal lines, 3 decimals, a title, etc) and output this in whatever file type you need (.pdf, .rtf, etc). Now when we obtain new data (for additional years, or updated figures for existing data) a new table can be created quickly, so we make less mistakes and save time!
 
 <!-- Can you include some code here to provide an example of automation of results? -->
 
@@ -179,10 +179,7 @@ and citations in the publication will justify the most important
 decisions. So, one must code to communicate with yourself and
 others. There are two main ways to avoid forgetting the reasons you
 did something with data: comment your code and tightly link your code
-with your writing.^[One can also try the R command
-  `put-it-in-my-mind(reason,importance="high")` to firmly place a
-  reason for a decision into the mind of the analyst. I myself have
-  not had much luck with this function.] [I FEEL THIS COMMENT IS FUNNY BUT CONFUSING FOR OUR LATIN AMERICAN READERS PROBABLY]
+with your writing.
 
 ## Code is communication: Comment code
 
@@ -234,7 +231,7 @@ the distinction between the 'source code' of a document (i.e. what
 computation was required to produce it) and the visible, type-set page
 image. Page images are great for reading, but not great for
 reproducing or collaborating. The source code of any document
-exchanged by the group must be available and executable.^[As of the 2016 version of this paper, this idea is now widespread and made much easier than before via online services for code sharing and collaboration such as [GitHub](http://github.com), [Open Science Framework](https://osf.io/) and [BitBucket](http://bitbucket.org), see below.]
+exchanged by the group must be available and executable.^[As of the 2016 version of this paper, this idea is now widespread and made much easier than before via online services for code sharing and collaboration such as [GitHub](http://github.com), [Open Science Framework](https://osf.io/) and [BitBucket](http://bitbucket.org), see more below.]
 
 How might one avoid these problems?
 [Literate programming](http://en.wikipedia.org/wiki/Literate_programming) is the practice of weaving code into a document ---
@@ -381,8 +378,6 @@ some place easy to find (like in the same directory as the file or
 perhaps in `"Data/thedata.rda"`). Of course, its even better to
 include a comment pointing to the data file.
 
-[MAARTEN IDEAS HERE? PLUS ANOTHER SECTION ABOUT ORGANIZATION?]
-
 Where should one store data files? An obvious solution is always to
 make sure that the data file used by a command file is in the same
 directory as the command file. More elegant solutions require all
@@ -390,7 +385,7 @@ co-authors to have the same directory structure so that
 `load("Data/thedata.rda")` means the same thing on all computers
 used to work on the project. This kind of solution is one of the
 things that formal version control systems do well (as discussed
-a bit more in [@sec:vers-contr-prev]).
+a bit more below in [@sec:vers-contr-prev]).
 
 The principle of modularity suggests that you separate data cleaning,
 processing, recoding, and merging from analysis in different files
@@ -416,24 +411,33 @@ nicer solution is to maintain a file for each project called
 data and command files with brief descriptions of their functions and
 relations.
 
+Best practice is to create a file system where you separate folders by function and separate input from output files. For example, below we show a folder structure for a paper where we look at inequality. The paper is written in .tex, data analysis in STATA (that Maarten prefers, so we see .do and .dta file extensions) in R (the program of choice for Jake, see the .R extensions):
+
+<!-- JAKE please check if I made no mistake, also there may be a prettier way to show a folder structure (a screen shot?),feel free to change-->
+00_archive
+01_paper
+  20160622_inequality.tex
+02_data
+  00_archive
+  01_rawdata
+  02_cleandata
+  20160622_analysis.dta
+  20160622_analysis.rda
+03_analysis
+  00_archive
+  01_temp
+  02_output
+    01_tables
+    02_figures
+  20160622_analysis.do
+  20160622_analysis.R
+  20160622_prep_data.do
+  20160622_prep_data.R
+
+There are a couple of things to note. See that files start with a number to give them an ordering. Note also we create an 00_archive folder, here you can store older files without having to delete them permanently and keeping the number of files in your main folders to a minimum. Also there is a clear separation between raw data (data that came straight from the field, downloaded data, someone else's replication files, etc) and clean data (data ready to use). Note that in the analysis folder we created two files, one for cleaning and merging data called 20160622_prep_data and another for running the analysis called 20160622_analysis. See also the output folders, with subfolders for graphs and tables. These are place holder for R or STATA to output the results from the analysis and keeps things organized. We discuss integrated programs (that combine code and text below).  
+
 **Step 3** We should know where the data came
 from and what operations were performed on which set of data.
-
-In the good old days, when we executed our LISREL code in batch mode,
-we had no choice but to tell the machine clearly, in a few easy to
-understand and informative lines, what files (with filenames no longer
-than 8 characters) to use. See for example, this extremely clear code snippet:
-
-```
-DA NI=19 NO=199 MA=CM
-LA=basic.lab
-CM FI=basic.cov
-```
-
-The fact that we need to articulate this idea at all arises because of
-graphical user interfaces: it is all too easy to use the mouse to load
-a data file into memory and then to write a script to analyze this
-file without ever noting the actual name or location of the data file.
 
 # Version control prevents clobbering, reconciles history, and helps organize work. {#sec:vers-contr-prev}
 
@@ -470,9 +474,8 @@ work on merging changes by hand before copying back to the Dropbox directory
 and replacing existing files. You will however need to agree on an iron file and directory naming rule with your collaborators.
 
 Jake uses github within his research group, and used it for all of
-his own projects. MORE ON GITHUB
+his own projects. <!-- JAKE do you want to add something else here? -->
 You may even obtain a two year unlimited repositories with an academic affiliation.
-
 
 An excellent, simple, and robust version control system is to rename your files with the date and time of
 saving them: yyyymmdd_project.docx (for changes within the same day, just before a deadline for example, you may even add a time, so it becomes 20160623_4PM_inequalitypaper.docx). This communicates very clear what version you are working. Remember the days when you received a file called inequalityMV4_APSRsubmit_reallyfinal2.tex? That should quickly become something of the past! We find ourselves preaching the gospel to our collaborators frequently and will keep renaming files until a collaborator has been successfully pacified. Be sure to include year in the file names --- remember, the life of an idea is
@@ -594,7 +597,9 @@ as creative and energetic folks turn their attention to the question of
 reproducible research.^[See for example <http://r-pkgs.had.co.nz/>]
 Finally, (5) Maarten has been using Dropbox for most of his collaborative projects (https://www.dropbox.com/). See comments above. As a tool for making files publicly available Dropbox is less useful. You can of course make replication files available through creating an public folder, but you will still need to refer to this folder on a particular project website (an example is Maarten's project on conflict and football https://www.dropbox.com/sh/wqosq99019mf04d/AAASTgJLkn6lmZJI_1veUK7ca?dl=0)
 
-There are some noteworthy new developments also. For example, and similar to R Markdown/KnitR in R Studio, there is Markdoc for STATA users (https://github.com/haghish/MarkDoc). People at UC Berkeley have been developing a is a web app, Jupyter Notebook (http://jupyter.org/), that enables you to make and share documents that include text, code, equations and visualizations in one INCLUDE REF TO GITHUB - USING PYTHON. For researchers working across different platforms, there is Docker (https://www.docker.com/). There are also are great notes programs that help you communicate with collaborators. For example, Simplenote is very basic but allows you to share and change notes.
+There are some noteworthy new developments also. For example, and similar to R Markdown/KnitR in R Studio, there is Markdoc for STATA users (https://github.com/haghish/MarkDoc). People at UC Berkeley have been developing a is a web app, Jupyter Notebook (http://jupyter.org/), that enables you to make and share documents that include text, code, equations and visualizations in one INCLUDE REF TO GITHUB - USING PYTHON. For researchers working across different platforms, there is Docker (https://www.docker.com/).
+
+There are also are great notes programs that help you communicate with collaborators. Remember, while email is fantastic for fast communication, it is not a tool designed for project management. It may work for small projects with few co-authors but when the number of collaborators increase it becomes very difficult to keep track. There are some great online systems for task management, most of which have mobile apps also, examples are Flow (www.getflow.com), Asana (www.asana.com), Wrike (www.wrike.com) <!-- JAKE do you know others? --> . There also are great programs for notes. For example, Simplenote is very basic but allows you to share and edit notes. Others are Evernote (www.evernote.com) and for Windows users there is OneNote.
 
 **Step 6** We all learn by doing. When we create a reproducible workflow and share
 reproduction materials we improve both cumulation of knowledge and our
