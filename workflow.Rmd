@@ -24,6 +24,7 @@ output:
 ...
 
 
+<!-- An example comment -->
 
 ```{r include=FALSE, cache=FALSE}
 # Some customization.  You can alter or delete as desired (if you know what you are doing).
