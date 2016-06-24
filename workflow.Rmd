@@ -4,7 +4,7 @@ author:
 - name: Jake Bowers
   affiliation: <jwbowers@illinois.edu>,  University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team. Nothing in this paper reflect the official position of the US Government. Many thanks to Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on this document and to Mika LaVaque-Manty and Ben Hansen for many useful discussions on this topic. The source code for this document may be freely downloaded and modified from <https://github.com/jwbowers/workflow>.
 - name: Maarten Voors
-  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics Group. Special thanks, the EGAP Learning Days 2016 participants in Santiago Chile,  to the BITSS team and the Department of Economics and Ted Miguel at UC Berkeley where Maarten was a visiting researcher during spring 2016.
+  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics Group. Special thanks, the EGAP Learning Days 2016 participants in Santiago Chile,  to the BITSS team and the Department of Economics and Ted Miguel at UC Berkeley where Maarten was a visiting researcher during spring 2016. Maarten gratefully acknowledges financial support from N.W.O. grant 451-14-001.
 bibliography: references.bib
 csl: american-political-science-review.csl
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
@@ -83,12 +83,12 @@ options(SweaveHooks=list(fig=function(){
 > If you tell the truth, you don't have to remember anything. [@twain1975mark]
 
 
-Memory is tricky. When we really want to remember something we should practice it until it becomes internalized. In fact, learning requires effort. And when we do not practice, we tend to be overconfident in our recall abilities [@koriat2005illusions] and false memories can be implanted.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php>. On false memory see Wikipedia and linked studies <https://en.wikipedia.org/wiki/False_memory>.] If we cannot count on memory, then how can we do science?
+Memory is tricky. When we really want to remember something we should practice it until it becomes internalized. In fact, learning requires effort. And when we do not practice, we tend to be overconfident in our recall abilities [@koriat2005illusions] and false memories can be implanted.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php>. On false memory see Wikipedia and linked studies <https://en.wikipedia.org/wiki/False_memory>.] Moreover, most of us live busy lives. We write text and code behind our new standing desk at home while the kids run around, cry about an elder sister taking away a favorite new yellow school bus toy, drinks spill on the floor, the laundry needs going, the kettle boils... Our minds are full and we need to efficiently move from task to task. If we cannot count on memory, then how can we do science?
 
-How long does it take from planning a study to publication? And subsequently, how much time passes to the first reproduction of a study? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a data driven study faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, it will occur after publication. Moreover, this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, years past the initial publication of the article.^[We note that sometimes this reproduction occurs within the context of classes and learning about statistics and data analysis. Other times, this process is organized more broadly (cite IIIE program, researchers have started to implement psychological experiments using the same protocols across many locations, see Open Science Foundation 2014, 2015, within experimental economics a team did the same, see Camerer et al 2016 Science paper. Another example is to share analysis across many researchers. in a their 'crowdsourcing analysis" Silberzahn and Uhlmann (Nature 2015) asked 29 research teams to run the analysis for a project that looked at the impact of skin color on the probability of getting a foul card in a football match.<!-- Can you do the correct citing here -->]
+How long does it take from planning a study to publication? How much time passes to the first reproduction of a study? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a data driven study faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, it will occur after publication. Moreover, this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, years past the initial publication of the article.^[We note that sometimes this reproduction occurs within the context of classes and learning about statistics and data analysis. Other times, this process is organized more broadly (cite IIIE program, researchers have started to implement psychological experiments using the same protocols across many locations, see Open Science Foundation 2014, 2015, within experimental economics a team did the same, see Camerer et al 2016 Science paper. Another example is to share analysis across many researchers. in a their 'crowdsourcing analysis" Silberzahn and Uhlmann (Nature 2015) asked 29 research teams to run the analysis for a project that looked at the impact of skin color on the probability of getting a foul card in a football match.<!-- Can you do the correct citing here -->]
 
 
-If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised and updated version of @bowers2011tpm and provides some suggestions for practices that will make such reproduction occur much more easily and quickly.  Specifically, this piece aims to amplify some of what we already ought to know, and to add to some of those ideas given current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations.] This essay is an attempt at providing practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on other bad past decisions but not on decisions about data analysis and the production of scholarly papers.
+If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised and updated version of @bowers2011tpm and provides some suggestions for practices that will make such reproduction occur much more easily and quickly.  Specifically, this piece aims to amplify some of what we already ought to know and do, and highlight some current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations.] We aim to provide practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on other bad past decisions but not on decisions about data analysis and the production of scholarly papers.
 
 <!-- JAKE: we dont say anything about pre registration, should we? -->
 
@@ -109,20 +109,14 @@ We organize the paper around a series of homilies that lead to certain concrete 
 # Data analysis is computer programming. {#sec:data-analys-comp}
 
 All results (numbers, comparisons, tables, figures) should arise from
-code, not from a series of mouse clicks or copying and pasting. If you wanted
+code. Not from a series of mouse clicks or copying and pasting. If you wanted
 to re-create the figure from say 2011 but include a new variable or
 specification, you should be able to do so with just a few edits to the
 code rather than knowledge of how you used a pointing device in
 your graphical user interface all those years ago.
 
-For example, using R [@R:2011], a open-source statistical software program, I might specify that a file, called `fig1.pdf` was
-produced by the following set of commands in a file called `makefig1.R`.^[The command
-`please-plot`and some other R functions used in this essay come from the
-`MayIPleaseDoStatistics` package which emphasizes politeness in data analysis.
-Functions like `please-plot`can be blocked and more polite versions such as
-`may-I-please-have-a-plot`can be required using `options(politeness=99)`. We do
-not recommend setting negative values for the politeness option should you use this package.]
-Lets look at some annotated R code you could produce:
+For example, using R [@R:2011], a open-source statistical software program, you might specify that a file, called `fig1.pdf` was
+produced by the following set of commands in a file called `makefig1.R`. Lets look at some annotated R code you could produce:
 
 ```{r eval=FALSE}
 ## This file produces a plot relating the explanatory variable to the outcome.
@@ -140,7 +134,7 @@ dev.off() ## stop writing to the pdf file
 Now, in the future if you wonder how 'that plot on page 10' was
 created, you will know: (1) 'that plot' is from a file called
 `fig1.pdf`and (2) `fig1.pdf`was created in
-`makefig1.R`. Any time in a future (provided R still exists), changing the figure
+`makefig1.R`. Any time in a future, provided R still exists, changing the figure
 will require some quick edits of commands already written.  In a future
 where R does not exist, you (or someone else) will at least be able to read the plain text
 R commands and use them to write code in a new favorite statistical
@@ -154,16 +148,16 @@ write computer programs.^[Since R is open
   old-fashioned operating system in a virtual machine on my
   new-fashioned actual machine.]
 
-Moreover, coding saves time. Often, a lot of time, especially if projects increase (in the number of files, partners, analysis). Manually importing
-a data file into R, may be effortless. Importing 100 files is another issue, and the costs of each manual action add up quickly.  
+Moreover, coding saves time. Often, a lot of time, especially if projects grow (in the number of files, partners, analysis). Manually importing
+a data file into R, may be effortless. Importing 100 files is another issue, and the time costs of each manual action add up quickly (and the probability for error increases).  
 
 Also, realize that *file names send messages* to your future self. This means that if you name your files with evocative and descriptive names, your
-collaborators are less likely to call you at midnight asking for help and you will remove some regret from your future self. For example, if you are studying inequality and protest, you might try naming a file something like  `inequality-and-protest-figures.R` instead of  `temp9`or
-`supercalifragilisticexpialidocious`.  More on this below. By the way, the extension
+collaborators are less likely to call you at midnight asking for help and you will remove some regret from your future self. For example, if you are studying inequality and protest, you might try naming a file something like  `inequality-and-protest-figures.R` instead of `temp9.R` or
+`supercalifragilisticexpialidocious.R`.  More on this below. By the way, the extension
 `.R` tells us and the operating system that the file contains R commands. This part of the filename enables us to quickly search our
 antique hard drives for files containing R scripts.
 
-Coding helps us to avoid making mistakes. For example, in our example above we may be interested in how many people protest. We may use a data file containing all protests for several years. We can then create a table with the number of protesters by copying the results manually to a document you use to write your paper. In copying we can make mistakes. So a better approach is to ask R to automatically create the table (in the format you like, with horizontal lines, 3 decimals, a title, etc) and output this in whatever file type you need (.pdf, .rtf, etc). Now when we obtain new data (for additional years, or updated figures for existing data) a new table can be created quickly, so we make less mistakes and save time!
+Coding helps us to avoid making mistakes. For example, in our example above we may be interested in how many people protest. We may use a data file containing all protests for several years. We can then create a table with the number of protesters by copying the results manually to a document you use to write your paper. In copying we can make mistakes. So a better approach is to ask R (or STATA, or another program of choice) to automatically create the table (in the format you like, with horizontal lines, 3 decimals, a title, etc) and output this in whatever file type you need (.pdf, .rtf, etc). Now when we obtain new data (for additional years, or updated figures for existing data) a new table can be created quickly, so we make less mistakes and save time!
 
 <!-- Can you include some code here to provide an example of automation of results? -->
 
@@ -173,7 +167,7 @@ Coding helps us to avoid making mistakes. For example, in our example above we m
 
 Data analysis involves a long series of decisions. Each decision
 requires a justification.  Some decisions will be too small and
-technical for inclusion in the published article itself. These need to
+technical for inclusion in the published article itself. Still, these need to
 be documented in the code itself [@nagler1995coding]. Paragraphs
 and citations in the publication will justify the most important
 decisions. So, one must code to communicate with yourself and
@@ -189,7 +183,7 @@ work. In the above code chunk, we used comments to explain the lines to
 readers unfamiliar with R and to remember that we had tried a different
 specification but decided not to use it because adding the squared
 term did not really change the substantive story arising from the
-model.^[R considers text marked with `#` as a comment.]
+model.^[R considers text marked with `#` as a comment. For STATA simply add a `*` before the text]
 Messages left for your future self (or near-future others) help
 retrace and justify your decisions as the work moves from seminar
 paper to conference paper to poster back to paper to dissertation and
@@ -200,7 +194,7 @@ teaching. By assuming that others will look at your code, you will be
 more likely to write clearer code, or perhaps even to think more
 deeply about what you are doing as you do it.
 
-Comment liberally. Comments are discarded when R runs analysis or LaTeX or pandoc
+Comment liberally. Comments are discarded when R or STATA runs analysis, or LaTeX or pandoc
 turns plain text into pdf or html files so only those who dig into
 your work will see them.
 
@@ -251,6 +245,8 @@ markdown markup with R code chunks to make things like
 Figure \ref{fig:giniprot}. This combination of markdown and R is called
 [R Markdown](http://rmarkdown.rstudio.org).
 
+<!-- JAKE in the example below can you also add a line of text to people see the combination of text and table? -->
+
 ```{r fig1plotcode,eval=FALSE,echo=TRUE}
 ##  Make a scatterplot of Protest by Inequality
 par(bty="n",xpd=TRUE,pty="s",tcl=-.25)
@@ -286,6 +282,8 @@ generate within the source code of a scholarly paper. Those who view the code
 for this essay will see how Table \ref{tab:protest} was also generated directly
 from a regression object.\footnote{@beck2010reg inspired this particular
 presentation of a linear model.}
+
+For STATA users, there now is Markdoc (https://github.com/haghish/MarkDoc) which can be used similarly.
 
 ```{r maketable, echo=FALSE, results='hide'}
   lm1<-lm(protest05~gini04+meanpr,data=good.df)  #  Run the regression
@@ -328,8 +326,7 @@ thextab<-xtable(themat,align=c("l",rep(".",4)),digits=1,
           ))
 ```
 
-
-
+<!-- I how many of our readers will know what Sweave is.. drop or change? -->
 
 Literate data analysis is not the same as Sweave, even if Sweave is a
 nice implementation.^[The R project has a task view devoted to
@@ -384,7 +381,7 @@ directory as the command file. More elegant solutions require all
 co-authors to have the same directory structure so that
 `load("Data/thedata.rda")` means the same thing on all computers
 used to work on the project. This kind of solution is one of the
-things that formal version control systems do well (as discussed
+things that Dropbox and more formal version control systems do well (as discussed
 a bit more below in [@sec:vers-contr-prev]).
 
 The principle of modularity suggests that you separate data cleaning,
@@ -597,7 +594,7 @@ as creative and energetic folks turn their attention to the question of
 reproducible research.^[See for example <http://r-pkgs.had.co.nz/>]
 Finally, (5) Maarten has been using Dropbox for most of his collaborative projects (https://www.dropbox.com/). See comments above. As a tool for making files publicly available Dropbox is less useful. You can of course make replication files available through creating an public folder, but you will still need to refer to this folder on a particular project website (an example is Maarten's project on conflict and football https://www.dropbox.com/sh/wqosq99019mf04d/AAASTgJLkn6lmZJI_1veUK7ca?dl=0)
 
-There are some noteworthy new developments also. For example, and similar to R Markdown/KnitR in R Studio, there is Markdoc for STATA users (https://github.com/haghish/MarkDoc). People at UC Berkeley have been developing a is a web app, Jupyter Notebook (http://jupyter.org/), that enables you to make and share documents that include text, code, equations and visualizations in one INCLUDE REF TO GITHUB - USING PYTHON. For researchers working across different platforms, there is Docker (https://www.docker.com/).
+There are some noteworthy new developments also. People at UC Berkeley have been developing a is a web app, Jupyter Notebook (http://jupyter.org/), that enables you to make and share documents that include text, code, equations and visualizations in one INCLUDE REF TO GITHUB - USING PYTHON. For researchers working across different platforms, there is Docker (https://www.docker.com/).
 
 There are also are great notes programs that help you communicate with collaborators. Remember, while email is fantastic for fast communication, it is not a tool designed for project management. It may work for small projects with few co-authors but when the number of collaborators increase it becomes very difficult to keep track. There are some great online systems for task management, most of which have mobile apps also, examples are Flow (www.getflow.com), Asana (www.asana.com), Wrike (www.wrike.com) <!-- JAKE do you know others? --> . There also are great programs for notes. For example, Simplenote is very basic but allows you to share and edit notes. Others are Evernote (www.evernote.com) and for Windows users there is OneNote.
 
@@ -673,7 +670,7 @@ people in the group have done or what they, themselves, did in the past.
 In the end, following these practices and those recommended by
 @fredrickson2011tpm and @healy2011tpm among others working on these topics
 allows your computerized analyses of your collections of stuff to be
-credible.  Finally, if the someone quibbles with your analyses, your future
+credible.  If then someone quibbles with your analyses, your future
 self can shoot them the archive required to reproduce your
 work.^[Since you used plain text, the files will still be
   intelligible, analyzed using commented code so that folks can
@@ -692,3 +689,5 @@ or on a quiet walk.
 
 
 #References
+
+<!-- dont forget Camerer 2016 Science and  Silberzahn and Uhlmann (Nature 2015)
