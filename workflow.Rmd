@@ -4,7 +4,8 @@ author:
 - name: Jake Bowers
   affiliation: <jwbowers@illinois.edu>,  University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team. Nothing in this paper reflect the official position of the US Government. Many thanks to Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on this document and to Mika LaVaque-Manty and Ben Hansen for many useful discussions on this topic. The source code for this document may be freely downloaded and modified from <https://github.com/jwbowers/workflow>.
 - name: Maarten Voors
-  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics Group. Special thanks to the BITSS team and the Department of Economics and Ted Miguel at UC Berkeley where Maarten was a visiting researcher during 2016.
+  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics Group. Special thanks, the EGAP Learning Days 2016 participants in Santiago Chile,  to the BITSS team and the Department of Economics and Ted Miguel at UC Berkeley where Maarten was a visiting researcher during spring 2016.
+  <!-- Separate the thanks sections from affiliation and integrate? Wasnt sure how to do this here-->
 bibliography: references.bib
 csl: american-political-science-review.csl
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
@@ -84,9 +85,12 @@ options(SweaveHooks=list(fig=function(){
 
 Memory is tricky. When we really want to remember something we should practice it until it becomes internalized. In fact, learning requires effort. And when we do not practice, we tend to be overconfident in our recall abilities [@koriat2005illusions] and false memories can be implanted.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php>. On false memory see Wikipedia and linked studies <https://en.wikipedia.org/wiki/False_memory>.] If we cannot count on memory, then how can we do science?
 
-How long does it take from planning a study to publication? And subsequently, how much time passes to the first reproduction of a study? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a data driven study faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, it will occur after publication. Moreover, this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, years past the initial publication of the article.^[We note that sometimes this reproduction occurs within the context of classes and learning about statistics and data analysis. Other times, this process is organized more broadly (cite IIIE program, cite Open Science Foundation on psychology, cite the Camerer 2016 Science paper?, cite the cool "Crowdsourcing Analysis" project by Silberzahn and Uhlmann Nature 2015?).]
+How long does it take from planning a study to publication? And subsequently, how much time passes to the first reproduction of a study? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a data driven study faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, it will occur after publication. Moreover, this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, years past the initial publication of the article.^[We note that sometimes this reproduction occurs within the context of classes and learning about statistics and data analysis. Other times, this process is organized more broadly (cite IIIE program, researchers have started to implement psychological experiments using the same protocols across many locations, see Open Science Foundation 2014, 2015, within experimental economics a team did the same, see Camerer et al 2016 Science paper. Another example is to share analysis across many researchers. in a their 'crowdsourcing analysis" Silberzahn and Uhlmann (Nature 2015) asked 29 research teams to run the analysis for a project that looked at the impact of skin color on the probability of getting a foul card in a football match.<!-- Can you do the correct citing here -->]
+
 
 If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised and updated version of @bowers2011tpm and provides some suggestions for practices that will make such reproduction occur much more easily and quickly.  Specifically, this piece aims to amplify some of what we already ought to know, and to add to some of those ideas given current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations.] This essay is an attempt at providing practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on other bad past decisions but not on decisions about data analysis and the production of scholarly papers.
+
+<!-- JAKE: we dont say anything about pre registration, should we? -->
 
 ```{r read.data,echo=FALSE,results='hide', cache=TRUE}
 ## This data frame will be used throughout the analyses.
@@ -159,9 +163,9 @@ collaborators are less likely to call you at midnight asking for help and you wi
 `.R` tells us and the operating system that the file contains R commands. This part of the filename enables us to quickly search our
 antique hard drives for files containing R scripts.
 
-Finally, coding helps us to avoid making mistakes. For example, say in our example above we are interested in how many people protest. We may use a data file containing all protests for several years. We can then create a table with the number of protesters by copying the results manually to a document you use to write your paper. In copying we can make mistakes. So a better approach is to ask R to automatically create the table (in the format you like, with horizontal lines, 3 decimals, a title, etc) and output this in whatever file type you need (.pdf, .rtf, etc). Now when we obtain new data (for additional years, or updated figures for existing data) a new table can be created quickly, so we make less mistakes and save time!
+Finally, coding helps us to avoid making mistakes. For example, in our example above we may be interested in how many people protest. We may use a data file containing all protests for several years. We can then create a table with the number of protesters by copying the results manually to a document you use to write your paper. In copying we can make mistakes. So a better approach is to ask R to automatically create the table (in the format you like, with horizontal lines, 3 decimals, a title, etc) and output this in whatever file type you need (.pdf, .rtf, etc). Now when we obtain new data (for additional years, or updated figures for existing data) a new table can be created quickly, so we make less mistakes and save time!
 
-[NOTE we could include some code here to provide an example of automation of results?]
+<!-- Can you include some code here to provide an example of automation of results? -->
 
 **Step 1** Code everything that can be coded. If we know the provenance of results, future or current collaborators make less mistakes and can quickly and easily reproduce (and thus change and improve) upon the work.
 
@@ -470,9 +474,8 @@ his own projects. MORE ON GITHUB
 You may even obtain a two year unlimited repositories with an academic affiliation.
 
 
- An excellent, simple, and robust version
-control system is to rename your files with the date and time of
-saving them: yyyymmdd_project.docx (for changes within the same day, just before a deadline for example, you may even add a time, so it becomes 20160623_4PM_inequalitypaper.docx).  Be sure to include year in the file names --- remember, the life of an idea is
+An excellent, simple, and robust version control system is to rename your files with the date and time of
+saving them: yyyymmdd_project.docx (for changes within the same day, just before a deadline for example, you may even add a time, so it becomes 20160623_4PM_inequalitypaper.docx). This communicates very clear what version you are working. Remember the days when you received a file called inequalityMV4_APSRsubmit_reallyfinal2.tex? That should quickly become something of the past! We find ourselves preaching the gospel to our collaborators frequently and will keep renaming files until a collaborator has been successfully pacified. Be sure to include year in the file names --- remember, the life of an idea is
 measured in years. If you are wise enough to have saved your documents
 as plain text then you can easily compare documents using the many
 utilities available for comparing text files.^[Adobe Acrobat
@@ -507,7 +510,7 @@ you.
 
 # Minimize error by testing.
 
-Anyone writing custom code should worry about getting it right. The more code one writes, the more time one has to appreciate problems arising from bugs, errors, and typos in data analysis and code. Mistakes will always be made we should just recognize we need more standardization of practice to minimise the mistakes and help others find them. One thing we can do is to include testing in our coding.
+Anyone writing custom code should worry about getting it right. The more code one writes, the more time one has to appreciate problems arising from bugs, errors, and typos in data analysis and code. Mistakes will always be made we should just recognize we need more standardization of practice to minimize the mistakes and help others find them. One thing we can do is to include testing in our coding.
 
 If one has a moment to think in between teaching that new class,
 reading books for an awards committee, evaluating application files
@@ -521,8 +524,7 @@ Of course, this idea, like most others, is not new. The desire to
 avoid error looms large when large groups of programmers write code
 for multi-million dollar programs. The idea of
 [test driven development](http://en.wikipedia.org/wiki/Test-driven_development) and the idea that one ought to create tests of
-[small parts of one's code](http://en.wikipedia.org/wiki/Unit_testing) arose to address such concerns.^[There are now R packages to help R package writers do this, see for example <https://github.com/hadley/testthat> and the article on it <https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf>.] For the social scientist
-collaborating with her future self and/or a small group of
+[small parts of one's code](http://en.wikipedia.org/wiki/Unit_testing) arose to address such concerns.^[There are now R packages to help R package writers do this, see for example <https://github.com/hadley/testthat> and the article on it <https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf>.] For the social scientist collaborating with her future self and/or a small group of
 collaborators, here is an example of this idea in a very simple form:
 Say you want to write a function to multiply a number by 2. If the
 function works, when you give it the number 4, you should see it return
@@ -550,7 +552,7 @@ times.2.fn <- function(thenumber){
 test.times.2.fn()
 ```
 
-Ack! we mistyped '+' for '*'. Good thing I wrote the
+Ack! we mistyped '+' for '*'. Good thing we wrote the
 test!^[A more common example of this kind of testing occur
   everyday when we recode variables into new forms but look at a
   crosstab of the old vs. new variable before proceeding.]
@@ -562,9 +564,8 @@ computer program can fail. One can, however, at least make sure that
 it succeeds in doing the task motivating the writing of the code in
 the first place.
 
-# Copy and improve on others' examples.
+# Creating a reproducible workflow
 
-[IS THIS SECTION MORE MORE ON CREATING AN INTEGRATED REPRODUCIBLE WORKFLOW RATHER THAN COPYING AND IMPROVING?]
 Lots of people are thinking about 'reproducible research', creating a 'reproducible workflow' and
 'literate programming' these days. Google those terms. Of course, the
 devil is in the details: Here I list a few of my own attempts at enabling
@@ -576,9 +577,8 @@ copy and improve, it is polite to alert the person from whom you made
 the copy about your work.
 
 We have experimented with several systems so far: (1) we wrote this paper in R markdown (Jake) and Atom (Maarten) and organized our files and collaboration on Github. The source code can be accessed, downloaded and modified from <https://github.com/jwbowers/workflow>. The program also allowed us to send notes to each other. The nice thing about github is that is enables you to make "releases" of a project which enable you to smooth the reproduction of all of the
-products of your research (simulations, data analyses, tables, figures, etc..). Similar features are offered by the Open Science Framework (https://osf.io/), Maarten recently participated in a workshop on research transparency organized by the Berkeley Institute for Transparency in the Social Sciences (www.bitss.org), all course material was accessible through OSF (https://osf.io/qh2nr/). Both platforms, OSF and Github nicely integrate and a key benefit is that they have been created to remain for a long time (unlike perhaps your university drive) JAKES PROJECT; (2) for one paper Jake simply included a Sweave document and data files into a compressed archive [@bowers2005dataverse] [SAY ABIT MORE ABOUT WHAT SWEAVE IS IN PRINCIPLE]; (3) for another more computing intensive paper Jake
-assembled a set of files that enabled reproduction of our results using the
-`make` system [@bowers2008dataverse] [EXPLAIN A BIT MORE OR INCLUDE REF TO WEBSITE?]; (4) Jake also tried the "compendium"
+products of your research (simulations, data analyses, tables, figures, etc..). Similar features are offered by the Open Science Framework (https://osf.io/), Maarten recently participated in a workshop on research transparency organized by the Berkeley Institute for Transparency in the Social Sciences (www.bitss.org), all course material was accessible through OSF (https://osf.io/qh2nr/). Both platforms, OSF and Github nicely integrate and a key benefit is that they have been created to remain for a long time (unlike perhaps your university drive) <!-- ADD REFERENCE TO YOUR OSF PROJECT -->; (2) for one paper Jake simply included a Sweave document and data files into a compressed archive [@bowers2005dataverse] <!-- PERHAPS SAY ABIT MORE ABOUT WHAT SWEAVE IS IN PRINCIPLE-->; (3) for another more computing intensive paper Jake assembled a set of files that enabled reproduction of results using the
+`make` system [@bowers2008dataverse] <!-- AGAIN A FEW WORDS ON WHAT PERHAPS LINK TO A WEBSITE? -->; (4) Jake also tried the "compendium"
 approach [@gentleman2005reproducible,@gentleman2007statistical] which embeds an
 academic paper within the R package system [@bowers2011dataverse]; The benefit of the compendium approach is that one is not required to have
 access to a command line for `make`: the compendium is downloadable from within
@@ -592,19 +592,15 @@ just as one installs and uses statistical software packages is very attractive,
 and we anticipate that it will become ever easier to turn papers into R packages
 as creative and energetic folks turn their attention to the question of
 reproducible research.^[See for example <http://r-pkgs.had.co.nz/>]
-Finally, (5) Maarten has been using Dropbox for most of his collaborative projects (https://www.dropbox.com/). ALREADY ABOVE? NOTE BACK
+Finally, (5) Maarten has been using Dropbox for most of his collaborative projects (https://www.dropbox.com/). See comments above. As a tool for making files publicly available Dropbox is less useful. You can of course make replication files available through creating an public folder, but you will still need to refer to this folder on a particular project website (an example is Maarten's project on conflict and football https://www.dropbox.com/sh/wqosq99019mf04d/AAASTgJLkn6lmZJI_1veUK7ca?dl=0)
 
-There are some new noteworthy developments also. For example, and similar to R Markdown/KnitR in R Studio, there is Markdoc for STATA users (https://github.com/haghish/MarkDoc). People at UC Berkeley have been developing a is a web app, Jupyter Notebook (http://jupyter.org/), that enables you to make and share documents that include text, code, equations and visualizations in one INCLUDE REF TO GITHUB - USING PYTHON. For researchers working across difference platforms, there is Docker (https://www.docker.com/).
+There are some noteworthy new developments also. For example, and similar to R Markdown/KnitR in R Studio, there is Markdoc for STATA users (https://github.com/haghish/MarkDoc). People at UC Berkeley have been developing a is a web app, Jupyter Notebook (http://jupyter.org/), that enables you to make and share documents that include text, code, equations and visualizations in one INCLUDE REF TO GITHUB - USING PYTHON. For researchers working across different platforms, there is Docker (https://www.docker.com/). There are also are great notes programs that help you communicate with collaborators. For example, Simplenote is very basic but allows you to share and change notes.
 
 **Step 6** We all learn by doing. When we create a reproducible workflow and share
 reproduction materials we improve both cumulation of knowledge and our
 methods for doing social science
 [@freese2007replication,king1995replication}.
 
- As we copy and
-improve upon each other's modes of doing work we enhance our collective
-ability to believe each other and for future scholars to believe us, too.
-[I FEEL LIKE THE COPY COMMENT IS PERHAPS ANOTHER POINT TO MAKE (OR LEAVE)]
 
 # Remember that research ought to be credible communication.
 
