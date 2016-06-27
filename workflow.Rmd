@@ -1,10 +1,10 @@
 ---
-title: How to improve your relationship with your future self.
+title: How to improve your relationship with your future self, V 2.0
 author:
 - name: Jake Bowers
-  affiliation: <jwbowers@illinois.edu>,  University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team. Nothing in this paper reflect the official position of the US Government. Many thanks to Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on this document and to Mika LaVaque-Manty and Ben Hansen for many useful discussions on this topic. The source code for this document may be freely downloaded and modified from <https://github.com/jwbowers/workflow>.
+  affiliation: <jwbowers@illinois.edu>,  University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team.
 - name: Maarten Voors
-  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics Group. Special thanks, the EGAP Learning Days 2016 participants in Santiago Chile,  to the BITSS team and the Department of Economics and Ted Miguel at UC Berkeley where Maarten was a visiting researcher during spring 2016. Maarten gratefully acknowledges financial support from N.W.O. grant 451-14-001.
+  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics Group.  \emph{Acknowledgements:} Many thanks to the EGAP Learning Days 2016 participants in Santiago Chile, to the BITSS team and the Department of Economics and Ted Miguel at UC Berkeley where Maarten was a visiting researcher during spring 2016. Maarten gratefully acknowledges financial support from N.W.O. grant 451-14-001. The previous version of this paper benefited from comments and discussions with Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn, Cara Wong, Mika LaVaque-Manty and Ben Hansen. The source code for this document may be freely downloaded and modified from <https://github.com/jwbowers/workflow>.
 bibliography: references.bib
 csl: american-political-science-review.csl
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
@@ -25,8 +25,8 @@ output:
 
 
 <!-- An example comment -->
+<!-- Separate the thanks sections from affiliation and integrate? Wasnt sure how to do this here-->
 
-  <!-- Separate the thanks sections from affiliation and integrate? Wasnt sure how to do this here-->
 ```{r include=FALSE, cache=FALSE}
 # Some customization.  You can alter or delete as desired (if you know what you are doing).
 # knitr settings to control how R chunks work.
@@ -39,16 +39,15 @@ output:
 
 require(knitr)
 opts_chunk$set(
-  tidy=FALSE,     # display code as typed
-  size="small",    # slightly smaller font for code
+  tidy=TRUE,     # display code as typed
+  size="footnotesize",    # slightly smaller font for code
   echo=TRUE,
   results='markup',
   strip.white=TRUE,
   fig.path='figs/fig',
   cache=FALSE,
   highlight=TRUE,
-  width.cutoff=132,
-  size='footnotesize',
+  width.cutoff=100,
   out.width='.9\\textwidth',
   message=FALSE,
   comment=NA)
@@ -68,7 +67,7 @@ options(SweaveHooks=list(fig=function(){
 			 }),
 	digits=4,
 	scipen=8,
-	width=132
+	width=100
 	)
 
 #options(error=function(){options(prompt="> ",continue="+ ");NULL})
@@ -83,14 +82,12 @@ options(SweaveHooks=list(fig=function(){
 > If you tell the truth, you don't have to remember anything. [@twain1975mark]
 
 
-Memory is tricky. When we really want to remember something we should practice it until it becomes internalized. In fact, learning requires effort. And when we do not practice, we tend to be overconfident in our recall abilities [@koriat2005illusions] and false memories can be implanted.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php>. On false memory see Wikipedia and linked studies <https://en.wikipedia.org/wiki/False_memory>.] Moreover, most of us live busy lives. We write text and code behind our new standing desk at home while the kids run around, cry about an elder sister taking away a favorite new yellow school bus toy, drinks spill on the floor, the laundry needs going, the kettle boils... Our minds are full and we need to efficiently move from task to task. If we cannot count on memory, then how can we do science?
+Memory is tricky. Learning requires effort. When we do not practice and repeat something that we want to remember, most people forget quickly, are overconfident in their abilities to recall future information [@koriat2005illusions], and may even recall events that never happened.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php>. On false memory see Wikipedia and linked studies <https://en.wikipedia.org/wiki/False_memory>.] Moreover, most of us live busy lives. We write text and code behind our new standing desk at home while the kids run around, cry about an elder sister taking away a favorite new yellow school bus toy, drinks spill on the floor, the laundry needs doing, the kettle boils \ldots Our lives and minds are full and we need to efficiently move from task to task. If we cannot count on memory, then how can we do science?
 
-How long does it take from planning a study to publication? How much time passes to the first reproduction of a study? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a data driven study faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, it will occur after publication. Moreover, this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, years past the initial publication of the article.^[We note that sometimes this reproduction occurs within the context of classes and learning about statistics and data analysis. Other times, this process is organized more broadly (cite IIIE program, researchers have started to implement psychological experiments using the same protocols across many locations, see Open Science Foundation 2014, 2015, within experimental economics a team did the same, see Camerer et al 2016 Science paper. Another example is to share analysis across many researchers. in a their 'crowdsourcing analysis" Silberzahn and Uhlmann (Nature 2015) asked 29 research teams to run the analysis for a project that looked at the impact of skin color on the probability of getting a foul card in a football match.<!-- Can you do the correct citing here -->]
+How long does it take from planning a study to publication? How much time passes to the first reproduction of a study? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a data driven study faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, it will occur after publication. Moreover, this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, many years past the initial publication of the article.^[The process of reproducing past findings can occur when one researcher wants to build on the work of another. It can also occur within the context of classes --- some professors assign reproduction tasks to students to aid learning about data analysis and statistics. In addition to those models, recently reproduction of research has been organized to enhance the quality of public policy in the field of economic development by the 3ie Replication Program (@brown2014quality) and to assess the quality of scientific research at the level of subdisciplines in social psychology (@open2015estimating) and within experimental economics (@camerer2016evaluating). Another of 29 research teams recently collaborated on a project focusing on applied statistics to see if the same answers would emerge from re-analyses of the same data set (@silberzahn2015crowdsourced).]
 
 
-If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised and updated version of @bowers2011tpm and provides some suggestions for practices that will make such reproduction occur much more easily and quickly.  Specifically, this piece aims to amplify some of what we already ought to know and do, and highlight some current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations.] We aim to provide practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on other bad past decisions but not on decisions about data analysis and the production of scholarly papers.
-
-<!-- JAKE: we dont say anything about pre registration, should we? -->
+If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised and updated version of @bowers2011tpm and provides some suggestions for practices that will make reproducible data analysis easy and quick. Specifically, this piece aims to amplify some of what we already ought to know and do, and highlight some current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations, <http://osf.io> and <http://www.bitss.org/>.] We aim to provide practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on bad past decisions that do not have to do with data analysis and the production of scholarly papers.
 
 ```{r read.data,echo=FALSE,results='hide', cache=TRUE}
 ## This data frame will be used throughout the analyses.
@@ -108,17 +105,24 @@ We organize the paper around a series of homilies that lead to certain concrete 
 
 # Data analysis is computer programming. {#sec:data-analys-comp}
 
-All results (numbers, comparisons, tables, figures) should arise from
-code. Not from a series of mouse clicks or copying and pasting. If you wanted
-to re-create the figure from say 2011 but include a new variable or
-specification, you should be able to do so with just a few edits to the
-code rather than knowledge of how you used a pointing device in
-your graphical user interface all those years ago.
+All results (numbers, comparisons, tables, plots, figures) should arise from
+code not from a series of mouse clicks or copying and pasting.^[To our future
+selves: both of us are using a computer control device called a track-pad, and
+haven't used an older device called a
+[mouse](https://en.wikipedia.org/wiki/Computer_mouse) in some years. We no
+longer hear a clicking sound when we operate the control device either. We are
+not sure why we talked about mouse clicks just now.] If you wanted to re-create
+the figure from say 2011 but include a new variable or specification, you
+should be able to do so with just a few edits to the code rather than knowledge
+of how you used a pointing device in your graphical user interface all those
+years ago.
 
-For example, using R [@R:2011], a open-source statistical software program, you might specify that a file, called `fig1.pdf` was
-produced by the following set of commands in a file called `makefig1.R`. Lets look at some annotated R code you could produce:
+For example, using R [@R:2011], a open-source statistical software program, you
+might specify that a file, called `fig1.pdf` was produced by the following set
+of commands in a file called `makefig1.R`. Lets look at some annotated R code
+you could produce:
 
-```{r eval=FALSE}
+```{r eval=FALSE,tidy=FALSE}
 ## This file produces a plot relating the explanatory variable to the outcome.
 thedata <- read.csv("Data/thedata-15-03-2011.csv") ## Read the data
 pdf("fig1.pdf") ## begin writing to the pdf file
@@ -130,73 +134,146 @@ please-add-a-line(using model1)
 dev.off() ## stop writing to the pdf file
 ```
 
+Now, in the future if you wonder how 'that plot on page 10' was created, you
+will know: (1) 'that plot' is from a file called `fig1.pdf`and (2)
+`fig1.pdf`was created in `makefig1.R`. Any time in a future, provided R still
+exists, changing the figure will require some quick edits of commands already
+written.^[We use data from @norris2015data throughout this paper.]  In a future where R does not exist, you (or someone else) will at
+least be able to read the plain text R commands and use them to write code in a
+new favorite statistical computing language: R scripts are written in [plain
+text](http://en.wikipedia.org/wiki/Plain_text), and plain text is a format that
+will be around as long as computer programmers write computer programs.^[Since
+R is open source, you will also be able to download an old version of R,
+download an old-fashioned open-source operating system (like Ubuntu 22), and
+run the old-fashioned statistical computing environment in the old-fashioned
+operating system in a virtual machine on your new-fashioned actual machine.]
 
-Now, in the future if you wonder how 'that plot on page 10' was
-created, you will know: (1) 'that plot' is from a file called
-`fig1.pdf`and (2) `fig1.pdf`was created in
-`makefig1.R`. Any time in a future, provided R still exists, changing the figure
-will require some quick edits of commands already written.  In a future
-where R does not exist, you (or someone else) will at least be able to read the plain text
-R commands and use them to write code in a new favorite statistical
-computing language: R scripts are written in
-[plain text](http://en.wikipedia.org/wiki/Plain_text), and plain
-text is a format that will be around as long as computer programmers
-write computer programs.^[Since R is open
-  source, you will also be able to download an old version of R, download an
-  old-fashioned open-source operating system (like Ubuntu 10), and
-  run the old-fashioned statistical computing environment in the
-  old-fashioned operating system in a virtual machine on my
-  new-fashioned actual machine.]
+Moreover, coding saves time. Often, a lot of time, especially if projects grow
+in the number of files, partners, or complexity of analysis. Manually importing
+one data file into R, may be effortless. Importing 100 files is another issue,
+and the time costs of each manual action add up quickly (and the probability
+for error increases).
 
-Moreover, coding saves time. Often, a lot of time, especially if projects grow (in the number of files, partners, analysis). Manually importing
-a data file into R, may be effortless. Importing 100 files is another issue, and the time costs of each manual action add up quickly (and the probability for error increases).  
+Also, realize that *file names send messages* to your future self. This means
+that if you name your files with evocative and descriptive names, your
+collaborators are less likely to call you at midnight asking for help and you
+will remove some regret from your future self and protect your friendships and
+working relationships. For example, if you are studying inequality and protest,
+you might try naming a file something like `inequality-and-protest-figures.R`
+instead of `temp9.R` or `supercalifragilisticexpialidocious.R`.  By the way,
+the extension `.R` tells us and the operating system that the file contains R
+commands. This part of the filename enables us to quickly search our antique
+hard drives for files containing R scripts.^[We think that some method of
+tagging files by the purpose of the file will continue help analysts find and organize their files for long after the idea of a computer mouse ceases to make sense.]
 
-Also, realize that *file names send messages* to your future self. This means that if you name your files with evocative and descriptive names, your
-collaborators are less likely to call you at midnight asking for help and you will remove some regret from your future self. For example, if you are studying inequality and protest, you might try naming a file something like  `inequality-and-protest-figures.R` instead of `temp9.R` or
-`supercalifragilisticexpialidocious.R`.  More on this below. By the way, the extension
-`.R` tells us and the operating system that the file contains R commands. This part of the filename enables us to quickly search our
-antique hard drives for files containing R scripts.
+Coding helps us avoid making mistakes. For example, in our example above we may
+be interested in how many people protest. We may use a data file containing all
+protests for several years. People often create a tabular display of this data
+by copying the results manually to the working paper document. In copying we
+can make mistakes. So a better approach is to ask your favorite data analysis
+program to automatically create the table (in the format you like, with
+horizontal lines, 3 decimals, a title, etc) and output this in whatever file
+type you need (.pdf, .rtf, etc). Now when we obtain new data (for additional
+years, or updated figures for existing data) a new table can be created
+quickly, so we make less mistakes and save time!
 
-Coding helps us to avoid making mistakes. For example, in our example above we may be interested in how many people protest. We may use a data file containing all protests for several years. We can then create a table with the number of protesters by copying the results manually to a document you use to write your paper. In copying we can make mistakes. So a better approach is to ask R (or STATA, or another program of choice) to automatically create the table (in the format you like, with horizontal lines, 3 decimals, a title, etc) and output this in whatever file type you need (.pdf, .rtf, etc). Now when we obtain new data (for additional years, or updated figures for existing data) a new table can be created quickly, so we make less mistakes and save time!
+For example, the following table was created entirely with code using R and the `xtable` package @dahl2016aa.\footnote{@beck2010reg inspired this particular
+presentation of a linear model.}
 
-<!-- Can you include some code here to provide an example of automation of results? -->
+
+```{r loadlibraries, echo=FALSE}
+makebecktable<-function(lmobj,vars,thecaption,thelabel,filename){
+	require(xtable)
+	##  The next lines extract relevant and useful output from the
+	##  regression object, following Neal Beck's TPM article 2010.
+	themat<-cbind(summary(lmobj)$coef[,c("Estimate","Std. Error")],confint(lmobj))
+	n<-length(lmobj$fitted.values)
+	r2<-signif(summary(lmobj)$r.squared,2)
+	est.sigma<-signif(summary(lmobj)$sigma,2)
+	colnames(themat)[3:4]<-c("~{}","~{}")
+	row.names(themat)<-vars
+	thextab<-xtable(themat,align=c("l",rep(".",4)),digits=1,
+			caption=thecaption,
+			label=thelabel)
+	print(thextab,
+	      file=filename,
+	      include.colnames=FALSE,
+	      hline.after=NULL,
+	      table.placement="H",
+	      comment=FALSE,
+	      sanitize.text.function=function(x){x},
+	      add.to.row=list(
+			      pos=list(0,3),
+			      command=c(
+					"\\toprule \n &
+					\\multicolumn{1}{c}{Coef} &
+					\\multicolumn{1}{c}{Std. Err.} &
+					\\multicolumn{2}{c}{95\\% CI} \\\\ \\cmidrule(r){2-5} ",
+				paste("& \\multicolumn{4}{c}{n: ",n,",",
+				      "   resid.sd: ",signif(est.sigma),
+				      ", R$^2$: ",r2,"} \\\\ \\bottomrule",sep="")
+				)
+			      ))
+
+
+}
+
+```
+
+```{r maketable1, echo=TRUE, tidy=FALSE}
+lm1<-lm(protest05~gini04+meanpr,data=good.df)  #  Run the regression
+makebecktable(lmobj=lm1, # make the table file
+	      vars=c("Intercept","Income Inequality (lower=more equal)",
+		     "Mean Political Rights (lower=more rights)"),
+	      thecaption="People living in countries with unequal
+	      income distributions report more protest activity to World Values
+	      Survey interviewers than people living in countries with relatively
+	      more equal income distributions, adjusting for average political
+	      rights as measured by Freedom House 1980--2010.",
+	      thelabel="tab:protest",
+	      filename="protesttable.tex")
+```
+
+```
+\input{protesttable.tex} ## read in the table file
+```
+
+\input{protesttable.tex}
 
 **Step 1** Code everything that can be coded. If we know the provenance of results, future or current collaborators make less mistakes and can quickly and easily reproduce (and thus change and improve) upon the work.
 
 # No data analyst is an island for long.
 
-Data analysis involves a long series of decisions. Each decision
-requires a justification.  Some decisions will be too small and
-technical for inclusion in the published article itself. Still, these need to
-be documented in the code itself [@nagler1995coding]. Paragraphs
-and citations in the publication will justify the most important
-decisions. So, one must code to communicate with yourself and
-others. There are two main ways to avoid forgetting the reasons you
-did something with data: comment your code and tightly link your code
-with your writing.
+Data analysis involves a long series of decisions. Each decision requires a
+justification.  Some decisions will be too small and technical for inclusion in
+the published article itself. Still, these need to be documented in the code
+itself [@nagler1995coding]. Paragraphs and citations in the publication will
+justify the most important decisions but the code itself documents the smaller
+but still consequential decisions. So, one must code to communicate with
+yourself and others. There are two main ways to avoid forgetting the reasons
+you did something with data: comment your code and tightly link your code with
+your writing --- making your code literate.
 
 ## Code is communication: Comment code
 
-Comments, unexecuted text inside of a script, are a message to
-collaborators (including your future self) and other consumers of your
-work. In the above code chunk, we used comments to explain the lines to
-readers unfamiliar with R and to remember that we had tried a different
-specification but decided not to use it because adding the squared
-term did not really change the substantive story arising from the
-model.^[R considers text marked with `#` as a comment. For STATA simply add a `*` before the text]
-Messages left for your future self (or near-future others) help
-retrace and justify your decisions as the work moves from seminar
-paper to conference paper to poster back to paper to dissertation and
-onwards.
+Comments, unexecuted text inside of a script, are a message to collaborators
+(including your future self) and other consumers of your work. In the above
+code chunk, we used comments to explain the lines to readers unfamiliar with R
+and to remember that we had tried a different specification but decided not to
+use it because adding the squared term did not really change the substantive
+story arising from the model.^[R considers text marked with `#` as a comment.
+For Stata simply add a `*` before the text.] Messages left for your future self
+(or near-future others) help retrace and justify your decisions as the work
+moves from seminar paper to conference paper to poster back to paper to
+dissertation and onwards maybe even to publication.
 
-Notice one other benefit of coding for an audience: we learn by
-teaching. By assuming that others will look at your code, you will be
-more likely to write clearer code, or perhaps even to think more
-deeply about what you are doing as you do it.
+Notice one other benefit of coding for an audience: we learn by teaching. By
+assuming that others will look at your code, you will be more likely to write
+clearer code, or perhaps even to think more deeply about what you are doing as
+you do it since you are explaining even as you write.
 
-Comment liberally. Comments are discarded when R or STATA runs analysis, or LaTeX or pandoc
-turns plain text into pdf or html files so only those who dig into
-your work will see them.
+Comment liberally. Comments are discarded when R or STATA runs analysis, so
+only those who dig into the source code of your work will see them.
 
 ## Code to communicate: Literate programming.
 
@@ -209,7 +286,7 @@ your work will see them.
 Imagine you discover something new (or confirm something old). You
 produce a nice little report on your work for use in discussions of
 your working group or as a memo for a web or reviewer appendix. The
-report itself is a pdf file or some other format which displays page
+report itself is a pdf or html file or some other format which displays page
 images to ease reading rather than to encourage reanalysis and
 rewriting. Eventually pieces of that report (tables, graphs,
 paragraphs) ought to show up in, or at least inform, the publishable
@@ -218,34 +295,39 @@ pasting would invite typing error and waste time. Re-creating your
 arguments justifying your analysis decisions would also waste
 time.
 
-More importantly, we and others want to know why we did what we
-did. Such explanations may not be very clear if we have some pages of
-printed code in one hand and a manuscript in the other. Keep in mind
-the distinction between the 'source code' of a document (i.e. what
-computation was required to produce it) and the visible, type-set page
-image. Page images are great for reading, but not great for
-reproducing or collaborating. The source code of any document
-exchanged by the group must be available and executable.^[As of the 2016 version of this paper, this idea is now widespread and made much easier than before via online services for code sharing and collaboration such as [GitHub](http://github.com), [Open Science Framework](https://osf.io/) and [BitBucket](http://bitbucket.org), see more below.]
+More importantly, we and others want to know why we did what we did. Such
+explanations may not be very clear if we have some pages of printed code in one
+hand and a manuscript in the other. Keep in mind the distinction between the
+'source code' of a document (i.e. what computation was required to produce it)
+and the visible, type-set page image. Page images are great for reading, but
+not great for reproducing or collaborating. The source code of any document
+exchanged by the group must be available and executable.^[As of the 2016
+version of this paper, this idea is now widespread and made much easier than
+before via online services for code sharing and collaboration such as
+[GitHub](http://github.com), [Open Science Framework](https://osf.io/) and
+[BitBucket](http://bitbucket.org). As more data analysis moves online, it will
+become easier for cross-platform and geographically distant collaboration to
+occur, see for only one set of examples, [Docker](http://docker.com) or other
+services that make what is currently called 'cloud-computing' easier and more
+accessible.]
 
-How might one avoid these problems?
-[Literate programming](http://en.wikipedia.org/wiki/Literate_programming) is the practice of weaving code into a document ---
-paragraphs, equations, and diagrams can explain the code, and the code
-can produce numbers, figures, and tables (and diagrams and even equations and
-paragraphs). Literate programming is not merely fancy commenting but
-is about enabling the practice of programming itself to facilitate easy
-reproduction and communication.
+How might one avoid these problems?  [Literate
+programming](http://en.wikipedia.org/wiki/Literate_programming) is the practice
+of weaving code into a document --- paragraphs, equations, and diagrams can
+explain the code, and the code can produce numbers, figures, and tables (and
+diagrams and even equations and paragraphs). Literate programming is not merely
+fancy commenting but is about enabling the practice of programming itself to
+facilitate easy reproduction and communication.
 
-For example, in [@sec:data-analys-comp], we suggested that we know
-where 'that plot on page 10' comes from by making sure we had a
-`fig1.pdf` file produced from a clearly commented plain text file
-called something like `makefig1.R`.  An even easier solution would be to
-directly include a chunk of code to produce the figure inside of the
-paper itself. This paper, for example, was written in plain text using
-markdown markup with R code chunks to make things like
-Figure \ref{fig:giniprot}. This combination of markdown and R is called
-[R Markdown](http://rmarkdown.rstudio.org).
-
-<!-- JAKE in the example below can you also add a line of text to people see the combination of text and table? -->
+For example, in [@sec:data-analys-comp], we suggested that we knew where 'that
+plot on page 10' comes from by making sure we had a `fig1.pdf` file produced
+from a clearly commented plain text file called something like `makefig1.R`.
+An even easier solution would be to directly include a chunk of code to produce
+the figure inside of the paper itself. This paper, for example, was written in
+plain text using markdown markup with R code chunks to make things like Figure
+\ref{fig:giniprot}. This combination of markdown and R is called [R
+Markdown](http://rmarkdown.rstudio.org). Here, is an example of embedding a
+plot inside of a document. In a document sent to a journal one would tend to hide the code chunks and thus one would only see the plot.
 
 ```{r fig1plotcode,eval=FALSE,echo=TRUE}
 ##  Make a scatterplot of Protest by Inequality
@@ -259,7 +341,7 @@ with(good.df[c("Brazil","United Kingdom","United States","Sweden","Chile"),],
      text(gini04,protest05,labels=Nation,srt=0,cex=.6,pos=3,offset=.1))
 ```
 
-```{r giniprot,message=FALSE,echo=FALSE,fig=TRUE,include=TRUE,width=4,height=4,fig.cap="Average number of Protest activity by income inequality.",out.width=".5\\textwidth",fig.env="figure",fig.lp="fig:",fig.pos="H",fig.align="center"}
+```{r giniprot,message=FALSE,echo=FALSE,fig=TRUE,include=TRUE,width=4,height=4,fig.cap="Average number of protest activities by income inequality across countries in 2004--2005.",out.width=".5\\textwidth",fig.env="figure",fig.lp="fig:",fig.pos="H",fig.align="center"}
 ##  Make a scatterplot of Protest by Inequality
 par(bty="n",xpd=TRUE,pty="s",tcl=-.25)
 with(good.df,plot(gini04,protest05,
@@ -273,109 +355,59 @@ with(good.df[c("Brazil","United Kingdom","United States","Sweden","Chile"),],
 
 
 Markdown (and LaTeX and HTML) all have ways to cross-reference within a
-document. For example, by using `\label{fig:giniprot}` in LaTeX or
-`{#fig:giniprot}` in the pandoc version of markdown, I do not need to keep
-track of the figure number, nor do extra work when I reorganize the document in
-response to reviewer suggestions. Nor do I need a separate `makefig1.R`file or
-`fig1.pdf` file.  Tables and other numerical results are also possible to
-generate within the source code of a scholarly paper. Those who view the code
-for this essay will see how Table \ref{tab:protest} was also generated directly
-from a regression object.\footnote{@beck2010reg inspired this particular
-presentation of a linear model.}
+document. For example, by using `\label{fig:giniprot}` in \LaTeX or
+`{#fig:giniprot}` in the pandoc version of markdown, we do not need to keep
+track of the figure number, nor do extra work when we reorganize the document
+in response to reviewer suggestions. Nor do we need a separate `makefig1.R`file
+or `fig1.pdf` file.  Tables and other numerical results are also possible to
+generate within the source code of a scholarly paper. For example, if we had
+ommitted the filename in `makebecktable` above, we would have seen a LaTeX
+table be generated within this document itself. For Stata users, there now is
+[Markdoc](https://github.com/haghish/MarkDoc) which is very similar to R
+markdown.
 
-For STATA users, there now is Markdoc (https://github.com/haghish/MarkDoc) which can be used similarly.
+The R project has a task view devoted to [reproducible
+research](http://cran.r-project.org/web/views/ReproducibleResearch.html)
+listing many of the different approaches to literate programming for R.  If
+your workflow does not involve R, you can still implement some of the
+principles here. Imagine creating a style in Microsoft Word called 'code 'which
+hides your code when you print your document, but which allows you to at least
+run each code chunk piece by piece (or perhaps there are ways to extract all
+text of style code from a Microsoft Word document). Or imagine just using some
+other kind of indication linking paragraphs to specific places in code files.
+There are many ways that creative people can program in a literate way.
 
-```{r maketable, echo=FALSE, results='hide'}
-  lm1<-lm(protest05~gini04+meanpr,data=good.df)  #  Run the regression
+Literate programming need not go against the principle of modular data analysis
+[@nagler1995coding]. Jake routinely uses several different files that fulfill
+different functions, some of them create \LaTeX code that he can `\input` into
+his `main.tex` file, others setup the data, run simulations, or allow him to
+record his journeys down blind alleys. Of course, when we have flying cars
+running on autopilot, perhaps something other than combining R and Markdown or
+LaTeX will make our lives even easier. Then we'll change.
 
-##  The next lines extract relevant and useful output from the
-##  regression object, following Neal Beck's TPM article 2010.
-themat<-cbind(summary(lm1)$coef[,c("Estimate","Std. Error")],confint(lm1))
-n<-length(lm1$fitted.values)
-r2<-signif(summary(lm1)$r.squared,2)
-est.sigma<-signif(summary(lm1)$sigma,2)
-colnames(themat)[3:4]<-c("~{}","~{}")
-row.names(themat)<-c("Intercept","Income Inequality (lower=more equal)","Mean Political Rights (lower=more rights)")
-
-library(xtable)
-thextab<-xtable(themat,align=c("l",rep(".",4)),digits=1,
-                caption="People living in countries with unequal
-  income distributions report less protest activity to World Values
-  Survey interviewers than people living in countries with relatively
-  more equal income distributions, adjusting for average political
-  rights as measured by Freedom House 1980--2000. Data from [@norris2015data].",label="tab:protest")
-```
-
-
-```{r printtable,echo=FALSE,results='asis',message=FALSE}
-  print(thextab,include.colnames=FALSE,
-        hline.after=NULL,
-        table.placement="H",
-	comment=FALSE,
-        add.to.row=list(
-          pos=list(0,3),
-          command=c(
-            "\\toprule \n &
-             \\multicolumn{1}{c}{Coef} &
-             \\multicolumn{1}{c}{Std. Err.} &
-             \\multicolumn{2}{c}{95\\% CI} \\\\ \\cmidrule(r){2-5} ",
-            paste("& \\multicolumn{4}{c}{n: ",n,",",
-                  "   resid.sd: ",signif(est.sigma),
-                  ", R$^2$: ",r2,"} \\\\ \\bottomrule",sep="")
-            )
-          ))
-```
-
-<!-- I how many of our readers will know what Sweave is.. drop or change? -->
-
-Literate data analysis is not the same as Sweave, even if Sweave is a
-nice implementation.^[The R project has a task view devoted to
-  [reproducible research](http://cran.r-project.org/web/views/ReproducibleResearch.html) listing many of the different approaches to literate
-  programming for R.}  If your workflow does not involve R, you can
-still implement some of the principles here. Imagine creating a style
-in Microsoft Word called 'code 'which hides your code when you print
-your document, but which allows you to at least run each code chunk
-piece by piece (or perhaps there are ways to extract all text of style
-code from a Microsoft Word document). Or imagine just using some
-other kind of indication linking paragraphs to specific places in code
-files. There are many ways that creative people can program in a
-literate way.
-
-Literate programming need not go against the principle of modular data
-analysis [@nagler1995coding]. Jake routinely uses
-several different Sweave files that fulfill different functions, some
-of them create \LaTeX code that he can `\input` into his
-`main.tex` file, others setup the data, run simulations, or allow
-him to record his journeys down blind alleys. Of course, when we have
-flying cars running on autopilot, perhaps something other than
-Sweave will make our lives even easier. Then we'll change.
-
-**Step 2**
-We analyze data in order to explain something about the world to other
-scholars and policy makers. If we focus on explaining how we got our
-computers to do data analysis, we will do a better job
-with the data analysis itself: we will learn as we focus on teaching,
-and we will avoid errors and save time as we ensure that others
-(including our future selves) can retrace our steps. A document than
-can be 'run' to reproduce all of the analyses also instills
-confidence in readers and can more effectively spur discussion and
-learning and cumulation of research.
+**Step 2** We analyze data in order to explain something about the world to
+other scholars and policy makers. If we focus on explaining how we got our
+computers to do data analysis, we will do a better job with the data analysis
+itself: we will learn as we focus on teaching others about why we did what we
+did, and we will avoid errors and save time as we ensure that others (including
+our future selves) can retrace our steps. A document than can be 'run' to
+reproduce all of the analyses also instills confidence in readers and can more
+effectively spur discussion and learning and cumulation of research.
 
 # Meaningful code requires data.
 
-All files containing commands operating on data must refer to a data
-file. A reference to a data file is a line of code the analysis
-program will use to operate on ('load'/ 'open '/ 'get '/
-'use') the data file. One should not have to edit this line on
-different computers or platforms in order to execute this command.
-Using R, for example, all analysis files should have
-`load("thedata.rda")`or `read.csv("thedata.csv")`or some
-equivalent line in them, and `thedata.csv`should be stored in
-some place easy to find (like in the same directory as the file or
-perhaps in `"Data/thedata.rda"`). Of course, its even better to
-include a comment pointing to the data file.
+All files containing commands operating on data must refer to a data file. A
+reference to a data file is a line of code the analysis program will use to
+operate on ('load'/ 'open '/ 'get '/ 'use') the data file. One should not have
+to edit this line on different computers or platforms in order to execute this
+command.  Using R, for example, all analysis files should have
+`load("thedata.rda")`or `read.csv("thedata.csv")`or some equivalent line in
+them, and `thedata.csv`should be stored in some easy to find place (like in the
+same directory as the file or perhaps in `"Data/thedata.rda"`). Of course, its
+even better to include a comment pointing to the data file in addition to the
+line loading the file itself.
 
-Where should one store data files? An obvious solution is always to
+Where should one store data files? An obvious solution is to
 make sure that the data file used by a command file is in the same
 directory as the command file. More elegant solutions require all
 co-authors to have the same directory structure so that
@@ -393,48 +425,57 @@ in turn begins with
 `read.csv(\url("http://www.greatfreedata.gov/dirtydata.csv"))`. Such a data
 processing file will typically end with something like
 `save("cleandata.rda")`so that we are doubly certain about the provenance of
-the data.\footnote{Of course, if you need math or paragraphs to explain what is
-happening in these files, you might prefer to make them into R markdown or
-Sweave files, for which the conventional extension is .Rmd or .Rnw
+the data.^[Of course, if you need math or paragraphs to explain what is
+happening in these files, you might prefer to make them into R+Markdown or
+R+LaTeX files, for which the conventional extension is .Rmd or .Rnw
 respectively. So you'd have `create-cleandata.Rnw` written as a mixture of
-laTeX and R which might explain and explore the different coding decisions you
-made, perhaps involving a factor analysis and diagnostic plots.}
+LaTeX and R which might explain and explore the different coding decisions you
+made, perhaps involving some diagnostic plots.]
 
 Now, if in the future we wonder where `cleandata.rda`came from, we
 might search for occurrences of `cleandata` in the files on our
 system. However, if such searching among files is a burden, an even
 nicer solution is to maintain a file for each project called
-`MANIFEST.txt` or INDEX.txt or README.txt which lists the
+MANIFEST.txt or INDEX.txt or README.txt which lists the
 data and command files with brief descriptions of their functions and
 relations.
 
-Best practice is to create a file system where you separate folders by function and separate input from output files. For example, below we show a folder structure for a paper where we look at inequality. The paper is written in .tex, data analysis in STATA (that Maarten prefers, so we see .do and .dta file extensions) in R (the program of choice for Jake, see the .R extensions):
+Best practice is to create a file system where you separate folders by function and separate input from output files. For example, below we show a folder structure for a paper where we look at inequality. The paper is written in .tex, data analysis in Stata (that Maarten prefers, so we see .do and .dta file extensions) in R (the program of choice for Jake, see the .R extensions). Maarten likes to make sure that the directory structure in his projects is the same across projects (so, for example, the numbers on the directory names allow for easy default sorting). The file naming with full dates also allows for easy sorting:
 
-<!-- JAKE please check if I made no mistake, also there may be a prettier way to show a folder structure (a screen shot?),feel free to change-->
-00_archive
-01_paper
+```{bash ,eval=FALSE, tidy=FALSE}
+00_archive/
+01_paper/
   20160622_inequality.tex
-02_data
-  00_archive
-  01_rawdata
-  02_cleandata
+02_data/
+  00_archive/
+  01_rawdata/
+  02_cleandata/
   20160622_analysis.dta
   20160622_analysis.rda
-03_analysis
-  00_archive
-  01_temp
-  02_output
-    01_tables
-    02_figures
+03_analysis/
+  00_archive/
+  01_temp/
+  02_output/
+    01_tables/
+    02_figures/
   20160622_analysis.do
   20160622_analysis.R
   20160622_prep_data.do
   20160622_prep_data.R
+ ```
 
-There are a couple of things to note. See that files start with a number to give them an ordering. Note also we create an 00_archive folder, here you can store older files without having to delete them permanently and keeping the number of files in your main folders to a minimum. Also there is a clear separation between raw data (data that came straight from the field, downloaded data, someone else's replication files, etc) and clean data (data ready to use). Note that in the analysis folder we created two files, one for cleaning and merging data called 20160622_prep_data and another for running the analysis called 20160622_analysis. See also the output folders, with subfolders for graphs and tables. These are place holder for R or STATA to output the results from the analysis and keeps things organized. We discuss integrated programs (that combine code and text below).  
+There are a couple of things to note: See that files start with a number to give them an ordering. Note also we create an 00_archive folder, here you can store older files without having to delete them permanently and can reduce the number of files in your main folders. Also there is a clear separation between raw data (data that came straight from the field, downloaded data, someone else's replication files, etc) and clean data (data ready to use). Note that in the analysis folder we created two files, one for cleaning and merging data called `20160622_prep_data` and another for running the analysis called `20160622_analysis`. See also the output folders, with subfolders for graphs and tables. These are place holder for R or STATA to output the results from the analysis and keeps things organized.
 
-**Step 3** We should know where the data came
-from and what operations were performed on which set of data.
+Jake is less organized about directory structure and tends to have directories with structures like this:
+
+```{bash, tidy=FALSE, eval=FALSE}
+
+manuscript\ 
+
+
+```
+
+**Step 3** We should know where the data came from and what operations were performed on which set of data.
 
 # Version control prevents clobbering, reconciles history, and helps organize work. {#sec:vers-contr-prev}
 
