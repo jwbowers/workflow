@@ -655,7 +655,7 @@ computer program can fail. One can, however, at least make sure that
 it succeeds in doing the task motivating the writing of the code in
 the first place.
 
-# Creating a reproducible workflow
+# Create a reproducible workflow
 
 Lots of people are thinking about 'reproducible research', creating a
 'reproducible workflow' and 'literate programming' these days. Google those
@@ -737,53 +737,53 @@ methods for doing social science
   conclusions?  What purpose does an article like this serve?
   [@king1995replication, p. 445]
 
-We all always collaborate. Many of us collaborate with groups of
-people at one moment in time as we race against a deadline. All of us
-collaborate with ourselves over time.\footnote{What is a reasonable
-  time-span for which to plan for self-collaboration on a single idea?
-  Ask your advisers how long it took them to move from idea to dissertation to
-  publication.}  The time-frames over which collaboration are required
---- whether among a group of people working together or within a
-single scholar's productive life or probably both --- are much longer
-than any given version of any given software will easily exist. Plain
-text is the exception. Thus, even as we extol version control systems,
-one must have a way to ensure future access to them in a form that
-will still be around when sentient cockroaches finally join political
-science departments (by then dominated by cetaceans after humans are
-mostly uploads).^[The arrival of the six-legged social
-  scientists revives Emacs and finally makes Ctrl-a Ctrl-x Esc-x
-  Ctrl-c a [reasonable key combination](http://kieran.healy.usesthis.com/).]
+We all always collaborate. Many of us collaborate with groups of people at one
+moment in time as we race against a deadline. All of us collaborate with
+ourselves over time.^[What is a reasonable time-span for which to plan
+for self-collaboration on a single idea?  Ask your advisers how long it took
+them to move from idea to dissertation to publication.]  The time-frames over
+which collaboration are required --- whether among a group of people working
+together or within a single scholar's productive life or probably both --- are
+much longer than any given version of any given software will easily exist.
+Plain text is the exception. Thus, even as we extol version control systems,
+one must have a way to ensure future access to them in a form that will still
+be around when sentient cockroaches finally join political science departments
+(by then dominated by cetaceans after humans are mostly uploads).^[The arrival
+of the six-legged social scientists revives Emacs and finally makes Ctrl-a
+Ctrl-x Esc-x Ctrl-c a [reasonable key
+combination](http://kieran.healy.usesthis.com/). So far, in terms of version
+control systems, Jake has used RCS, CVS, bazaar, subversion, and now mostly
+uses git.]
 
 But what if no one ever hears of your work, or, by some cruel fate, your
-article does not spawn debate? Why then would you spend time to
-communicate with your future self and others? Our own answer to this
-question is that we want our work to be credible and useful to ourself
-and other scholars regardless.  What we report in our data analyses should have two main
-characteristics: (1) the findings of the work should not be a matter
-of opinion; and (2) other people should be able to reproduce the findings. That is,
-the work represents a shared experience --- and an experience shared without respect to the
-identities of others (although requiring some common technical
-training and research resources).
+article does not spawn debate? Why then would you spend time to communicate
+with your future self and others? Our own answer to this question is that we
+want our work to be credible and useful to ourselves and other scholars
+regardless.  What we report in our data analyses should have two main
+characteristics: (1) the findings of the work should not be a matter of
+opinion; and (2) other people should be able to reproduce the findings. That
+is, the work represents a shared experience --- and an experience shared
+without respect to the identities of others (although requiring some common
+technical training and research resources).
 
 Assume we want others to believe us when we say something. More narrowly,
 assume we want other people to believe us when we say something about data:
-'data' here can be words, numbers, musical notes, images, ideas, etc \ldots The
-point is that we are making some claims about patterns in some collection of
-stuff. For example, when Jake was invited into the homes and offices of ordinary
-people in Chile in 1991, the "stuff" was recordings of conversations that we
-had about life during the first year of democracy and Jake was comparing the
-responses of people who had experienced the Pinochet dictatorship differently.
-Now, it might be easy to convince others that 'this collection of stuff' is
-different from 'that collection of stuff' if those people were looking over our
-shoulders the whole time that we made decisions about collecting the stuff and
-broke it up into understandable parts and reorganized and summarized it.
-Unfortunately, we can't assume that people are willing to shadow a researcher
-throughout her career. Rather, we do our work alone or in small groups and want
-to convince other distant and future people about our analyses and findings.
+'data' here can be words, numbers, musical notes, images, ideas, etc. The point
+is that we are making some claims about patterns in some collection of stuff.
+For example, when Jake was invited into the homes and offices of ordinary
+people in Chile in 1991, the "stuff" was recordings of conversations that he
+had about life during the first year of democracy. Now, it might be easy to
+convince others that 'this collection of stuff' is different from 'that
+collection of stuff' if those people were looking over our shoulders the whole
+time that we made decisions about collecting the stuff and broke it up into
+understandable parts and reorganized and summarized it.  Unfortunately, we
+can't assume that people are willing to shadow a researcher throughout her
+career. Rather, we do our work alone or in small groups and want to convince
+other distant and future people to take our analyses and findings seriously.
 
 Now, say your collections of stuff are large or complex and your
 chosen tools of analyses are computer programs. How can we convince
-people that what we did with some data with some program is credible,
+people that what we did with some data with some code is credible,
 not a matter of whim or opinion, and reproducible by others who didn't
 shadow us as we wrote our papers? This essay has suggested a few
 concrete ways to enhance the believability of such scholarly work. In
@@ -795,25 +795,19 @@ people in the group have done or what they, themselves, did in the past.
 
 In the end, following these practices and those recommended by
 @fredrickson2011tpm and @healy2011tpm among others working on these topics
-allows your computerized analyses of your collections of stuff to be
-credible.  If then someone quibbles with your analyses, your future
-self can shoot them the archive required to reproduce your
-work.^[Since you used plain text, the files will still be
-  intelligible, analyzed using commented code so that folks can
-  translate to whatever system succeeds R, or since you used R, you
-  can include a copy of R and all of the R packages you used in your
-  final analyses in the archive itself. You can even throw in
-  a copy of whatever version of linux you used and an open source virtual machine running the
-  whole environment.] You can say, 'Here is everything you need to
-reproduce my work.' To be extra helpful you can add 'Read the README
-file for further instructions.' And then you can get on with your life:
-maybe the next great idea will occur when your 4-year-old asks a wacky
-question after stripping and painting her overly cooperative
-1-year-old brother purple, or teaching a class, or in a coffee shop,
-or on a quiet walk.
-
-
+allows your computerized analyses of your collections of stuff to be credible.
+If then someone quibbles with your analyses, your future self can shoot them
+the archive required to reproduce your work.^[Since you used plain text, the
+files will still be intelligible, analyzed using commented code so that folks
+can translate to whatever system succeeds R, or since you used R, you can
+include a copy of R and all of the R packages you used in your final analyses
+in the archive itself. You can even throw in a copy of whatever version of
+linux you used and an open source virtual machine running the whole environment
+using say, docker.] You can say, 'Here is everything you need to reproduce my
+work.' To be extra helpful you can add 'Read the README file for further
+instructions.' And then you can get on with your life: maybe the next great
+idea will occur when your 4-year-old asks a wacky question after stripping and
+painting her overly cooperative 1-year-old brother purple, or teaching a class,
+or in a coffee shop, or on a quiet walk.
 
 #References
-
-<!-- dont forget Camerer 2016 Science and  Silberzahn and Uhlmann (Nature 2015)
