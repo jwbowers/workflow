@@ -466,139 +466,189 @@ Best practice is to create a file system where you separate folders by function 
 
 There are a couple of things to note: See that files start with a number to give them an ordering. Note also we create an 00_archive folder, here you can store older files without having to delete them permanently and can reduce the number of files in your main folders. Also there is a clear separation between raw data (data that came straight from the field, downloaded data, someone else's replication files, etc) and clean data (data ready to use). Note that in the analysis folder we created two files, one for cleaning and merging data called `20160622_prep_data` and another for running the analysis called `20160622_analysis`. See also the output folders, with subfolders for graphs and tables. These are place holder for R or STATA to output the results from the analysis and keeps things organized.
 
-Jake is less organized about directory structure and tends to have directories with structures like this:
+Jake tends to be less organized than Maarten and relies on README.md files to tell his future self what is going on in a given directory, a [version control system](http://github.com) to keep track of versions of files, and a [Makefile](http://kbroman.org/minimal_make/) to keep track of relationships between files. 
 
 ```{bash, tidy=FALSE, eval=FALSE}
-
-manuscript\ 
-
-
+manuscript\
+figures\
+analysis\
+  README.md
+data\
+build\
+libraries\
+README.md
+Makefile
 ```
 
 **Step 3** We should know where the data came from and what operations were performed on which set of data.
 
 # Version control prevents clobbering, reconciles history, and helps organize work. {#sec:vers-contr-prev}
 
-Group work requires version control. Many people are familiar with the track changes
-feature in modern WYSIWYG (what you see is what you get) word processors or the fact that Dropbox allows one
-to recover previous versions of files. These are both kinds of version control.
-More generally, when we collaborate, we'd like to do a variety of actions with
-our shared files. Collaboration on data analytic projects is more productive
-and better when (1) it is easy to see what has changed between versions of
-files; (2) members of the team feel free to experiment and then to dump parts
-of the experimentation in favor of previous work while merging the successful parts
- into the main body of the paper; (3) the team can produce
-have 'releases' of the same document (one to MPSA, one to APSR, one to your
-parents) without spawning many possibly conflicting copies of the same
-document; (4) people can work on the same files at the same time without
-conflicting with one another, and can reconcile their changes without too much
-confusion and clobbering. Clobbering is what happens when your future self or
-your current collaborator saves an old version of a file over a new version,
-erasing good work by accident.
+Group work requires version control. Many people are familiar with the 'track
+changes' feature in modern WYSIWYG (what you see is what you get) word
+processors or the fact that Dropbox allows one to recover previous versions of
+files. These are both kinds of version control.  More generally, when we
+collaborate, we'd like to do a variety of actions with our shared files.
+Collaboration on data analytic projects is more productive and better when (1)
+it is easy to see what has changed between versions of files; (2) members of
+the team feel free to experiment and then to dump parts of the experimentation
+in favor of previous work while merging the successful parts into the main body
+of the paper; (3) the team can produce 'releases' of the same document
+(one to MPSA, one to APSR, one to their parents) without spawning many possibly
+conflicting copies of the same document; (4) people can work on the same files
+at the same time without conflicting with one another, and can reconcile their
+changes without too much confusion and clobbering. Clobbering is what happens
+when your future self or your current collaborator saves an old version of a
+file over a new version, erasing good work by accident.
 
-Of course if you rely on Dropbox or 'track changes' in Word for version
-control, you must communicate with other folks in your group before you edit
-existing files. Only one of you can edit and save a given file at a time. This
-prevents your work (or your colleagues work) from getting lost when you both
-try to save the same file on top of each other. If you find that you need to
-work on the same files at the same time, then you should work on establishing
-your own shared version control system. Free options include launchpad, github, Open Science Framework,
-sourceforge for open source projects (i.e. papers you are writing which you are
-happy to share with others as you write, see more below). Each has a slightly difference language (some say folders other repositories, some say download othere clone, etc) and it takes a bit of time adjusting. But as we'll argue: it is well worth the time investment as it will save (lots!) of time later on. Currently Google Docs does
-an excellent job with shared editing of files. The downside is: you have to be online. For people with irregular or slow internet connections, this may not be an option. MORE ON GOOGLE?
-One may also use Dropbox as a kind of server for version control (though the downside is if your collaborations or project grows large (in terms of MBs) you need to switch to a paid service). Maarten has been using this for most of his collaborations. You can copy files from the Dropbox
+Many rely on Dropbox, 'track changes' in Word, or Google Docs for
+collaboration. Those tools tend to require you to communicate with other folks
+in your group before you edit existing files. On Dropbox, only one of you can
+edit and save a given file at a time. Tracking changes with Word tends to
+function best if two people are not editing the same document (merging the
+changes between two documents is not simple or builtin). Google Docs allows for
+two people to edit the same document at the same time: but you must be online
+with a fairly fast internet connection.^[Note to future selves: change this
+section every five years or so. Stop saying 'internet' in 2026.] Communication
+and trading off editing a file prevents your work (or your colleagues' work)
+from getting lost when you both try to save the same file on top of each other. One may also use Dropbox as a kind of server for version
+control (though the downside is if your collaborations or project grows large
+(in terms of MBs) you need to switch to Dropbox's paid service). Maarten has been using
+this for most of his collaborations. You can copy files from the Dropbox
 directory into a local working directory so as to avoid clobbering and then
 work on merging changes by hand before copying back to the Dropbox directory
-and replacing existing files. You will however need to agree on an iron file and directory naming rule with your collaborators.
+and replacing existing files. You will however need to agree on an iron file
+and directory naming rule with your collaborators to ensure that the files and directories are always named the same across machines and versions.
 
-Jake uses github within his research group, and used it for all of
-his own projects. <!-- JAKE do you want to add something else here? -->
-You may even obtain a two year unlimited repositories with an academic affiliation.
+Another approach to organizing work on many files, including files for code and
+for writing, is to use a formal [version
+control](https://en.wikipedia.org/wiki/Version_control) strategy. As of 2016,
+the standard for managing large collaborations with many files is the
+[Git](https://en.wikipedia.org/wiki/Git_(software)) system. User friendly free
+front-ends for Git currently make the process of learning and using Git very
+convenient and integrated into the kind of workflow that your future self will
+be proud of: [Open Science Framework](http://osf.io)
+[bitbucket](http://bitbucket.com), [github](http://github.com). Jake uses
+[github](http://github.com) for all of his collaborations with others as well
+as with his future self: his collaborators appreciate some of the nice extra
+features of github, such as the ability to keep a [shared task
+list](https://guides.github.com/features/issues/). Learning about version
+control systems takes a bit of time. We suggest, however, it is well worth the
+time investment as it will save (lots!) of time later on.
 
-An excellent, simple, and robust version control system is to rename your files with the date and time of
-saving them: yyyymmdd_project.docx (for changes within the same day, just before a deadline for example, you may even add a time, so it becomes 20160623_4PM_inequalitypaper.docx). This communicates very clear what version you are working. Remember the days when you received a file called inequalityMV4_APSRsubmit_reallyfinal2.tex? That should quickly become something of the past! We find ourselves preaching the gospel to our collaborators frequently and will keep renaming files until a collaborator has been successfully pacified. Be sure to include year in the file names --- remember, the life of an idea is
-measured in years. If you are wise enough to have saved your documents
-as plain text then you can easily compare documents using the many
-utilities available for comparing text files.^[Adobe Acrobat
-  allows one to compare differences in pdf files. OpenOffice supports
-  a 'Compare Documents 'option. Word now does the same. And Google Docs will report on the
-  version history of a document.] When you reach certain milestones
-you can rename the file accordingly: thedocAPSA2009.tex --- for the
-one sent to discussants at APSA --- or thedocAPSR2015.tex --- for the
-version eventually sent to the APSR six years after you presented it
-at APSA. The formal version control systems mentioned above all
-allow this kind of thing and are much more elegant and capable, but
-you can do it by hand too as long as you don't mind taking up a lot of
-disk space and having many 'thedoc... ' files around. Indeed, the number of files can add up quickly (especially around submission time!) and you may want to create an "0_Archive" folder to store older versions. If you do
-version control by hand, spend a little extra time to ensure that you
-do not clobber files when you make mistakes typing in the
-file-names. And, if you find yourself spending extra time reconciling
-changes made by different collaborators by hand, remember this is a
-task that modern version control systems take care of quickly and
-easily.
+An excellent, simple, and robust version control system is to rename your files
+with the date and time of saving them: yyyymmdd_project.docx (for changes
+within the same day, just before a deadline for example, you may even add a
+time, so it becomes 20160623_4PM_inequalitypaper.docx). This communicates very
+clear what version you are working. Remember the days when you received a file
+called inequalityMV4_APSRsubmit_reallyfinal2.tex? That should quickly become
+something of the past! We find ourselves preaching the gospel to our
+collaborators frequently and will keep renaming files until a collaborator has
+been successfully pacified. Be sure to include year in the file names ---
+remember, the life of an idea is measured in years. If you are wise enough to
+have saved your documents as plain text then you can easily compare documents
+using the many utilities available for comparing text files.^[Adobe Acrobat
+allows one to compare differences in pdf files. OpenOffice supports a 'Compare
+Documents' option. Word now does the same. And Google Docs will report on the
+version history of a document.] When you reach certain milestones you can
+rename the file accordingly: thedocAPSA2009.tex --- for the one sent to
+discussants at APSA --- or thedocAPSR2015.tex --- for the version eventually
+sent to the APSR six years after you presented it at APSA. The formal version
+control systems mentioned above all allow this kind of thing and are much more
+elegant and capable, but you can do it by hand too as long as you don't mind
+taking up a lot of disk space and having many 'thedoc... ' files around.
+Indeed, the number of files can add up quickly (especially around submission
+time!) and you may want to create an "0_Archive" folder to store older
+versions. If you do version control by hand, spend a little extra time to
+ensure that you do not clobber files when you make mistakes typing in the
+file-names. And, if you find yourself spending extra time reconciling changes
+made by different collaborators by hand, remember this is a task that modern
+version control systems take care of quickly and easily.
 
-
-**Step 5** Writing is rewriting. Thus, all writing
-involves versions. When we collaborate with ourselves and others we
-want to avoid clobbering and we want to enable graceful reconciliation
-of rewriting. One can do these things with formal systems of software
-(like subversion or git or bazaar) or with formal systems of file
-naming, file comparing, and communication or, even better, with
-both. In either case, plain text files will make such tasks easier,
-will take up less disk space, and be easier to read for the future
-you.
+**Step 5** Writing is rewriting. Thus, all writing involves versions. When we
+collaborate with ourselves and others we want to avoid clobbering and we want
+to enable graceful reconciliation of rewriting. One can do these things with
+formal systems of software (like git) or with formal systems of file naming,
+file comparing, and communication or, even better, with both. In either case,
+plain text files will make such tasks easier, will take up less disk space, and
+be easier to read for the future you.
 
 
 # Minimize error by testing.
 
-Anyone writing custom code should worry about getting it right. The more code one writes, the more time one has to appreciate problems arising from bugs, errors, and typos in data analysis and code. Mistakes will always be made we should just recognize we need more standardization of practice to minimize the mistakes and help others find them. One thing we can do is to include testing in our coding.
+Anyone writing custom code should worry about getting it right. The more code
+one writes, the more time one has to appreciate problems arising from bugs,
+errors, and typos in data analysis and code. Since mistakes will always be
+made, we should just recognize we need more standardization of practice to
+minimize the mistakes and help others find them. One thing we can do to
+minimize and catch the inevitable mistakes is to include testing in our coding.
 
-If one has a moment to think in between teaching that new class,
-reading books for an awards committee, evaluating application files
-for the admissions committee, feeding popsicles to a sick child, and
-undertaking the odd bit of research, one might say to oneself,
-"Before I write new code, I should write a test of the code. I should
-write a little bit of code that lets me know that my double-bootstrap
-procedure actually does what it is supposed to do."
+If one has a moment to think in between teaching that new class, reading books
+for an awards committee, evaluating application files for the admissions
+committee, feeding popsicles to a sick child, and undertaking the odd bit of
+research, one might say to oneself, "Before I write new code, I should write a
+test of the code. I should write a little bit of code that lets me know that my
+double-bootstrap procedure actually does what it is supposed to do."
 
-Of course, this idea, like most others, is not new. The desire to
-avoid error looms large when large groups of programmers write code
-for multi-million dollar programs. The idea of
-[test driven development](http://en.wikipedia.org/wiki/Test-driven_development) and the idea that one ought to create tests of
-[small parts of one's code](http://en.wikipedia.org/wiki/Unit_testing) arose to address such concerns.^[There are now R packages to help R package writers do this, see for example <https://github.com/hadley/testthat> and the article on it <https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf>.] For the social scientist collaborating with her future self and/or a small group of
-collaborators, here is an example of this idea in a very simple form:
-Say you want to write a function to multiply a number by 2. If the
-function works, when you give it the number 4, you should see it return
-the number 8 and when you give it -4, you should get -8.
+Of course, this idea, is not new. The desire to avoid error
+looms large when large groups of programmers write code for multi-million
+dollar programs. The idea of [test driven
+development](http://en.wikipedia.org/wiki/Test-driven_development) and the idea
+that one ought to create tests of [small parts of one's
+code](http://en.wikipedia.org/wiki/Unit_testing) arose to address such
+concerns.^[There are now R packages to help R package writers do this, see for
+example <https://github.com/hadley/testthat> and the article on it
+<https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf>.]
 
-```{r unit.test}
+For the social scientist collaborating with her future self and/or a small
+group of collaborators, here is an example of this idea in a very simple form:
+Say you want to write a function to multiply a number by 2. If the function
+works, when you give it the number 4, you should see it return the number 8 and
+when you give it -4, you should get -8.
+
+```{r unit.test, tidy=FALSE}
 ##  The test function:
 test.times.2.fn <- function(){
-  ##  This function tests times.2.fn
-  if (times.2.fn(thenumber=4) ==  8 &
-      times.2.fn(thenumber=-4) == -8) {
-    print("It works!")
-  } else { print("It does not work!")
-         }
+	##  This function tests times.2.fn
+	if (times.2.fn(thenumber=4) ==  8 &
+	    times.2.fn(thenumber=-4) == -8) {
+		print("It works!")
+		} else { print("It does not work!")
+	}
 }
 
-##  The function:
+##  The actual function is:
 times.2.fn <- function(thenumber){
-  ##  This function multiplies a scalar number by 2
-  ##  thenumber is a scalar number
-  thenumber+2
+	##  This function multiplies a scalar number by 2
+	##  thenumber is a scalar number
+	thenumber+2
 }
+```
+Here we use the test function to make sure it works.
 
-##  Use the test function
+```{r results='asis'}
 test.times.2.fn()
 ```
 
 Ack! we mistyped '+' for '*'. Good thing we wrote the
-test!^[A more common example of this kind of testing occur
-  everyday when we recode variables into new forms but look at a
-  crosstab of the old vs. new variable before proceeding.]
+test!^[A more common example of this kind of testing occurs
+everyday when we recode variables into new forms but look at a
+crosstab of the old vs. new variable before proceeding.]
 
-MAYBE SOMETHING HERE ON `stopifnot` and recoding data.
+That approach works well when one is paying close attention to messages within
+the code. Another approach that we like better is to make the code stop with an
+error whenever it doesn't pass a test. In R we use the `stopifnot` function for
+this. For example, say we wanted to re-run our analyses excluding the countries
+with extreme values of protest. The following code makes a new dataset
+excluding places where more than 90% of the respondents to the World Values
+survey reported some protest activity. If all of the values of `protest05` are
+not less than 90, the code will stop with an error.
+
+```{r}
+smalldat <- subset(good.df,subset=protest05<90)
+stopifnot(all(smalldat$protest05<90))
+```
+
 
 **Step 6** No one can forsee all of the ways that a
 computer program can fail. One can, however, at least make sure that
@@ -607,42 +657,77 @@ the first place.
 
 # Creating a reproducible workflow
 
-Lots of people are thinking about 'reproducible research', creating a 'reproducible workflow' and
-'literate programming' these days. Google those terms. Of course, the
-devil is in the details: Here I list a few of my own attempts at enabling
-reproducible research. You'll find many other inspiring examples on
-the web. Luckily, the open source ethos aligns nicely with academic
-incentives, so we are beginning to find more and more people offering
-their files online for copying and improvement. By the way, if you do
-copy and improve, it is polite to alert the person from whom you made
-the copy about your work.
+Lots of people are thinking about 'reproducible research', creating a
+'reproducible workflow' and 'literate programming' these days. Google those
+terms. Of course, the devil is in the details: Here we list a few of our own
+attempts at enabling reproducible research. You'll find many other inspiring
+examples on the web. Luckily, the open source ethos aligns nicely with academic
+incentives, so we are beginning to find more and more people offering their
+files online for copying and improvement. By the way, if you do copy and
+improve, it is polite to alert the person from whom you made the copy about
+your work and to credit them in some way.
 
-We have experimented with several systems so far: (1) we wrote this paper in R markdown (Jake) and Atom (Maarten) and organized our files and collaboration on Github. The source code can be accessed, downloaded and modified from <https://github.com/jwbowers/workflow>. The program also allowed us to send notes to each other. The nice thing about github is that is enables you to make "releases" of a project which enable you to smooth the reproduction of all of the
-products of your research (simulations, data analyses, tables, figures, etc..). Similar features are offered by the Open Science Framework (https://osf.io/), Maarten recently participated in a workshop on research transparency organized by the Berkeley Institute for Transparency in the Social Sciences (www.bitss.org), all course material was accessible through OSF (https://osf.io/qh2nr/). Both platforms, OSF and Github nicely integrate and a key benefit is that they have been created to remain for a long time (unlike perhaps your university drive) <!-- ADD REFERENCE TO YOUR OSF PROJECT -->; (2) for one paper Jake simply included a Sweave document and data files into a compressed archive [@bowers2005dataverse] <!-- PERHAPS SAY ABIT MORE ABOUT WHAT SWEAVE IS IN PRINCIPLE-->; (3) for another more computing intensive paper Jake assembled a set of files that enabled reproduction of results using the
-`make` system [@bowers2008dataverse] <!-- AGAIN A FEW WORDS ON WHAT PERHAPS LINK TO A WEBSITE? -->; (4) Jake also tried the "compendium"
+We have experimented with several systems so far: 
+
+(1) We wrote this paper in the [R markdown](http://rmarkdown.rstudio.com/)
+literate programming format using two different text editors (Jake used vim)
+and (Maarten used [atom](https://atom.io/)). We organized our files and
+collaboration on Github. The source code for this document can be accessed,
+downloaded and modified from <https://github.com/jwbowers/workflow>. We also
+used Github Issues to send notes to each other and maintain a task list. The
+nice thing about github is that is enables you to make "releases" of a project
+which enable you to smooth the reproduction of all of the products of your
+research (simulations, data analyses, tables, figures, etc..).  Similar
+features are offered by the [Open Science Framework (OSF)](https://osf.io/).
+Maarten recently participated in a workshop on research transparency organized
+by the [Berkeley Institute for Transparency in the Social
+Sciences](www.bitss.org) in which all [course material](https://osf.io/qh2nr/)
+was accessible through OSF.  OSF integrates with Github nicely and a key
+benefit is that both systems have been created to remain for a long time
+(unlike perhaps your university drive).  (2) For one paper Jake simply mixed R
+and \LaTeX code in one document (called the "Sweave" format of literate
+programming) and then added that document and data into into a compressed
+archive [@bowers2005dataverse]; (3) For another more computing intensive paper
+Jake assembled a set of files that enabled reproduction of results using the
+`make` system [@bowers2008dataverse]; (4) Jake also tried the "compendium"
 approach [@gentleman2005reproducible,@gentleman2007statistical] which embeds an
-academic paper within the R package system [@bowers2011dataverse]; The benefit of the compendium approach is that one is not required to have
-access to a command line for `make`: the compendium is downloadable from within
-R using `install.packages()` and is viewable using the `vignette()` function in
-any operating system than runs R.^[Notice that Jake's reproduction archives and/or
+academic paper within the R package system [@bowers2011dataverse]; The benefit
+of the compendium approach is that one is not required to have access to a
+command line for `make`: the compendium is downloadable from within R using
+`install.packages()` and is viewable using the `vignette()` function in any
+operating system than runs R.^[Notice that Jake's reproduction archives and/or
 instructions for using them are hosted on the
 [Dataverse](http://thedata.org/book/learn-about-project), which is another
 system designed to enhance academic collaboration across time and space.]  The
 idea that one ought to be able to install and run and use an academic paper
 just as one installs and uses statistical software packages is very attractive,
-and we anticipate that it will become ever easier to turn papers into R packages
-as creative and energetic folks turn their attention to the question of
-reproducible research.^[See for example <http://r-pkgs.had.co.nz/>]
-Finally, (5) Maarten has been using Dropbox for most of his collaborative projects (https://www.dropbox.com/). See comments above. As a tool for making files publicly available Dropbox is less useful. You can of course make replication files available through creating an public folder, but you will still need to refer to this folder on a particular project website (an example is Maarten's project on conflict and football https://www.dropbox.com/sh/wqosq99019mf04d/AAASTgJLkn6lmZJI_1veUK7ca?dl=0)
+and we anticipate that it will become ever easier to turn papers into R
+packages as creative and energetic folks turn their attention to the question
+of reproducible research.^[See for example <http://r-pkgs.had.co.nz/>] Finally,
+(5) Maarten has been using Dropbox for most of his collaborative projects. See
+comments above. As a tool for making files publicly available Dropbox is less
+useful. You can of course make replication files available through creating an
+public folder, but you will still need to refer to this folder on a particular
+project website (an example is [Maarten's project on conflict and football](
+https://www.dropbox.com/sh/wqosq99019mf04d/AAASTgJLkn6lmZJI_1veUK7ca?dl=0)).
 
-There are some noteworthy new developments also. People at UC Berkeley have been developing a is a web app, Jupyter Notebook (http://jupyter.org/), that enables you to make and share documents that include text, code, equations and visualizations in one INCLUDE REF TO GITHUB - USING PYTHON. For researchers working across different platforms, there is Docker (https://www.docker.com/).
+There are some noteworthy new developments also. People at UC Berkeley have
+been developing a web app, Jupyter Notebook (http://jupyter.org/), that enables
+you to make and share documents that include text, code, equations and
+visualizations in one [literate programming
+environment](http://blog.jupyter.org/2015/05/07/rendering-notebooks-on-github/).
+For researchers working across different platforms, there is
+[Docker](https://www.docker.com/) which promises to enable all of the
+collaborators on one project to use the same computing environment even if they
+are using different laptops running different operating systems.
 
-There are also are great notes programs that help you communicate with collaborators. Remember, while email is fantastic for fast communication, it is not a tool designed for project management. It may work for small projects with few co-authors but when the number of collaborators increase it becomes very difficult to keep track. There are some great online systems for task management, most of which have mobile apps also, examples are Flow (www.getflow.com), Asana (www.asana.com), Wrike (www.wrike.com) <!-- JAKE do you know others? --> . There also are great programs for notes. For example, Simplenote is very basic but allows you to share and edit notes. Others are Evernote (www.evernote.com) and for Windows users there is OneNote.
+There are also are great notes programs that help you communicate with collaborators. Remember, while email is fantastic for fast communication, it is not a tool designed for project management. It may work for small projects with few co-authors but when the number of collaborators increase it becomes very difficult to keep track. There are some great online systems for task management, most of which have mobile apps also, examples include [Flow](http://www.getflow.com), [Asana](http://www.asana.com), [Wrike](http://www.wrike.com), [Basecamp](http://basecamp.com) and many others. There also are great programs for notes. For example, Simplenote is very basic but allows you to share and edit notes. Others include [Evernote](www.evernote.com) and for Windows users there is OneNote.
+
 
 **Step 6** We all learn by doing. When we create a reproducible workflow and share
 reproduction materials we improve both cumulation of knowledge and our
 methods for doing social science
-[@freese2007replication,king1995replication}.
+[@freese2007replication,king1995replication].
 
 
 # Remember that research ought to be credible communication.
