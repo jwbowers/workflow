@@ -1,10 +1,10 @@
 ---
 title: How to improve your relationship with your future self, V 2.0
 author:
-- name: Jake Bowers
-  affiliation: <jwbowers@illinois.edu>,  University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team.
-- name: Maarten Voors
-  affiliation: <maarten.voors@wur.nl>, Wageningen University, Development Economics Group.  \emph{Acknowledgements:} Many thanks to the EGAP Learning Days 2016 participants in Santiago Chile, to the BITSS team and the Department of Economics and Ted Miguel at UC Berkeley where Maarten was a visiting researcher during spring 2016. Maarten gratefully acknowledges financial support from N.W.O. grant 451-14-001. The previous version of this paper benefited from comments and discussions with Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn, Cara Wong, Mika LaVaque-Manty and Ben Hansen. The source code for this document may be freely downloaded and modified from <https://github.com/jwbowers/workflow>.
+- name: Anon 1
+  affiliation: Anon 1 Affiliation
+- name: Anon 2
+  affiliation: Anon 2 Affiliation and Acknowledgements
 bibliography: references.bib
 csl: american-political-science-review.csl
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
@@ -87,7 +87,7 @@ Memory is tricky. Learning requires effort. When we do not practice and repeat s
 How long does it take from planning a study to publication? How much time passes to the first reproduction of a study? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a data driven study faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, it will occur after publication. Moreover, this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, many years past the initial publication of the article.^[The process of reproducing past findings can occur when one researcher wants to build on the work of another. It can also occur within the context of classes --- some professors assign reproduction tasks to students to aid learning about data analysis and statistics. In addition to those models, recently reproduction of research has been organized to enhance the quality of public policy in the field of economic development by the 3ie Replication Program (@brown2014quality) and to assess the quality of scientific research at the level of subdisciplines in social psychology (@open2015estimating) and within experimental economics (@camerer2016evaluating). Another of 29 research teams recently collaborated on a project focusing on applied statistics to see if the same answers would emerge from re-analyses of the same data set (@silberzahn2015crowdsourced).]
 
 
-If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised and updated version of @bowers2011tpm and provides some suggestions for practices that will make reproducible data analysis easy and quick. Specifically, this piece aims to amplify some of what we already ought to know and do, and highlight some current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations, <http://osf.io> and <http://www.bitss.org/>.] We aim to provide practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on bad past decisions that do not have to do with data analysis and the production of scholarly papers.
+If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised and updated version of anonwhitepaper and provides some suggestions for practices that will make reproducible data analysis easy and quick. Specifically, this piece aims to amplify some of what we already ought to know and do, and highlight some current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations, <http://osf.io> and <http://www.bitss.org/>.] We aim to provide practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on bad past decisions that do not have to do with data analysis and the production of scholarly papers.
 
 ```{r read.data,echo=FALSE,results='hide', cache=TRUE}
 ## This data frame will be used throughout the analyses.
@@ -378,7 +378,7 @@ other kind of indication linking paragraphs to specific places in code files.
 There are many ways that creative people can program in a literate way.
 
 Literate programming need not go against the principle of modular data analysis
-[@nagler1995coding]. Jake routinely uses several different files that fulfill
+[@nagler1995coding]. Anon1 routinely uses several different files that fulfill
 different functions, some of them create \LaTeX code that he can `\input` into
 his `main.tex` file, others setup the data, run simulations, or allow him to
 record his journeys down blind alleys. Of course, when we have flying cars
@@ -440,7 +440,7 @@ MANIFEST.txt or INDEX.txt or README.txt which lists the
 data and command files with brief descriptions of their functions and
 relations.
 
-Best practice is to create a file system where you separate folders by function and separate input from output files. For example, below we show a folder structure for a paper where we look at inequality. The paper is written in .tex, data analysis in Stata (that Maarten prefers, so we see .do and .dta file extensions) in R (the program of choice for Jake, see the .R extensions). Maarten likes to make sure that the directory structure in his projects is the same across projects (so, for example, the numbers on the directory names allow for easy default sorting). The file naming with full dates also allows for easy sorting:
+Best practice is to create a file system where you separate folders by function and separate input from output files. For example, below we show a folder structure for a paper where we look at inequality. The paper is written in .tex, data analysis in Stata (that Anon2 prefers, so we see .do and .dta file extensions) in R (the program of choice for Anon1, see the .R extensions). Anon2 likes to make sure that the directory structure in his projects is the same across projects (so, for example, the numbers on the directory names allow for easy default sorting). The file naming with full dates also allows for easy sorting:
 
 ```{bash ,eval=FALSE, tidy=FALSE}
 00_archive/
@@ -466,7 +466,7 @@ Best practice is to create a file system where you separate folders by function 
 
 There are a couple of things to note: See that files start with a number to give them an ordering. Note also we create an 00_archive folder, here you can store older files without having to delete them permanently and can reduce the number of files in your main folders. Also there is a clear separation between raw data (data that came straight from the field, downloaded data, someone else's replication files, etc) and clean data (data ready to use). Note that in the analysis folder we created two files, one for cleaning and merging data called `20160622_prep_data` and another for running the analysis called `20160622_analysis`. See also the output folders, with subfolders for graphs and tables. These are place holder for R or STATA to output the results from the analysis and keeps things organized.
 
-Jake tends to be less organized than Maarten and relies on README.md files to tell his future self what is going on in a given directory, a [version control system](http://github.com) to keep track of versions of files, and a [Makefile](http://kbroman.org/minimal_make/) to keep track of relationships between files. 
+Anon1 tends to be less organized than Anon2 and relies on README.md files to tell his future self what is going on in a given directory, a [version control system](http://github.com) to keep track of versions of files, and a [Makefile](http://kbroman.org/minimal_make/) to keep track of relationships between files. 
 
 ```{bash, tidy=FALSE, eval=FALSE}
 manuscript\
@@ -513,7 +513,7 @@ section every five years or so. Stop saying 'internet' in 2026.] Communication
 and trading off editing a file prevents your work (or your colleagues' work)
 from getting lost when you both try to save the same file on top of each other. One may also use Dropbox as a kind of server for version
 control (though the downside is if your collaborations or project grows large
-(in terms of MBs) you need to switch to Dropbox's paid service). Maarten has been using
+(in terms of MBs) you need to switch to Dropbox's paid service). Anon2 has been using
 this for most of his collaborations. You can copy files from the Dropbox
 directory into a local working directory so as to avoid clobbering and then
 work on merging changes by hand before copying back to the Dropbox directory
@@ -528,7 +528,7 @@ the standard for managing large collaborations with many files is the
 front-ends for Git currently make the process of learning and using Git very
 convenient and integrated into the kind of workflow that your future self will
 be proud of: [Open Science Framework](http://osf.io)
-[bitbucket](http://bitbucket.com), [github](http://github.com). Jake uses
+[bitbucket](http://bitbucket.com), [github](http://github.com). Anon1 uses
 [github](http://github.com) for all of his collaborations with others as well
 as with his future self: his collaborators appreciate some of the nice extra
 features of github, such as the ability to keep a [shared task
@@ -670,32 +670,32 @@ your work and to credit them in some way.
 We have experimented with several systems so far: 
 
 (1) We wrote this paper in the [R markdown](http://rmarkdown.rstudio.com/)
-literate programming format using two different text editors (Jake used vim)
-and (Maarten used [atom](https://atom.io/)). We organized our files and
+literate programming format using two different text editors (Anon1 used vim)
+and (Anon2 used [atom](https://atom.io/)). We organized our files and
 collaboration on Github. The source code for this document can be accessed,
-downloaded and modified from <https://github.com/jwbowers/workflow>. We also
+downloaded and modified from <https://github.com/anon1/workflow>. We also
 used Github Issues to send notes to each other and maintain a task list. The
 nice thing about github is that is enables you to make "releases" of a project
 which enable you to smooth the reproduction of all of the products of your
 research (simulations, data analyses, tables, figures, etc..).  Similar
 features are offered by the [Open Science Framework (OSF)](https://osf.io/).
-Maarten recently participated in a workshop on research transparency organized
+Anon2 recently participated in a workshop on research transparency organized
 by the [Berkeley Institute for Transparency in the Social
 Sciences](www.bitss.org) in which all [course material](https://osf.io/qh2nr/)
 was accessible through OSF.  OSF integrates with Github nicely and a key
 benefit is that both systems have been created to remain for a long time
-(unlike perhaps your university drive).  (2) For one paper Jake simply mixed R
+(unlike perhaps your university drive).  (2) For one paper Anon1 simply mixed R
 and \LaTeX code in one document (called the "Sweave" format of literate
 programming) and then added that document and data into into a compressed
-archive [@bowers2005dataverse]; (3) For another more computing intensive paper
-Jake assembled a set of files that enabled reproduction of results using the
-`make` system [@bowers2008dataverse]; (4) Jake also tried the "compendium"
+archive [anon1refA]; (3) For another more computing intensive paper
+Anon1 assembled a set of files that enabled reproduction of results using the
+`make` system [anon1refB]; (4) Anon1 also tried the "compendium"
 approach [@gentleman2005reproducible,@gentleman2007statistical] which embeds an
-academic paper within the R package system [@bowers2011dataverse]; The benefit
+academic paper within the R package system [anon1refC]; The benefit
 of the compendium approach is that one is not required to have access to a
 command line for `make`: the compendium is downloadable from within R using
 `install.packages()` and is viewable using the `vignette()` function in any
-operating system than runs R.^[Notice that Jake's reproduction archives and/or
+operating system than runs R.^[Notice that Anon1's reproduction archives and/or
 instructions for using them are hosted on the
 [Dataverse](http://thedata.org/book/learn-about-project), which is another
 system designed to enhance academic collaboration across time and space.]  The
@@ -704,11 +704,11 @@ just as one installs and uses statistical software packages is very attractive,
 and we anticipate that it will become ever easier to turn papers into R
 packages as creative and energetic folks turn their attention to the question
 of reproducible research.^[See for example <http://r-pkgs.had.co.nz/>] Finally,
-(5) Maarten has been using Dropbox for most of his collaborative projects. See
+(5) Anon2 has been using Dropbox for most of his collaborative projects. See
 comments above. As a tool for making files publicly available Dropbox is less
 useful. You can of course make replication files available through creating an
 public folder, but you will still need to refer to this folder on a particular
-project website (an example is [Maarten's project on conflict and football](
+project website (an example is [Anon2's project on conflict and football](
 https://www.dropbox.com/sh/wqosq99019mf04d/AAASTgJLkn6lmZJI_1veUK7ca?dl=0)).
 
 There are some noteworthy new developments also. People at UC Berkeley have
@@ -752,7 +752,7 @@ be around when sentient cockroaches finally join political science departments
 of the six-legged social scientists revives Emacs and finally makes Ctrl-a
 Ctrl-x Esc-x Ctrl-c a [reasonable key
 combination](http://kieran.healy.usesthis.com/). So far, in terms of version
-control systems, Jake has used RCS, CVS, bazaar, subversion, and now mostly
+control systems, Anon1 has used RCS, CVS, bazaar, subversion, and now mostly
 uses git.]
 
 But what if no one ever hears of your work, or, by some cruel fate, your
@@ -770,7 +770,7 @@ Assume we want others to believe us when we say something. More narrowly,
 assume we want other people to believe us when we say something about data:
 'data' here can be words, numbers, musical notes, images, ideas, etc. The point
 is that we are making some claims about patterns in some collection of stuff.
-For example, when Jake was invited into the homes and offices of ordinary
+For example, when Anon1 was invited into the homes and offices of ordinary
 people in Chile in 1991, the "stuff" was recordings of conversations that he
 had about life during the first year of democracy. Now, it might be easy to
 convince others that 'this collection of stuff' is different from 'that
