@@ -1,6 +1,5 @@
-<<<<<<< Updated upstream
 ---
-title: How to improve your relationship with your future self
+title: How to improve your relationship with your future self, V 2.0
 author:
 - name: Jake Bowers
   affiliation: <jwbowers@illinois.edu>,  University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team.
@@ -74,92 +73,38 @@ options(SweaveHooks=list(fig=function(){
 #options(error=function(){options(prompt="> ",continue="+ ");NULL})
 ```
 
-<<<<<<< Updated upstream
+> | Do I contradict myself?
+| Very well then I contradict myself,
+| (I am large, I contain multitudes.)
+| [@whitman1855song]
+
+
+> If you tell the truth, you don't have to remember anything. [@twain1975mark]
+
+
 Memory is tricky. Learning requires effort. When we do not practice and repeat something that we want to remember, most people forget quickly, are overconfident in their abilities to recall future information [@koriat2005illusions], and may even recall events that never happened.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php>. On false memory see Wikipedia and linked studies <https://en.wikipedia.org/wiki/False_memory>.] Moreover, most of us live busy lives. We write text and code behind our new standing desk at home while the kids run around, cry about an elder sister taking away a favorite new yellow school bus toy, drinks spill on the floor, the laundry needs doing, the kettle boils \ldots Our lives and minds are full and we need to efficiently move from task to task. If we cannot count on memory, then how can we do science?
 
 How long does it take from planning a study to publication? How much time passes to the first reproduction of a study? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a data driven study faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, it will occur after publication. Moreover, this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, many years past the initial publication of the article.^[The process of reproducing past findings can occur when one researcher wants to build on the work of another. It can also occur within the context of classes --- some professors assign reproduction tasks to students to aid learning about data analysis and statistics. In addition to those models, recently reproduction of research has been organized to enhance the quality of public policy in the field of economic development by the 3ie Replication Program (@brown2014quality) and to assess the quality of scientific research at the level of subdisciplines in social psychology (@open2015estimating) and within experimental economics (@camerer2016evaluating). Another of 29 research teams recently collaborated on a project focusing on applied statistics to see if the same answers would emerge from re-analyses of the same data set (@silberzahn2015crowdsourced).]
 
 
 If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised and updated version of @bowers2011tpm and provides some suggestions for practices that will make reproducible data analysis easy and quick. Specifically, this piece aims to amplify some of what we already ought to know and do, and highlight some current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <http://www.dartstatement.org/> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations, <http://osf.io> and <http://www.bitss.org/>.] We aim to provide practical advice about how to *do work* such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on bad past decisions that do not have to do with data analysis and the production of scholarly papers.
-=======
-<!DOCTYPE html>
-<html lang="en" class=" is-copy-enabled emoji-size-boost">
-  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
-    <meta charset='utf-8'>
 
+```{r read.data,echo=FALSE,results='hide', cache=TRUE}
+## This data frame will be used throughout the analyses.
+## Putting it up top, so we can use it in the comments section.
+library(readstata13)
+dem.nations.df<-read.dta13("https://www.dropbox.com/s/huhqag5rudwtbno/Democracy%20Cross-National%20Data%20V4.1%2009092015.dta?dl=1&pv=1&raw=1",convert.factors=FALSE)
 
-    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-99d7aa100f64ed4b204b8948da8202a5c3deea702d3ab311b71113e2d900c235.css" integrity="sha256-mdeqEA9k7UsgS4lI2oICpcPe6nAtOrMRtxET4tkAwjU=" media="all" rel="stylesheet" />
-    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-c5a213f80cb3fec6630be2bfb751131d772ed8d2f4fbbc3d8ec17afab33eef7d.css" integrity="sha256-xaIT+Ayz/sZjC+K/t1ETHXcu2NL0+7w9jsF6+rM+730=" media="all" rel="stylesheet" />
+row.names(dem.nations.df)<-dem.nations.df$Nation ##make the row names more helpful
+good.df<-na.omit(dem.nations.df[,c("Gini2004","WVS5_protest","Nation","meanpr")])
+good.df$gini04<-good.df$Gini2004/100
+good.df$protest05<-good.df$WVS5_protest
+```
 
+We organize the paper around a series of homilies that lead to certain concrete actions.
 
-    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/site-becbb68a5e0ae3f94214b9e9edea2c49974f6d60b9eae715b70e5d017ff1b935.css" integrity="sha256-vsu2il4K4/lCFLnp7eosSZdPbWC56ucVtw5dAX/xuTU=" media="all" rel="stylesheet" />
+# Data analysis is computer programming. {#sec:data-analys-comp}
 
-
-    <link as="script" href="https://assets-cdn.github.com/assets/frameworks-74e2880351ce368d8f0a52f12a7452b422bef6397d5477d8120207ea79f0dfd9.js" rel="preload" />
-
-    <link as="script" href="https://assets-cdn.github.com/assets/github-b7ab73ce182cf9e2d9553064684837bcf8cda8c31e573166c3ee515d2c3e09d5.js" rel="preload" />
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Language" content="en">
-    <meta name="viewport" content="width=device-width">
-
-    <title>workflow/workflow.Rmd at master · maartenvoors/workflow · GitHub</title>
-    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
-    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
-    <meta property="fb:app_id" content="1401488693436528">
-
-      <meta content="https://avatars0.githubusercontent.com/u/19229157?v=3&amp;s=400" name="twitter:image:src" /><meta content="@github" name="twitter:site" /><meta content="summary" name="twitter:card" /><meta content="maartenvoors/workflow" name="twitter:title" /><meta content="A paper about workflow for The Political Methodologist" name="twitter:description" />
-      <meta content="https://avatars0.githubusercontent.com/u/19229157?v=3&amp;s=400" property="og:image" /><meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="maartenvoors/workflow" property="og:title" /><meta content="https://github.com/maartenvoors/workflow" property="og:url" /><meta content="A paper about workflow for The Political Methodologist" property="og:description" />
-      <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
-    <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
-    <link rel="assets" href="https://assets-cdn.github.com/">
-
-    <meta name="pjax-timeout" content="1000">
-
-    <meta name="request-id" content="947A2D7C:55B3:AA56CC0:57BD4C53" data-pjax-transient>
-
-    <meta name="msapplication-TileImage" content="/windows-tile.png">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="selected-link" value="repo_source" data-pjax-transient>
-
-    <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
-<meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
-    <meta name="google-analytics" content="UA-3769691-2">
-
-<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="947A2D7C:55B3:AA56CC0:57BD4C53" name="octolytics-dimension-request_id" />
-<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" />
-
-
-
-  <meta class="js-ga-set" name="dimension1" content="Logged Out">
-
-
-
-        <meta name="hostname" content="github.com">
-    <meta name="user-login" content="">
->>>>>>> Stashed changes
-
-        <meta name="expected-hostname" content="github.com">
-      <meta name="js-proxy-site-detection-payload" content="YWZjYjIwNzkxZGMzYWQyMDZiNTRiOTViZWMwYTlhNTM4NWM4YjczNjM5MDVjYzI5MmZiMDRmMDBmNTAxYTY0ZHx7InJlbW90ZV9hZGRyZXNzIjoiMTQ4LjEyMi40NS4xMjQiLCJyZXF1ZXN0X2lkIjoiOTQ3QTJEN0M6NTVCMzpBQTU2Q0MwOjU3QkQ0QzUzIiwidGltZXN0YW1wIjoxNDcyMDIzNjM1fQ==">
-
-
-      <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#4078c0">
-      <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
-
-    <meta name="html-safe-nonce" content="8e826a5c171e3453482db73cfeb28d92b99c5ccb">
-    <meta content="202292097215bfda6f239a810d8f9ada5140bd97" name="form-nonce" />
-
-<<<<<<< Updated upstream
 All results (numbers, comparisons, tables, plots, figures) should arise from
 code not from a series of mouse clicks or copying and pasting.^[To our future
 selves: both of us are using a computer control device called a track-pad, and
@@ -188,17 +133,6 @@ please-add-a-line(using model1)
 ## summary(abs(fitted(model1)-fitted(model2)))
 dev.off() ## stop writing to the pdf file
 ```
-=======
-    <meta http-equiv="x-pjax-version" content="815aa92cfbc15ea6a1d05cfd3542565f">
-
-
-
-  <meta name="description" content="A paper about workflow for The Political Methodologist">
-  <meta name="go-import" content="github.com/maartenvoors/workflow git https://github.com/maartenvoors/workflow.git">
-
-  <meta content="19229157" name="octolytics-dimension-user_id" /><meta content="maartenvoors" name="octolytics-dimension-user_login" /><meta content="61843310" name="octolytics-dimension-repository_id" /><meta content="maartenvoors/workflow" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="true" name="octolytics-dimension-repository_is_fork" /><meta content="1409790" name="octolytics-dimension-repository_parent_id" /><meta content="jwbowers/workflow" name="octolytics-dimension-repository_parent_nwo" /><meta content="1409790" name="octolytics-dimension-repository_network_root_id" /><meta content="jwbowers/workflow" name="octolytics-dimension-repository_network_root_nwo" />
-  <link href="https://github.com/maartenvoors/workflow/commits/master.atom" rel="alternate" title="Recent Commits to workflow:master" type="application/atom+xml">
->>>>>>> Stashed changes
 
 Now, in the future if you wonder how 'that plot on page 10' was created, you
 will know: (1) 'that plot' is from a file called `fig1.pdf`and (2)
@@ -304,7 +238,6 @@ makebecktable(lmobj=lm1, # make the table file
 \input{protesttable.tex} ## read in the table file
 ```
 
-<<<<<<< Updated upstream
 \input{protesttable.tex}
 
 **Step 1** Code everything that can be coded. If we know the provenance of results, future or current collaborators make less mistakes and can quickly and easily reproduce (and thus change and improve) upon the work.
@@ -320,520 +253,9 @@ but still consequential decisions. So, one must code to communicate with
 yourself and others. There are two main ways to avoid forgetting the reasons
 you did something with data: comment your code and tightly link your code with
 your writing --- making your code literate.
-=======
-      <link rel="canonical" href="https://github.com/maartenvoors/workflow/blob/master/workflow.Rmd" data-pjax-transient>
-  </head>
 
+## Code is communication: Comment code
 
-  <body class="logged-out  env-production macintosh vis-public fork page-blob">
-    <div id="js-pjax-loader-bar" class="pjax-loader-bar"><div class="progress"></div></div>
-    <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
-
-
-
-
-
-
-
-          <header class="site-header js-details-container" role="banner">
-  <div class="container-responsive">
-    <a class="header-logo-invertocat" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
-      <svg aria-hidden="true" class="octicon octicon-mark-github" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-    </a>
-
-    <button class="btn-link right site-header-toggle js-details-target" type="button" aria-label="Toggle navigation">
-      <svg aria-hidden="true" class="octicon octicon-three-bars" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg>
-    </button>
-
-    <div class="site-header-menu">
-      <nav class="site-header-nav site-header-nav-main">
-        <a href="/personal" class="js-selected-navigation-item nav-item nav-item-personal" data-ga-click="Header, click, Nav menu - item:personal" data-selected-links="/personal /personal">
-          Personal
-</a>        <a href="/open-source" class="js-selected-navigation-item nav-item nav-item-opensource" data-ga-click="Header, click, Nav menu - item:opensource" data-selected-links="/open-source /open-source">
-          Open source
-</a>        <a href="/business" class="js-selected-navigation-item nav-item nav-item-business" data-ga-click="Header, click, Nav menu - item:business" data-selected-links="/business /business/partners /business/features /business/customers /business">
-          Business
-</a>        <a href="/explore" class="js-selected-navigation-item nav-item nav-item-explore" data-ga-click="Header, click, Nav menu - item:explore" data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship /explore">
-          Explore
-</a>      </nav>
-
-      <div class="site-header-actions">
-            <a class="btn btn-primary site-header-actions-btn" href="/join?source=header-repo" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
-          <a class="btn site-header-actions-btn mr-2" href="/login?return_to=%2Fmaartenvoors%2Fworkflow%2Fblob%2Fmaster%2Fworkflow.Rmd" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
-      </div>
-
-        <nav class="site-header-nav site-header-nav-secondary">
-          <a class="nav-item" href="/pricing">Pricing</a>
-          <a class="nav-item" href="/blog">Blog</a>
-          <a class="nav-item" href="https://help.github.com">Support</a>
-          <a class="nav-item header-search-link" href="https://github.com/search">Search GitHub</a>
-              <div class="header-search scoped-search site-scoped-search js-site-search" role="search">
-  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="/maartenvoors/workflow/search" class="js-site-search-form" data-scoped-search-url="/maartenvoors/workflow/search" data-unscoped-search-url="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-    <label class="form-control header-search-wrapper js-chromeless-input-container">
-      <div class="header-search-scope">This repository</div>
-      <input type="text"
-        class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable"
-        data-hotkey="s"
-        name="q"
-        placeholder="Search"
-        aria-label="Search this repository"
-        data-unscoped-placeholder="Search GitHub"
-        data-scoped-placeholder="Search"
-        autocapitalize="off">
-    </label>
-</form></div>
-
-        </nav>
-    </div>
-  </div>
-</header>
-
-
-
-    <div id="start-of-content" class="accessibility-aid"></div>
-
-      <div id="js-flash-container">
-</div>
-
-
-    <div role="main">
-        <div itemscope itemtype="http://schema.org/SoftwareSourceCode">
-    <div id="js-repo-pjax-container" data-pjax-container>
-
-<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
-  <div class="container repohead-details-container">
-
-
-
-<ul class="pagehead-actions">
-
-  <li>
-      <a href="/login?return_to=%2Fmaartenvoors%2Fworkflow"
-    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
-    aria-label="You must be signed in to watch a repository" rel="nofollow">
-    <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
-    Watch
-  </a>
-  <a class="social-count" href="/maartenvoors/workflow/watchers"
-     aria-label="1 user is watching this repository">
-    1
-  </a>
-
-  </li>
-
-  <li>
-      <a href="/login?return_to=%2Fmaartenvoors%2Fworkflow"
-    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
-    aria-label="You must be signed in to star a repository" rel="nofollow">
-    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"></path></svg>
-    Star
-  </a>
-
-    <a class="social-count js-social-count" href="/maartenvoors/workflow/stargazers"
-      aria-label="0 users starred this repository">
-      0
-    </a>
-
-  </li>
-
-  <li>
-      <a href="/login?return_to=%2Fmaartenvoors%2Fworkflow"
-        class="btn btn-sm btn-with-count tooltipped tooltipped-n"
-        aria-label="You must be signed in to fork a repository" rel="nofollow">
-        <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
-        Fork
-      </a>
-
-    <a href="/maartenvoors/workflow/network" class="social-count"
-       aria-label="1 user is forked this repository">
-      1
-    </a>
-  </li>
-</ul>
-
-    <h1 class="public ">
-  <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
-  <span class="author" itemprop="author"><a href="/maartenvoors" class="url fn" rel="author">maartenvoors</a></span><!--
---><span class="path-divider">/</span><!--
---><strong itemprop="name"><a href="/maartenvoors/workflow" data-pjax="#js-repo-pjax-container">workflow</a></strong>
-
-    <span class="fork-flag">
-      <span class="text">forked from <a href="/jwbowers/workflow">jwbowers/workflow</a></span>
-    </span>
-</h1>
-
-  </div>
-  <div class="container">
-
-<nav class="reponav js-repo-nav js-sidenav-container-pjax"
-     itemscope
-     itemtype="http://schema.org/BreadcrumbList"
-     role="navigation"
-     data-pjax="#js-repo-pjax-container">
-
-  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
-    <a href="/maartenvoors/workflow" aria-selected="true" class="js-selected-navigation-item selected reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /maartenvoors/workflow" itemprop="url">
-      <svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path></svg>
-      <span itemprop="name">Code</span>
-      <meta itemprop="position" content="1">
-</a>  </span>
-
-
-  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
-    <a href="/maartenvoors/workflow/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /maartenvoors/workflow/pulls" itemprop="url">
-      <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
-      <span itemprop="name">Pull requests</span>
-      <span class="counter">0</span>
-      <meta itemprop="position" content="3">
-</a>  </span>
-
-
-
-
-  <a href="/maartenvoors/workflow/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="pulse /maartenvoors/workflow/pulse">
-    <svg aria-hidden="true" class="octicon octicon-pulse" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0v2h3.6l.9-1.8.9 5.4L9 8.5l1.6 1.5H14V8z"></path></svg>
-    Pulse
-</a>
-  <a href="/maartenvoors/workflow/graphs" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors /maartenvoors/workflow/graphs">
-    <svg aria-hidden="true" class="octicon octicon-graph" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M16 14v1H0V0h1v14h15zM5 13H3V8h2v5zm4 0H7V3h2v10zm4 0h-2V6h2v7z"></path></svg>
-    Graphs
-</a>
-
-</nav>
-
-  </div>
-</div>
-
-<div class="container new-discussion-timeline experiment-repo-nav">
-  <div class="repository-content">
-
-
-
-<a href="/maartenvoors/workflow/blob/eb39614e3dbeb7ca58fa09f4ff00c016307dcdd0/workflow.Rmd" class="hidden js-permalink-shortcut" data-hotkey="y">Permalink</a>
-
-<!-- blob contrib key: blob_contributors:v21:b45b7a50e361765870a1bfcada423d5a -->
-
-<div class="file-navigation js-zeroclipboard-container">
-
-<div class="select-menu branch-select-menu js-menu-container js-select-menu left">
-  <button class="btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
-
-    type="button" aria-label="Switch branches or tags" tabindex="0" aria-haspopup="true">
-    <i>Branch:</i>
-    <span class="js-select-button css-truncate-target">master</span>
-  </button>
-
-  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax aria-hidden="true">
-
-    <div class="select-menu-modal">
-      <div class="select-menu-header">
-        <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
-        <span class="select-menu-title">Switch branches/tags</span>
-      </div>
-
-      <div class="select-menu-filters">
-        <div class="select-menu-text-filter">
-          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="form-control js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
-        </div>
-        <div class="select-menu-tabs">
-          <ul>
-            <li class="select-menu-tab">
-              <a href="#" data-tab-filter="branches" data-filter-placeholder="Filter branches/tags" class="js-select-menu-tab" role="tab">Branches</a>
-            </li>
-            <li class="select-menu-tab">
-              <a href="#" data-tab-filter="tags" data-filter-placeholder="Find a tag…" class="js-select-menu-tab" role="tab">Tags</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches" role="menu">
-
-        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
-
-
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-               href="/maartenvoors/workflow/blob/TPM2011/workflow.Rmd"
-               data-name="TPM2011"
-               data-skip-pjax="true"
-               rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
-                TPM2011
-              </span>
-            </a>
-            <a class="select-menu-item js-navigation-item js-navigation-open selected"
-               href="/maartenvoors/workflow/blob/master/workflow.Rmd"
-               data-name="master"
-               data-skip-pjax="true"
-               rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
-                master
-              </span>
-            </a>
-        </div>
-
-          <div class="select-menu-no-results">Nothing to show</div>
-      </div>
-
-      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
-        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
-
-
-            <a class="select-menu-item js-navigation-item js-navigation-open "
-              href="/maartenvoors/workflow/tree/v0.1/workflow.Rmd"
-              data-name="v0.1"
-              data-skip-pjax="true"
-              rel="nofollow">
-              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-              <span class="select-menu-item-text css-truncate-target" title="v0.1">
-                v0.1
-              </span>
-            </a>
-        </div>
-
-        <div class="select-menu-no-results">Nothing to show</div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-  <div class="btn-group right">
-    <a href="/maartenvoors/workflow/find/master"
-          class="js-pjax-capture-input btn btn-sm"
-          data-pjax
-          data-hotkey="t">
-      Find file
-    </a>
-    <button aria-label="Copy file path to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button">Copy path</button>
-  </div>
-  <div class="breadcrumb js-zeroclipboard-target">
-    <span class="repo-root js-repo-root"><span class="js-path-segment"><a href="/maartenvoors/workflow"><span>workflow</span></a></span></span><span class="separator">/</span><strong class="final-path">workflow.Rmd</strong>
-  </div>
-</div>
-
-<include-fragment class="commit-tease" src="/maartenvoors/workflow/contributors/master/workflow.Rmd">
-  <div>
-    Fetching contributors&hellip;
-  </div>
-
-  <div class="commit-tease-contributors">
-    <img alt="" class="loader-loading left" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32-EAF2F5.gif" width="16" />
-    <span class="loader-error">Cannot retrieve contributors at this time</span>
-  </div>
-</include-fragment>
-<div class="file">
-  <div class="file-header">
-  <div class="file-actions">
-
-    <div class="btn-group">
-      <a href="/maartenvoors/workflow/raw/master/workflow.Rmd" class="btn btn-sm " id="raw-url">Raw</a>
-        <a href="/maartenvoors/workflow/blame/master/workflow.Rmd" class="btn btn-sm js-update-url-with-hash">Blame</a>
-      <a href="/maartenvoors/workflow/commits/master/workflow.Rmd" class="btn btn-sm " rel="nofollow">History</a>
-    </div>
-
-        <a class="btn-octicon tooltipped tooltipped-nw"
-           href="https://mac.github.com"
-           aria-label="Open this file in GitHub Desktop"
-           data-ga-click="Repository, open with desktop, type:mac">
-            <svg aria-hidden="true" class="octicon octicon-device-desktop" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M15 2H1c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h5.34c-.25.61-.86 1.39-2.34 2h8c-1.48-.61-2.09-1.39-2.34-2H15c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm0 9H1V3h14v8z"></path></svg>
-        </a>
-
-        <button type="button" class="btn-octicon disabled tooltipped tooltipped-nw"
-          aria-label="You must be signed in to make or propose changes">
-          <svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>
-        </button>
-        <button type="button" class="btn-octicon btn-octicon-danger disabled tooltipped tooltipped-nw"
-          aria-label="You must be signed in to make or propose changes">
-          <svg aria-hidden="true" class="octicon octicon-trashcan" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path></svg>
-        </button>
-  </div>
-
-  <div class="file-info">
-      694 lines (598 sloc)
-      <span class="file-info-divider"></span>
-    37.8 KB
-  </div>
-</div>
-
-
-  <div id="readme" class="readme blob instapaper_body">
-    <article class="markdown-body entry-content" itemprop="text"><hr>
-
-<p>title: How to improve your relationship with your future self.
-author:</p>
-
-<ul>
-<li>name: Jake Bowers
-affiliation: <a href="mailto:jwbowers@illinois.edu">jwbowers@illinois.edu</a>,  University of Illinois at Urbana-Champaign, Departments of Political Science and Statistics; Fellow, White House Social and Behavioral Sciences Team. Many thanks to Mark Fredrickson, Brian Gaines, Kieran Healy, Kevin Quinn and Cara Wong for direct help on this document and to Mika LaVaque-Manty and Ben Hansen for many useful discussions on this topic. The source code for this document may be freely downloaded and modified from <a href="https://github.com/jwbowers/workflow">https://github.com/jwbowers/workflow</a>.</li>
-<li>name: Maarten Voors
-affiliation: <a href="mailto:maarten.voors@wur.nl">maarten.voors@wur.nl</a>, Wageningen University, Development Economics Group
-bibliography: references.bib
-csl: american-political-science-review.csl
-date: '<code>r format(Sys.Date(), "%B %d, %Y")</code>'
-output:
-pdf_document:
-  keep_tex: true
-  number_sections: true
-  fig_width: 7
-  fig_height: 7
-  fig_caption: true
-  template: bowersarticletemplate.latex
-  pandoc_args: [
-  "-M", "secPrefix=\S",
-  "--filter", "/usr/local/bin/pandoc-crossref"
-  ]
-  md_extensions: +autolink_bare_uris+ascii_identifiers+tex_math_single_backslash
-...</li>
-</ul>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c"># Some customization.  You can alter or delete as desired (if you know what you are doing).</span>
-<span class="pl-c"># knitr settings to control how R chunks work.</span>
-
-<span class="pl-c">## To make the html file do</span>
-<span class="pl-c">## render("exploration4.Rmd",output_format=html_document(fig_retina=FALSE))</span>
-<span class="pl-c">## To make the pdf file do</span>
-<span class="pl-c">## render("exploration4.Rmd",output_format=pdf_document())</span>
-<span class="pl-c">## to debug, try render("thefile.Rmd", clean=FALSE) so that you can see the intermediate files</span>
-
-require(<span class="pl-smi">knitr</span>)
-<span class="pl-smi">opts_chunk</span><span class="pl-k">$</span>set(
-  <span class="pl-v">tidy</span><span class="pl-k">=</span><span class="pl-c1">FALSE</span>,     <span class="pl-c"># display code as typed</span>
-  <span class="pl-v">size</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>small<span class="pl-pds">"</span></span>,    <span class="pl-c"># slightly smaller font for code</span>
-  <span class="pl-v">echo</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>,
-  <span class="pl-v">results</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>markup<span class="pl-pds">'</span></span>,
-  <span class="pl-v">strip.white</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>,
-  <span class="pl-v">fig.path</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>figs/fig<span class="pl-pds">'</span></span>,
-  <span class="pl-v">cache</span><span class="pl-k">=</span><span class="pl-c1">FALSE</span>,
-  <span class="pl-v">highlight</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>,
-  <span class="pl-v">width.cutoff</span><span class="pl-k">=</span><span class="pl-c1">132</span>,
-  <span class="pl-v">size</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>footnotesize<span class="pl-pds">'</span></span>,
-  <span class="pl-v">out.width</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>.9<span class="pl-cce">\\</span>textwidth<span class="pl-pds">'</span></span>,
-  <span class="pl-v">message</span><span class="pl-k">=</span><span class="pl-c1">FALSE</span>,
-  <span class="pl-v">comment</span><span class="pl-k">=</span><span class="pl-c1">NA</span>)</pre></div>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c">##First, just setup the R environment for today:</span>
-<span class="pl-k">if</span>(<span class="pl-k">!</span>file.exists(<span class="pl-s"><span class="pl-pds">'</span>figs<span class="pl-pds">'</span></span>)) dir.create(<span class="pl-s"><span class="pl-pds">'</span>figs<span class="pl-pds">'</span></span>)
-
-options(<span class="pl-v">SweaveHooks</span><span class="pl-k">=</span><span class="pl-k">list</span>(<span class="pl-v">fig</span><span class="pl-k">=</span><span class="pl-k">function</span>(){
-               par(<span class="pl-v">mar</span><span class="pl-k">=</span>c(<span class="pl-c1">3.5</span>, <span class="pl-c1">3</span>, <span class="pl-c1">1.1</span>, <span class="pl-c1">0</span>),
-                   <span class="pl-v">pty</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>s<span class="pl-pds">"</span></span>,
-                   <span class="pl-v">mgp</span><span class="pl-k">=</span>c(<span class="pl-c1">1.5</span>,<span class="pl-c1">0.5</span>,<span class="pl-c1">0</span>),
-                   <span class="pl-v">oma</span><span class="pl-k">=</span>c(<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>))},
-             <span class="pl-v">echo</span><span class="pl-k">=</span><span class="pl-k">function</span>(){options(<span class="pl-v">continue</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span>) <span class="pl-c">##Don't show "+" prompts,</span>
-             options(<span class="pl-v">prompt</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span>)
-             }),
-    <span class="pl-v">digits</span><span class="pl-k">=</span><span class="pl-c1">4</span>,
-    <span class="pl-v">scipen</span><span class="pl-k">=</span><span class="pl-c1">8</span>,
-    <span class="pl-v">width</span><span class="pl-k">=</span><span class="pl-c1">132</span>
-    )
-
-<span class="pl-c">#options(error=function(){options(prompt="&gt; ",continue="+ ");NULL})</span></pre></div>
-
-<blockquote>
-<p>| Do I contradict myself?
-| Very well then I contradict myself,
-| (I am large, I contain multitudes.)
-| [@whitman1855song]</p>
-
-<p>If you tell the truth, you don't have to remember anything. [@twain1975mark]</p>
-</blockquote>
-
-<p>Memory is tricky. When we really want to remember something we should practice it until it becomes internalized. In fact, learning requires effort. When we do not practice, we tend to be overconfident in our recall abilities [@koriat2005illusions] and false memories can be implanted.^[See the following site for a nice overview of what we know about memory including the fact that learning requires practice: <a href="http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php">http://www.spring.org.uk/2012/10/how-memory-works-10-things-most-people-get-wrong.php</a>. On false memory see Wikipedia and linked studies <a href="https://en.wikipedia.org/wiki/False_memory">https://en.wikipedia.org/wiki/False_memory</a>.] If we cannot count on memory, then how can we do science?</p>
-
-<p>How long does it take from planning a study to publication and to the first reproduction of the study after publication? Is three years too short? Is ten years too long? We suspect that few of our colleagues in the social and behavioral sciences conceive of, field, write, and publish a study in faster than about three years. We also suspect that, if some other scholar decides to re-examine the analyses of a published study, that it will occur after publication, and that this new scholarly activity of learning from one anothers' data and analyses, can occur at anytime, years past the initial publication of the article.^[We note that sometimes this reproduction occurs within the context of classes and learning about statistics and data analysis. Othertimes, this process is organized more broadly (cite IIIE program, cite Open Science Foundation on psychology).]</p>
-
-<p>If we cannot count on our memories about why we made such and such a design or analysis decision, then what should we do? How can we minimize regret with our past decisions? How can we improve our relationship with our future self?  This essay is a heavily revised version of @bowers2011tpm and provides some suggestions for practices that will make such reproduction occur much more easily and quickly in the event that famous papers require special scrutiny.  Specifically, this piece aims to amplify some of what we already ought to know,  and to add to some of those ideas
-given current practices, platforms, and possibilities.^[@king1995replication and @nagler1995coding were two of the first pieces introducing these kinds of ideas to political scientists. Now, the efforts to encourage transparency and ease of learning from the data and analyses of others has become institutionalized with the DA-RT inititiave <a href="http://www.dartstatement.org/">http://www.dartstatement.org/</a> @lupia2014openness. These ideas are spreading beyond political science as well @freese2007replication and @asendorpf2013recommendations.] This essay is an attempt at providing practical advice about how to <em>do work</em> such that one complies with such recommendations as a matter of course and, in so doing, can focus personal regret on other bad past decisions but not on decisions about data analysis and the production of scholarly papers.</p>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c">## This data frame will be used throughout the analyses.</span>
-<span class="pl-c">## Putting it up top, so we can use it in the comments section.</span>
-library(<span class="pl-smi">readstata13</span>)
-<span class="pl-smi">dem.nations.df</span><span class="pl-k">&lt;-</span>read.dta13(<span class="pl-s"><span class="pl-pds">"</span>https://www.dropbox.com/s/huhqag5rudwtbno/Democracy%20Cross-National%20Data%20V4.1%2009092015.dta?dl=1&amp;pv=1&amp;raw=1<span class="pl-pds">"</span></span>,<span class="pl-v">convert.factors</span><span class="pl-k">=</span><span class="pl-c1">FALSE</span>)
-
-row.names(<span class="pl-smi">dem.nations.df</span>)<span class="pl-k">&lt;-</span><span class="pl-smi">dem.nations.df</span><span class="pl-k">$</span><span class="pl-smi">Nation</span> <span class="pl-c">##make the row names more helpful</span>
-<span class="pl-smi">good.df</span><span class="pl-k">&lt;-</span>na.omit(<span class="pl-smi">dem.nations.df</span>[,c(<span class="pl-s"><span class="pl-pds">"</span>Gini2004<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>WVS5_protest<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Nation<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>meanpr<span class="pl-pds">"</span></span>)])
-<span class="pl-smi">good.df</span><span class="pl-k">$</span><span class="pl-smi">gini04</span><span class="pl-k">&lt;-</span><span class="pl-smi">good.df</span><span class="pl-k">$</span><span class="pl-smi">Gini2004</span><span class="pl-k">/</span><span class="pl-c1">100</span>
-<span class="pl-smi">good.df</span><span class="pl-k">$</span><span class="pl-smi">protest05</span><span class="pl-k">&lt;-</span><span class="pl-smi">good.df</span><span class="pl-k">$</span><span class="pl-smi">WVS5_protest</span></pre></div>
-
-<p>We organize the paper around a series of homilies that lead to certain concrete actions.</p>
-
-<h1><a id="user-content-data-analysis-is-computer-programming-secdata-analys-comp" class="anchor" href="#data-analysis-is-computer-programming-secdata-analys-comp" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Data analysis is computer programming. {#sec:data-analys-comp}</h1>
-
-<p>All results (numbers, comparisons, tables, figures) should arise from
-code, not from a series of mouse clicks or copying and pasting. If I wanted
-to re-create the figure from 2011 but include a new variable or
-specification, I should be able to do so with just a few edits to the
-code rather than knowledge of how I (or you) used a pointing device in
-your graphical user interface some years ago.</p>
-
-<p>Using R [@R:2011], for example, I might specify that the file <code>fig1.pdf</code> was
-produced by the following commands in a file called <code>fig1.R</code>.^[The command
-<code>please-plot</code>and some other R functions used in this essay come from the
-<code>MayIPleaseDoStatistics</code> package which emphasizes politeness in data analysis.
-Functions like <code>please-plot</code>can be blocked and more polite versions such as
-<code>may-I-please-have-a-plot</code>can be required using <code>options(politeness=99)</code>. We do
-not recommend setting negative values for the politeness option should you use this package.]</p>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c">## This file produces a plot relating the explanatory variable to the outcome.</span>
-<span class="pl-smi">thedata</span> <span class="pl-k">&lt;-</span> read.csv(<span class="pl-s"><span class="pl-pds">"</span>Data/thedata-15-03-2011.csv<span class="pl-pds">"</span></span>) <span class="pl-c">## Read the data</span>
-pdf(<span class="pl-s"><span class="pl-pds">"</span>fig1.pdf<span class="pl-pds">"</span></span>) <span class="pl-c">## begin writing to the pdf file</span>
-<span class="pl-smi">please</span><span class="pl-k">-</span>plot(<span class="pl-smi">outcome</span> <span class="pl-smi">by</span> <span class="pl-smi">explanatory</span> <span class="pl-smi">using</span> <span class="pl-smi">thedata</span>. <span class="pl-smi">red</span> <span class="pl-smi">lines</span> <span class="pl-smi">please</span>.)
-<span class="pl-smi">please</span><span class="pl-k">-</span><span class="pl-smi">add</span><span class="pl-k">-</span><span class="pl-smi">a</span><span class="pl-k">-</span>line(<span class="pl-smi">using</span> <span class="pl-smi">model1</span>)
-<span class="pl-c">## Note to self: a quadratic term does not add to the substance</span>
-<span class="pl-c">## model2 &lt;- please-fit(outcome by explanatory+explanatory^2 using thedata</span>
-<span class="pl-c">## summary(abs(fitted(model1)-fitted(model2)))</span>
-dev.off() <span class="pl-c">## stop writing to the pdf file</span></pre></div>
-
-<p>Now, in the future if I wonder how 'that plot on page 10' was
-created, I will know: (1) 'that plot' is from a file called
-<code>fig1.pdf</code>and (2) <code>fig1.pdf</code>was created in
-<code>fig1.R</code>. In a future where R still exists, changing the figure
-will require quick edits of commands already written.  In a future
-where R does not exist, I will at least be able to read the plain text
-R commands and use them to write code in my new favorite statistical
-computing language: R scripts are written in
-<a href="http://en.wikipedia.org/wiki/Plain_text">plain text</a>, and plain
-text is a format that will be around as long as computer programmers
-write computer programs.^[Since R is open
-  source, I will also be able to download an old version of R, download an
-  old-fashioned open-source operating system (like Ubuntu 10), and
-  run the old-fashioned statistical computing environment in the
-  old-fashioned operating system in a virtual machine on my
-  new-fashioned actual machine.]</p>
-
-<p>Moreover, realize that <em>file names send messages</em> to your future
-self. This means that if you name your files with evocative and descriptive names, your
-collaborators are less likely to call you at midnight asking for help and you will remove some regret from your future self. For example, if you are studying inequality and protest, you might try naming a file something like  <code>inequality-and-protest-figures.R</code> instead of  <code>temp9</code>or
-<code>supercalifragilisticexpialidocious</code>.  By the way, the extension
-<code>.R</code> tells us and the operating system that the file contains R
-commands. This part of the filename enables us to quickly search our
-antique hard drives for files containing R scripts.</p>
-
-<p><strong>Step 1</strong> If we know the provenance of results, future or current collaborators can quickly and easily reproduce
-and thus change and improve upon the work.</p>
-
-<h1><a id="user-content-no-data-analyst-is-an-island-for-long" class="anchor" href="#no-data-analyst-is-an-island-for-long" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>No data analyst is an island for long.</h1>
-
-<p>Data analysis involves a long series of decisions. Each decision
-requires justification.  Some decisions will be too small and
-technical for inclusion in the published article itself. These need to
-be documented in the code itself [@nagler1995coding]. Paragraphs
-and citations in the publication will justify the most important
-decisions. So, one must code to communicate with yourself and
-others. There are two main ways to avoid forgetting the reasons you
-did something with data: comment your code and tightly link your code
-with your writing.^[One can also try the R command
-  <code>put-it-in-my-mind(reason,importance="high")</code> to firmly place a
-  reason for a decision into the mind of the analyst. I myself have
-  not had much luck with this function.]</p>
->>>>>>> Stashed changes
-
-<h2><a id="user-content-code-is-communication-comment-code" class="anchor" href="#code-is-communication-comment-code" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Code is communication: Comment code</h2>
-
-<<<<<<< Updated upstream
 Comments, unexecuted text inside of a script, are a message to collaborators
 (including your future self) and other consumers of your work. In the above
 code chunk, we used comments to explain the lines to readers unfamiliar with R
@@ -852,40 +274,16 @@ you do it since you are explaining even as you write.
 
 Comment liberally. Comments are discarded when R or STATA runs analysis, so
 only those who dig into the source code of your work will see them.
-=======
-<p>Comments, unexecuted text inside of a script, are a message to
-collaborators (including your future self) and other consumers of your
-work. In the above code chunk, I used comments to explain the lines to
-readers unfamiliar with R and to remember that I had tried a different
-specification but decided not to use it because adding the squared
-term did not really change the substantive story arising from the
-model.^[R considers text marked with <code>#</code> as a comment.]
-Messages left for your future self (or near-future others) help
-retrace and justify your decisions as the work moves from seminar
-paper to conference paper to poster back to paper to dissertation and
-onwards.</p>
 
-<p>Notice one other benefit of coding for an audience: we learn by
-teaching. By assuming that others will look at your code, you will be
-more likely to write clearer code, or perhaps even to think more
-deeply about what you are doing as you do it.</p>
+## Code to communicate: Literate programming.
 
-<p>Comment liberally. Comments are discarded when R runs analysis or LaTeX or pandoc
-turns plain text into pdf or html files so only those who dig into
-your work will see them.</p>
->>>>>>> Stashed changes
-
-<h2><a id="user-content-code-to-communicate-literate-programming" class="anchor" href="#code-to-communicate-literate-programming" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Code to communicate: Literate programming.</h2>
-
-<blockquote>
-<p>Let us change our traditional attitude to the construction of
+> Let us change our traditional attitude to the construction of
   programs: Instead of imagining that our main task is to instruct a
   computer what to do, let us concentrate rather on explaining to
   human beings what we want a computer to do.
-  [@knuth1984literate, p.97]</p>
-</blockquote>
+  [@knuth1984literate, p.97]
 
-<p>Imagine you discover something new (or confirm something old). You
+Imagine you discover something new (or confirm something old). You
 produce a nice little report on your work for use in discussions of
 your working group or as a memo for a web or reviewer appendix. The
 report itself is a pdf or html file or some other format which displays page
@@ -895,9 +293,8 @@ paragraphs) ought to show up in, or at least inform, the publishable
 paper. Re-creating those analyses by pointing, clicking, copying, or
 pasting would invite typing error and waste time. Re-creating your
 arguments justifying your analysis decisions would also waste
-time.</p>
+time.
 
-<<<<<<< Updated upstream
 More importantly, we and others want to know why we did what we did. Such
 explanations may not be very clear if we have some pages of printed code in one
 hand and a manuscript in the other. Keep in mind the distinction between the
@@ -996,138 +393,9 @@ did, and we will avoid errors and save time as we ensure that others (including
 our future selves) can retrace our steps. A document than can be 'run' to
 reproduce all of the analyses also instills confidence in readers and can more
 effectively spur discussion and learning and cumulation of research.
-=======
-<p>More importantly, we and others want to know why we did what we
-did. Such explanations may not be very clear if we have some pages of
-printed code in one hand and a manuscript in the other. Keep in mind
-the distinction between the 'source code' of a document (i.e. what
-computation was required to produce it) and the visible, type-set page
-image. Page images are great for reading, but not great for
-reproducing or collaborating. The source code of any document
-exchanged by the group must be available and executable.^[As of the 2016 version of this paper, this idea is now widespread and made much easier than before via online services for code sharing and collaboration such as <a href="http://github.com">GitHub</a> and <a href="http://bitbucket.org">BitBucket</a>.]</p>
 
-<p>How might one avoid these problems?
-<a href="http://en.wikipedia.org/wiki/Literate_programming">Literate programming</a> is the practice of weaving code into a document ---
-paragraphs, equations, and diagrams can explain the code, and the code
-can produce numbers, figures, and tables (and diagrams and even equations and
-paragraphs). Literate programming is not merely fancy commenting but
-is about enabling the practice of programming itself to facilitate easy
-reproduction and communication.</p>
+# Meaningful code requires data.
 
-<p>For example, in [@sec:data-analys-comp], I suggested that we know
-where 'that plot on page 10 'comes from by making sure we had a
-<code>fig1.pdf</code> file produced from a clearly commented plain text file
-called something like <code>fig1.R</code>.  An even easier solution would be to
-directly include a chunk of code to produce the figure inside of the
-paper itself. This paper, for example, was written in plain text using
-markdown markup with R code chunks to make things like
-Figure \ref{fig:giniprot}. This combination of markdown and R is called
-<a href="http://rmarkdown.rstudio.org">R Markdown</a>.</p>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c">##  Make a scatterplot of Protest by Inequality</span>
-par(<span class="pl-v">bty</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>,<span class="pl-v">xpd</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>,<span class="pl-v">pty</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>s<span class="pl-pds">"</span></span>,<span class="pl-v">tcl</span><span class="pl-k">=</span><span class="pl-k">-</span>.<span class="pl-c1">25</span>)
-with(<span class="pl-smi">good.df</span>,plot(<span class="pl-smi">gini04</span>,<span class="pl-smi">protest05</span>,
-                  <span class="pl-v">xlab</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>Gini Coefficient 2004 (UNDP)<span class="pl-pds">'</span></span>,
-                  <span class="pl-v">ylab</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>Proportion Reporting Protest Activities<span class="pl-cce">\n</span>(World Values Survey 2005)<span class="pl-pds">'</span></span>,
-                  <span class="pl-v">cex</span><span class="pl-k">=</span>.<span class="pl-c1">8</span>))
-<span class="pl-c">##  Label a few interesting points</span>
-with(<span class="pl-smi">good.df</span>[c(<span class="pl-s"><span class="pl-pds">"</span>Brazil<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>United Kingdom<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>United States<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Sweden<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Chile<span class="pl-pds">"</span></span>),],
-     text(<span class="pl-smi">gini04</span>,<span class="pl-smi">protest05</span>,<span class="pl-v">labels</span><span class="pl-k">=</span><span class="pl-smi">Nation</span>,<span class="pl-v">srt</span><span class="pl-k">=</span><span class="pl-c1">0</span>,<span class="pl-v">cex</span><span class="pl-k">=</span>.<span class="pl-c1">6</span>,<span class="pl-v">pos</span><span class="pl-k">=</span><span class="pl-c1">3</span>,<span class="pl-v">offset</span><span class="pl-k">=</span>.<span class="pl-c1">1</span>))</pre></div>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c">##  Make a scatterplot of Protest by Inequality</span>
-par(<span class="pl-v">bty</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>n<span class="pl-pds">"</span></span>,<span class="pl-v">xpd</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>,<span class="pl-v">pty</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>s<span class="pl-pds">"</span></span>,<span class="pl-v">tcl</span><span class="pl-k">=</span><span class="pl-k">-</span>.<span class="pl-c1">25</span>)
-with(<span class="pl-smi">good.df</span>,plot(<span class="pl-smi">gini04</span>,<span class="pl-smi">protest05</span>,
-                  <span class="pl-v">xlab</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>Gini Coefficient 2004 (UNDP)<span class="pl-pds">'</span></span>,
-                  <span class="pl-v">ylab</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>Proportion Reporting Protest Activities<span class="pl-cce">\n</span>(World Values Survey 2005)<span class="pl-pds">'</span></span>,
-                  <span class="pl-v">cex</span><span class="pl-k">=</span>.<span class="pl-c1">8</span>))
-<span class="pl-c">##  Label a few interesting points</span>
-with(<span class="pl-smi">good.df</span>[c(<span class="pl-s"><span class="pl-pds">"</span>Brazil<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>United Kingdom<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>United States<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Sweden<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Chile<span class="pl-pds">"</span></span>),],
-     text(<span class="pl-smi">gini04</span>,<span class="pl-smi">protest05</span>,<span class="pl-v">labels</span><span class="pl-k">=</span><span class="pl-smi">Nation</span>,<span class="pl-v">srt</span><span class="pl-k">=</span><span class="pl-c1">0</span>,<span class="pl-v">cex</span><span class="pl-k">=</span>.<span class="pl-c1">6</span>,<span class="pl-v">pos</span><span class="pl-k">=</span><span class="pl-c1">3</span>,<span class="pl-v">offset</span><span class="pl-k">=</span>.<span class="pl-c1">1</span>))</pre></div>
-
-<p>Markdown (and LaTeX and HTML) all have ways to cross-reference within a
-document. For example, by using <code>\label{fig:giniprot}</code> in LaTeX or
-<code>{#fig:giniprot}</code> in the pandoc version of markdown, I do not need to keep
-track of the figure number, nor do extra work when I reorganize the document in
-response to reviewer suggestions. Nor do I need a separate <code>fig1.R</code>file or
-<code>fig1.pdf</code> file.  Tables and other numerical results are also possible to
-generate within the source code of a scholarly paper. Those who view the code
-for this essay will see how Table \ref{tab:protest} was also generated directly
-from a regression object.\footnote{@beck2010reg inspired this particular
-presentation of a linear model.}</p>
-
-<div class="highlight highlight-source-r"><pre>  <span class="pl-smi">lm1</span><span class="pl-k">&lt;-</span>lm(<span class="pl-smi">protest05</span><span class="pl-k">~</span><span class="pl-smi">gini04</span><span class="pl-k">+</span><span class="pl-smi">meanpr</span>,<span class="pl-v">data</span><span class="pl-k">=</span><span class="pl-smi">good.df</span>)  <span class="pl-c">#  Run the regression</span>
-
-<span class="pl-c">##  The next lines extract relevant and useful output from the</span>
-<span class="pl-c">##  regression object, following Neal Beck's TPM article 2010.</span>
-<span class="pl-smi">themat</span><span class="pl-k">&lt;-</span>cbind(summary(<span class="pl-smi">lm1</span>)<span class="pl-k">$</span><span class="pl-smi">coef</span>[,c(<span class="pl-s"><span class="pl-pds">"</span>Estimate<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Std. Error<span class="pl-pds">"</span></span>)],confint(<span class="pl-smi">lm1</span>))
-<span class="pl-smi">n</span><span class="pl-k">&lt;-</span>length(<span class="pl-smi">lm1</span><span class="pl-k">$</span><span class="pl-smi">fitted.values</span>)
-<span class="pl-smi">r2</span><span class="pl-k">&lt;-</span>signif(summary(<span class="pl-smi">lm1</span>)<span class="pl-k">$</span><span class="pl-smi">r.squared</span>,<span class="pl-c1">2</span>)
-<span class="pl-smi">est.sigma</span><span class="pl-k">&lt;-</span>signif(summary(<span class="pl-smi">lm1</span>)<span class="pl-k">$</span><span class="pl-smi">sigma</span>,<span class="pl-c1">2</span>)
-colnames(<span class="pl-smi">themat</span>)[<span class="pl-c1">3</span><span class="pl-k">:</span><span class="pl-c1">4</span>]<span class="pl-k">&lt;-</span>c(<span class="pl-s"><span class="pl-pds">"</span>~{}<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>~{}<span class="pl-pds">"</span></span>)
-row.names(<span class="pl-smi">themat</span>)<span class="pl-k">&lt;-</span>c(<span class="pl-s"><span class="pl-pds">"</span>Intercept<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Income Inequality (lower=more equal)<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Mean Political Rights (lower=more rights)<span class="pl-pds">"</span></span>)
-
-library(<span class="pl-smi">xtable</span>)
-<span class="pl-smi">thextab</span><span class="pl-k">&lt;-</span>xtable(<span class="pl-smi">themat</span>,<span class="pl-v">align</span><span class="pl-k">=</span>c(<span class="pl-s"><span class="pl-pds">"</span>l<span class="pl-pds">"</span></span>,rep(<span class="pl-s"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span>,<span class="pl-c1">4</span>)),<span class="pl-v">digits</span><span class="pl-k">=</span><span class="pl-c1">1</span>,
-                <span class="pl-v">caption</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>People living in countries with unequal</span>
-<span class="pl-s">  income distributions report less protest activity to World Values</span>
-<span class="pl-s">  Survey interviewers than people living in countries with relatively</span>
-<span class="pl-s">  more equal income distributions, adjusting for average political</span>
-<span class="pl-s">  rights as measured by Freedom House 1980--2000. Data from [@norris2015data].<span class="pl-pds">"</span></span>,<span class="pl-v">label</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>tab:protest<span class="pl-pds">"</span></span>)</pre></div>
-
-<div class="highlight highlight-source-r"><pre>  print(<span class="pl-smi">thextab</span>,<span class="pl-v">include.colnames</span><span class="pl-k">=</span><span class="pl-c1">FALSE</span>,
-        <span class="pl-v">hline.after</span><span class="pl-k">=</span><span class="pl-c1">NULL</span>,
-        <span class="pl-v">table.placement</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>H<span class="pl-pds">"</span></span>,
-    <span class="pl-v">comment</span><span class="pl-k">=</span><span class="pl-c1">FALSE</span>,
-        <span class="pl-v">add.to.row</span><span class="pl-k">=</span><span class="pl-k">list</span>(
-          <span class="pl-v">pos</span><span class="pl-k">=</span><span class="pl-k">list</span>(<span class="pl-c1">0</span>,<span class="pl-c1">3</span>),
-          <span class="pl-v">command</span><span class="pl-k">=</span>c(
-            <span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\\</span>toprule <span class="pl-cce">\n</span> &amp;</span>
-<span class="pl-s">             <span class="pl-cce">\\</span>multicolumn{1}{c}{Coef} &amp;</span>
-<span class="pl-s">             <span class="pl-cce">\\</span>multicolumn{1}{c}{Std. Err.} &amp;</span>
-<span class="pl-s">             <span class="pl-cce">\\</span>multicolumn{2}{c}{95<span class="pl-cce">\\</span>% CI} <span class="pl-cce">\\\\</span> <span class="pl-cce">\\</span>cmidrule(r){2-5} <span class="pl-pds">"</span></span>,
-            paste(<span class="pl-s"><span class="pl-pds">"</span>&amp; <span class="pl-cce">\\</span>multicolumn{4}{c}{n: <span class="pl-pds">"</span></span>,<span class="pl-smi">n</span>,<span class="pl-s"><span class="pl-pds">"</span>,<span class="pl-pds">"</span></span>,
-                  <span class="pl-s"><span class="pl-pds">"</span>   resid.sd: <span class="pl-pds">"</span></span>,signif(<span class="pl-smi">est.sigma</span>),
-                  <span class="pl-s"><span class="pl-pds">"</span>, R$^2$: <span class="pl-pds">"</span></span>,<span class="pl-smi">r2</span>,<span class="pl-s"><span class="pl-pds">"</span>} <span class="pl-cce">\\\\</span> <span class="pl-cce">\\</span>bottomrule<span class="pl-pds">"</span></span>,<span class="pl-v">sep</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>)
-            )
-          ))</pre></div>
-
-<p>Literate data analysis is not the same as Sweave, even if Sweave is a
-nice implementation.^[The R project has a task view devoted to
-  <a href="http://cran.r-project.org/web/views/ReproducibleResearch.html">reproducible research</a> listing many of the different approaches to literate
-  programming for R.}  If your workflow does not involve R, you can
-still implement some of the principles here. Imagine creating a style
-in Microsoft Word called 'code 'which hides your code when you print
-your document, but which allows you to at least run each code chunk
-piece by piece (or perhaps there are ways to extract all text of style
-code from a Microsoft Word document). Or imagine just using some
-other kind of indication linking paragraphs to specific places in code
-files. There are many ways that creative people can program in a
-literate way.</p>
-
-<p>Literate programming need not go against the principle of modular data
-analysis [@nagler1995coding]. In my own work I routinely have
-several different Sweave files that fulfill different functions, some
-of them create \LaTeX code that I can <code>\input</code> into my
-<code>main.tex</code> file, others setup the data, run simulations, or allow
-me to record my journeys down blind alleys. Of course, when we have
-flying cars running on autopilot, perhaps something other than
-Sweave will make our lives even easier. Then we'll change.</p>
-
-<p><strong>Step 2</strong>
-We analyze data in order to explain something about the world to other
-scholars and policy makers. If we focus on explaining how we got our
-computers to do data analysis to human beings, we will do a better job
-with the data analysis itself: we will learn as we focus on teaching,
-and we will avoid errors and save time as we ensure that others
-(including our future selves) can retrace our steps. A document than
-can be 'run' to reproduce all of the analyses also instills
-confidence in readers and can more effectively spur discussion and
-learning and cumulation of research.</p>
->>>>>>> Stashed changes
-
-<h1><a id="user-content-meaningful-code-requires-data" class="anchor" href="#meaningful-code-requires-data" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Meaningful code requires data.</h1>
-
-<<<<<<< Updated upstream
 All files containing commands operating on data must refer to a data file. A
 reference to a data file is a line of code the analysis program will use to
 operate on ('load'/ 'open '/ 'get '/ 'use') the data file. One should not have
@@ -1140,40 +408,22 @@ even better to include a comment pointing to the data file in addition to the
 line loading the file itself.
 
 Where should one store data files? An obvious solution is to
-=======
-<p>All files containing commands operating on data must refer to a data
-file. A reference to a data file is a line of code the analysis
-program will use to operate on ('load'/ 'open '/ 'get '/
-'use') the data file. One should not have to edit this line on
-different computers or platforms in order to execute this command.
-Using R, for example, all analysis files should have
-<code>load("thedata.rda")</code>or <code>read.csv("thedata.csv")</code>or some
-equivalent line in them, and <code>thedata.csv</code>should be stored in
-some place easy to find (like in the same directory as the file or
-perhaps in <code>"Data/thedata.rda"</code>). Of course, it never hurts to
-drop in a comment pointing to the data file.</p>
-
-<p>[MAARTEN IDEAS HERE? PLUS ANOTHER SECTION ABOUT ORGANIZATION?]</p>
-
-<p>Where should one store data files? An obvious solution is always to
->>>>>>> Stashed changes
 make sure that the data file used by a command file is in the same
 directory as the command file. More elegant solutions require all
 co-authors to have the same directory structure so that
-<code>load("Data/thedata.rda")</code> means the same thing on all computers
+`load("Data/thedata.rda")` means the same thing on all computers
 used to work on the project. This kind of solution is one of the
-things that formal version control systems do well (as discussed
-a bit more in [@sec:vers-contr-prev]).</p>
+things that Dropbox and more formal version control systems do well (as discussed
+a bit more below in [@sec:vers-contr-prev]).
 
-<p>The principle of modularity suggests that you separate data cleaning,
+The principle of modularity suggests that you separate data cleaning,
 processing, recoding, and merging from analysis in different files
 [@nagler1995coding]. So, perhaps your analysis oriented files will
-<code>load("cleandata.rda")</code>and a comment in the code will alert the future you
-(among others) that <code>cleandata.rda</code>was created from <code>create-cleandata.R</code> which
+`load("cleandata.rda")`and a comment in the code will alert the future you
+(among others) that `cleandata.rda`was created from `create-cleandata.R` which
 in turn begins with
-<code>read.csv(\url("http://www.greatfreedata.gov/dirtydata.csv"))</code>. Such a data
+`read.csv(\url("http://www.greatfreedata.gov/dirtydata.csv"))`. Such a data
 processing file will typically end with something like
-<<<<<<< Updated upstream
 `save("cleandata.rda")`so that we are doubly certain about the provenance of
 the data.^[Of course, if you need math or paragraphs to explain what is
 happening in these files, you might prefer to make them into R+Markdown or
@@ -1181,21 +431,11 @@ R+LaTeX files, for which the conventional extension is .Rmd or .Rnw
 respectively. So you'd have `create-cleandata.Rnw` written as a mixture of
 LaTeX and R which might explain and explore the different coding decisions you
 made, perhaps involving some diagnostic plots.]
-=======
-<code>save("cleandata.rda")</code>so that we are doubly certain about the provenance of
-the data.\footnote{Of course, if you need math or paragraphs to explain what is
-happening in these files, you might prefer to make them into R markdown or
-Sweave files, for which the conventional extension is .Rmd or .Rnw
-respectively. So you'd have <code>create-cleandata.Rnw</code> written as a mixture of
-laTeX and R which might explain and explore the different coding decisions you
-made, perhaps involving a factor analysis and diagnostic plots.}</p>
->>>>>>> Stashed changes
 
-<p>Now, if in the future we wonder where <code>cleandata.rda</code>came from, we
-might search for occurrences of <code>cleandata</code> in the files on our
+Now, if in the future we wonder where `cleandata.rda`came from, we
+might search for occurrences of `cleandata` in the files on our
 system. However, if such searching among files is a burden, an even
 nicer solution is to maintain a file for each project called
-<<<<<<< Updated upstream
 MANIFEST.txt or INDEX.txt or README.txt which lists the
 data and command files with brief descriptions of their functions and
 relations.
@@ -1226,7 +466,7 @@ Best practice is to create a file system where you separate folders by function 
 
 There are a couple of things to note: See that files start with a number to give them an ordering. Note also we create an 00_archive folder, here you can store older files without having to delete them permanently and can reduce the number of files in your main folders. Also there is a clear separation between raw data (data that came straight from the field, downloaded data, someone else's replication files, etc) and clean data (data ready to use). Note that in the analysis folder we created two files, one for cleaning and merging data called `20160622_prep_data` and another for running the analysis called `20160622_analysis`. See also the output folders, with subfolders for graphs and tables. These are place holder for R or STATA to output the results from the analysis and keeps things organized.
 
-Jake tends to be less organized than Maarten and relies on README.md files to tell his future self what is going on in a given directory, a [version control system](http://github.com) to keep track of versions of files, and a [Makefile](http://kbroman.org/minimal_make/) to keep track of relationships between files.
+Jake tends to be less organized than Maarten and relies on README.md files to tell his future self what is going on in a given directory, a [version control system](http://github.com) to keep track of versions of files, and a [Makefile](http://kbroman.org/minimal_make/) to keep track of relationships between files. 
 
 ```{bash, tidy=FALSE, eval=FALSE}
 manuscript\
@@ -1242,7 +482,7 @@ Makefile
 
 **Step 3** We should know where the data came from and what operations were performed on which set of data.
 
-# Version control prevents clobbering, reconciles history and helps organize work. {#sec:vers-contr-prev}
+# Version control prevents clobbering, reconciles history, and helps organize work. {#sec:vers-contr-prev}
 
 Group work requires version control. Many people are familiar with the 'track
 changes' feature in modern WYSIWYG (what you see is what you get) word
@@ -1332,112 +572,10 @@ formal systems of software (like git) or with formal systems of file naming,
 file comparing, and communication or, even better, with both. In either case,
 plain text files will make such tasks easier, will take up less disk space, and
 be easier to read for the future you.
-=======
-<code>MANIFEST.txt</code> or INDEX.txt or README.txt which lists the
-data and command files with brief descriptions of their functions and
-relations.</p>
 
-<p><strong>Step 3</strong> We should know where the data came
-from and what operations were performed on which set of data.</p>
 
-<p>In the good old days, when we executed our LISREL code in batch mode,
-we had no choice but to tell the machine clearly, in a few easy to
-understand and informative lines, what files (with filenames no longer
-than 8 characters) to use. See for example, this extremely clear code snippet:</p>
+# Minimize error by testing.
 
-<pre><code>DA NI=19 NO=199 MA=CM
-LA=basic.lab
-CM FI=basic.cov
-</code></pre>
-
-<p>The fact that I need to articulate this idea at all arises because of
-graphical user interfaces: it is all too easy to use the mouse to load
-a data file into memory and then to write a script to analyze this
-file without ever noting the actual name or location of the data file.</p>
-
-<h1><a id="user-content-version-control-prevents-clobbering-reconciles-history-and-helps-organize-work-secvers-contr-prev" class="anchor" href="#version-control-prevents-clobbering-reconciles-history-and-helps-organize-work-secvers-contr-prev" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Version control prevents clobbering, reconciles history, and helps organize work. {#sec:vers-contr-prev}</h1>
-
-<p>Group work requires version control.^[@fredrickson2011tpm and
-@healy2011tpm in this issue also explain what version control is and why we
-might want to use it.] Many people are familiar with the track changes
-feature in modern WYSIWYG word processors or the fact that Dropbox allows one
-to recover previous versions of files. These are both kinds of version control.
-More generally, when we collaborate, we'd like to do a variety of actions with
-our shared files. Collaboration on data analytic projects is more productive
-and better when (1) it is easy to see what has changed between versions of
-files; (2) members of the team feel free to experiment and then to dump parts
-of the experiment in favor of previous work while merging the successful parts
-of the experiment into the main body of the paper; (3) the team can produce
-have 'releases' of the same document (one to MPSA, one to APSR, one to your
-parents) without spawning many possibly conflicting copies of the same
-document; (4) people can work on the same files at the same time without
-conflicting with one another (and can reconcile their changes without too much
-confusion and clobbering).  Clobbering is what happens when your future self or
-your current collaborator saves an old version of a file over a new version,
-erasing good work by accident.</p>
-
-<p>Of course if you rely on Dropbox or 'track changes' in Word for version
-control, you must communicate with other folks in your group before you edit
-existing files. Only one of you can edit and save a given file at a time. This
-prevents your work (or your colleagues work) from getting lost when you both
-try to save the same file on top of each other. If you find that you need to
-work on the same files at the same time, then you should work on establishing
-your own shared version control system. Free options include launchpad, github,
-sourceforge for open source projects (i.e. papers you are writing which you are
-happy to share with others as you write). As of this writing, Google Docs does
-an excellent job with shared editing of files as long as your are online. Each
-of those services include paid versions too. One may also use Dropbox as a kind
-of server for version control: for example, one may copy files from the Dropbox
-directory into a local working directory so as to avoid clobbering and then
-work on merging changes by hand before copying back to the Dropbox directory
-and replacing existing files. MORE PERHAPS ON GOOGLE? LESS ON DROPBOX?</p>
-
-<p>We use git with our own research group, and I use it for all of
-my own projects. MORE ON GITHUB</p>
-
-<p>Of course, one may take advantage of many of the benefits of formal
-version control systems with some disciplined systems for file and
-directory organization.  An excellent, simple, and robust version
-control system is to rename your files with the date and time of
-saving them: thedoc.tex becomes thedoc25-12-2011-23:50.tex.  Be sure
-to include year in the file names --- remember, the life of an idea is
-measured in years. If you are wise enough to have saved your documents
-as plain text then you can easily compare documents using the many
-utilities available for comparing text files.^[Adobe Acrobat
-  allows one to compare differences in pdf files. OpenOffice supports
-  a 'Compare Documents 'option. And Google Docs will report on the
-  version history of a document.] When you reach certain milestones
-you can rename the file accordingly: thedocAPSA2009.tex --- for the
-one sent to discussants at APSA --- or thedocAPSR2015.tex --- for the
-version eventually sent to the APSR six years after you presented it
-at APSA. The formal version control systems I mentioned above all
-allow this kind of thing and are much more elegant and capable, but
-you can do it by hand too as long as you don't mind taking up a lot of
-disk space and having many 'thedoc... ' files around. If you do
-version control by hand, spend a little extra time to ensure that you
-do not clobber files when you make mistakes typing in the
-file-names. And, if you find yourself spending extra time reconciling
-changes made by different collaborators by hand, remember this is a
-task that modern version control systems take care of quickly and
-easily.</p>
-
-<p><strong>Step 5</strong> Writing is rewriting. Thus, all writing
-involves versions. When we collaborate with ourselves and others we
-want to avoid clobbering and we want to enable graceful reconciliation
-of rewriting. One can do these things with formal systems of software
-(like subversion or git or bazaar) or with formal systems of file
-naming, file comparing, and communication or, even better, with
-both. In either case, plain text files will make such tasks easier,
-will take up less disk space, and be easier to read for the future
-you.</p>
->>>>>>> Stashed changes
-
-<h1><a id="user-content-minimize-error-by-testing" class="anchor" href="#minimize-error-by-testing" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Minimize error by testing.</h1>
-
-<p>Anyone writing custom code should worry about getting it right. The more code one writes, the more time one has to appreciate problems arising from bugs, errors, and typos in data analysis
-and code.</p>
-
-<<<<<<< Updated upstream
 Anyone writing custom code should worry about getting it right. The more code
 one writes, the more time one has to appreciate problems arising from bugs,
 errors, and typos in data analysis and code. Since mistakes will always be
@@ -1484,47 +622,10 @@ times.2.fn <- function(thenumber){
 	##  This function multiplies a scalar number by 2
 	##  thenumber is a scalar number
 	thenumber+2
-=======
-<p>Now, if one has a moment to think in between teaching that new class,
-reading books for an awards committee, evaluating application files
-for the admissions committee, feeding popsicles to a sick child, and
-undertaking the odd bit of research, one might say to oneself,
-"Before I write new code, I should write a test of the code. I should
-write a little bit of code that lets me know that my double-bootstrap
-procedure actually does what it is supposed to do."</p>
-
-<p>Of course, this idea, like most others, is not new. The desire to
-avoid error looms large when large groups of programmers write code
-for multi-million dollar programs. The idea of
-<a href="http://en.wikipedia.org/wiki/Test-driven_development">test driven development</a> and the idea that one ought to create tests of
-<a href="http://en.wikipedia.org/wiki/Unit_testing">small parts of one's code</a> arose to address such concerns.^[There are now R packages to help R package writers do this, see for example <a href="https://github.com/hadley/testthat">https://github.com/hadley/testthat</a> and the article on it <a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>.] For the social scientist
-collaborating with her future self and/or a small group of
-collaborators, here is an example of this idea in a very simple form:
-Say I want to write a function to multiply a number by 2. If my
-function works, when I give it the number 4, I should see it return
-the number 8 and when I give it -4, I should get -8.</p>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c">##  The test function:</span>
-<span class="pl-en">test.times.2.fn</span> <span class="pl-k">&lt;-</span> <span class="pl-k">function</span>(){
-  <span class="pl-c">##  This function tests times.2.fn</span>
-  <span class="pl-k">if</span> (times.2.fn(<span class="pl-v">thenumber</span><span class="pl-k">=</span><span class="pl-c1">4</span>) <span class="pl-k">==</span>  <span class="pl-c1">8</span> <span class="pl-k">&amp;</span>
-      times.2.fn(<span class="pl-v">thenumber</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">4</span>) <span class="pl-k">==</span> <span class="pl-k">-</span><span class="pl-c1">8</span>) {
-    print(<span class="pl-s"><span class="pl-pds">"</span>It works!<span class="pl-pds">"</span></span>)
-  } <span class="pl-k">else</span> { print(<span class="pl-s"><span class="pl-pds">"</span>It does not work!<span class="pl-pds">"</span></span>)
-         }
-}
-
-<span class="pl-c">##  The function:</span>
-<span class="pl-en">times.2.fn</span> <span class="pl-k">&lt;-</span> <span class="pl-k">function</span>(<span class="pl-smi">thenumber</span>){
-  <span class="pl-c">##  This function multiplies a scalar number by 2</span>
-  <span class="pl-c">##  thenumber is a scalar number</span>
-  <span class="pl-smi">thenumber</span><span class="pl-k">+</span><span class="pl-c1">2</span>
->>>>>>> Stashed changes
 }
 ```
 Here we use the test function to make sure it works.
 
-<<<<<<< Updated upstream
 ```{r results='asis'}
 test.times.2.fn()
 ```
@@ -1548,24 +649,12 @@ smalldat <- subset(good.df,subset=protest05<90)
 stopifnot(all(smalldat$protest05<90))
 ```
 
-=======
-<span class="pl-c">##  Use the test function</span>
-test.times.2.fn()</pre></div>
 
-<p>Ack! I mistyped '+' for '*'. Good thing I wrote the
-test!^[A more common example of this kind of testing occur
-  everyday when we recode variables into new forms but look at a
-  crosstab of the old vs. new variable before proceeding.]</p>
-
-<p>MAYBE SOMETHING HERE ON <code>stopifnot</code> and recoding data.</p>
->>>>>>> Stashed changes
-
-<p><strong>Step 6</strong> No one can forsee all of the ways that a
+**Step 6** No one can forsee all of the ways that a
 computer program can fail. One can, however, at least make sure that
 it succeeds in doing the task motivating the writing of the code in
-the first place.</p>
+the first place.
 
-<<<<<<< Updated upstream
 # Create a reproducible workflow
 
 Lots of people are thinking about 'reproducible research', creating a
@@ -1578,22 +667,22 @@ files online for copying and improvement. By the way, if you do copy and
 improve, it is polite to alert the person from whom you made the copy about
 your work and to credit them in some way.
 
-We have experimented with several systems so far:
+We have experimented with several systems so far: 
 
 (1) We wrote this paper in the [R markdown](http://rmarkdown.rstudio.com/)
 literate programming format using two different text editors (Jake used vim)
 and (Maarten used [atom](https://atom.io/)). We organized our files and
 collaboration on Github. The source code for this document can be accessed,
 downloaded and modified from <https://github.com/jwbowers/workflow>. We also
-used GitHub Issues to send notes to each other and maintain a task list. The
-nice thing about GitHub is that is enables you to make "releases" of a project
+used Github Issues to send notes to each other and maintain a task list. The
+nice thing about github is that is enables you to make "releases" of a project
 which enable you to smooth the reproduction of all of the products of your
 research (simulations, data analyses, tables, figures, etc..).  Similar
 features are offered by the [Open Science Framework (OSF)](https://osf.io/).
 Maarten recently participated in a workshop on research transparency organized
 by the [Berkeley Institute for Transparency in the Social
 Sciences](www.bitss.org) in which all [course material](https://osf.io/qh2nr/)
-was accessible through OSF.  OSF integrates with GitHub nicely and a key
+was accessible through OSF.  OSF integrates with Github nicely and a key
 benefit is that both systems have been created to remain for a long time
 (unlike perhaps your university drive).  (2) For one paper Jake simply mixed R
 and \LaTeX code in one document (called the "Sweave" format of literate
@@ -1607,40 +696,11 @@ of the compendium approach is that one is not required to have access to a
 command line for `make`: the compendium is downloadable from within R using
 `install.packages()` and is viewable using the `vignette()` function in any
 operating system than runs R.^[Notice that Jake's reproduction archives and/or
-=======
-<h1><a id="user-content-copy-and-improve-on-others-examples" class="anchor" href="#copy-and-improve-on-others-examples" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Copy and improve on others' examples.</h1>
-
-<p>Lots of people are thinking about 'reproducible research' and
-'literate programming' these days. Of course, the
-devil is in the details. Below is a list of Jakes attempts at enabling
-reproducible research. You will find many other inspiring examples on
-the web. Luckily, the open source ethos aligns nicely with academic
-incentives, so we are beginning to find more and more people offering
-their files online for copying and improvement. By the way, if you do
-copy and improve, it is polite to alert the person from whom you made
-the copy about your work.</p>
-
-<p>I have experimented with three systems so far: (1) for one paper we simply
-included a Sweave document and data files into a compressed archive
-[@bowers2005dataverse]; (2) for another more computing intensive paper we
-assembled a set of files that enabled reproduction of our results using the
-<code>make</code> system [@bowers2008dataverse]; (3) I have tried the "compendium"
-approach [@gentleman2005reproducible,@gentleman2007statistical] which embeds an
-academic paper within the R package system [@bowers2011dataverse]; and (4)
-recently I have started organizing my work on GitHub which enables me to make
-"releases" of the project which should enable smooth reproduction of all of the
-products of the research (simulations, data analyses, tables, figures, etc..).
-The benefit of the compendium approach is that one is not required to have
-access to a command line for <code>make</code>: the compendium is downloadable from within
-R using <code>install.packages()</code> and is viewable using the <code>vignette()</code> function in
-any operating system than runs R.^[Notice that my reproduction archives and/or
->>>>>>> Stashed changes
 instructions for using them are hosted on the
-<a href="http://thedata.org/book/learn-about-project">Dataverse</a>, which is another
+[Dataverse](http://thedata.org/book/learn-about-project), which is another
 system designed to enhance academic collaboration across time and space.]  The
 idea that one ought to be able to install and run and use an academic paper
 just as one installs and uses statistical software packages is very attractive,
-<<<<<<< Updated upstream
 and we anticipate that it will become ever easier to turn papers into R
 packages as creative and energetic folks turn their attention to the question
 of reproducible research.^[See for example <http://r-pkgs.had.co.nz/>] Finally,
@@ -1651,7 +711,8 @@ public folder, but you will still need to refer to this folder on a particular
 project website (an example is [Maarten's project on conflict and football](
 https://www.dropbox.com/sh/wqosq99019mf04d/AAASTgJLkn6lmZJI_1veUK7ca?dl=0)).
 
-There are some noteworthy new developments also. A new web app, Jupyter Notebook (http://jupyter.org/), enables
+There are some noteworthy new developments also. People at UC Berkeley have
+been developing a web app, Jupyter Notebook (http://jupyter.org/), that enables
 you to make and share documents that include text, code, equations and
 visualizations in one [literate programming
 environment](http://blog.jupyter.org/2015/05/07/rendering-notebooks-on-github/).
@@ -1668,29 +729,14 @@ reproduction materials we improve both cumulation of knowledge and our
 methods for doing social science
 [@freese2007replication,king1995replication].
 
-=======
-and I anticipate that it will become ever easier to turn papers into R packages
-as creative and energetic folks turn their attention to the question of
-reproducible research.^[See for example <a href="http://r-pkgs.had.co.nz/">http://r-pkgs.had.co.nz/</a>]</p>
 
-<p><strong>Step 6</strong> We all learn by doing. When we share
-reproduction materials we improve both cumulation of knowledge and our
-methods for doing social science
-[@freese2007replication,king1995replication}.  As we copy and
-improve upon each other's modes of doing work we enhance our collective
-ability to believe each other and for future scholars to believe us, too.</p>
->>>>>>> Stashed changes
+# Remember that research ought to be credible communication.
 
-<h1><a id="user-content-remember-that-research-ought-to-be-credible-communication" class="anchor" href="#remember-that-research-ought-to-be-credible-communication" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Remember that research ought to be credible communication.</h1>
-
-<blockquote>
-<p>[I]f the empirical basis for an article or book cannot be
+> [I]f the empirical basis for an article or book cannot be
   reproduced, of what use to the discipline are its
   conclusions?  What purpose does an article like this serve?
-  [@king1995replication, p. 445]</p>
-</blockquote>
+  [@king1995replication, p. 445]
 
-<<<<<<< Updated upstream
 We all always collaborate. Many of us collaborate with groups of people at one
 moment in time as we race against a deadline. All of us collaborate with
 ourselves over time.^[What is a reasonable time-span for which to plan
@@ -1719,41 +765,9 @@ opinion; and (2) other people should be able to reproduce the findings. That
 is, the work represents a shared experience --- and an experience shared
 without respect to the identities of others (although requiring some common
 technical training and research resources).
-=======
-<p>We all always collaborate. Many of us collaborate with groups of
-people at one moment in time as we race against a deadline. All of us
-collaborate with ourselves over time.\footnote{What is a reasonable
-  time-span for which to plan for self-collaboration on a single idea?
-  Ask your advisers how long it took them to move from idea to dissertation to
-  publication.}  The time-frames over which collaboration are required
---- whether among a group of people working together or within a
-single scholar's productive life or probably both --- are much longer
-than any given version of any given software will easily exist. Plain
-text is the exception. Thus, even as we extol version control systems,
-one must have a way to ensure future access to them in a form that
-will still be around when sentient cockroaches finally join political
-science departments (by then dominated by cetaceans after humans are
-mostly uploads).^[The arrival of the six-legged social
-  scientists revives Emacs and finally makes Ctrl-a Ctrl-x Esc-x
-  Ctrl-c a <a href="http://kieran.healy.usesthis.com/">reasonable key combination</a>.]</p>
 
-<p>But what if no one ever hears of your work, or, by some cruel fate, your
-article does not spawn debate? Why then would you spend time to
-communicate with your future self and others? My own answer to this
-question is that I want my work to be credible and useful to myself
-and other scholars even if each article does not immediately change
-the world.  What I report in my data analyses should have two main
-characteristics: (1) the findings of the work should not be a matter
-of opinion; and (2) other people should be able to reproduce the findings. That is,
-the work represents a shared
-experience --- and an experience shared without respect to the
-identities of others (although requiring some common technical
-training and research resources).</p>
->>>>>>> Stashed changes
-
-<p>Assume we want others to believe us when we say something. More narrowly,
+Assume we want others to believe us when we say something. More narrowly,
 assume we want other people to believe us when we say something about data:
-<<<<<<< Updated upstream
 'data' here can be words, numbers, musical notes, images, ideas, etc. The point
 is that we are making some claims about patterns in some collection of stuff.
 For example, when Jake was invited into the homes and offices of ordinary
@@ -1766,23 +780,8 @@ understandable parts and reorganized and summarized it.  Unfortunately, we
 can't assume that people are willing to shadow a researcher throughout her
 career. Rather, we do our work alone or in small groups and want to convince
 other distant and future people to take our analyses and findings seriously.
-=======
-'data' here can be words, numbers, musical notes, images, ideas, etc \ldots The
-point is that we are making some claims about patterns in some collection of
-stuff. For example, when I was invited into the homes and offices of ordinary
-people in Chile in 1991, the "stuff" was recordings of conversations that we
-had about life during the first year of democracy and I was comparing the
-responses of people who had experienced the Pinochet dictatorship differently.
-Now, it might be easy to convince others that 'this collection of stuff is
-different from that collection of stuff' if those people were looking over our
-shoulders the whole time that we made decisions about collecting the stuff and
-broke it up into understandable parts and reorganized and summarized it.
-Unfortunately, we can't assume that people are willing to shadow a researcher
-throughout her career. Rather, we do our work alone or in small groups and want
-to convince other distant and future people about our analyses.</p>
->>>>>>> Stashed changes
 
-<p>Now, say your collections of stuff are large or complex and your
+Now, say your collections of stuff are large or complex and your
 chosen tools of analyses are computer programs. How can we convince
 people that what we did with some data with some code is credible,
 not a matter of whim or opinion, and reproducible by others who didn't
@@ -1792,11 +791,10 @@ addition, these actions (as summarized in the section headings of this
 essay) make collaboration within research groups more effective.
 Believability comes in part from reproducibility and researchers
 often need to be able to reproduce in part or in whole what different
-people in the group have done or what they, themselves, did in the past.</p>
+people in the group have done or what they, themselves, did in the past.
 
-<p>In the end, following these practices and those recommended by
+In the end, following these practices and those recommended by
 @fredrickson2011tpm and @healy2011tpm among others working on these topics
-<<<<<<< Updated upstream
 allows your computerized analyses of your collections of stuff to be credible.
 If then someone quibbles with your analyses, your future self can shoot them
 the archive required to reproduce your work.^[Since you used plain text, the
@@ -1813,111 +811,3 @@ painting her overly cooperative 1-year-old brother purple, or teaching a class,
 or in a coffee shop, or on a quiet walk.
 
 #References
-=======
-allows your computerized analyses of your collections of stuff to be
-credible.  Finally, if the someone quibbles with your analyses, your future
-self can shoot them the archive required to reproduce your
-work.^[Since you used plain text, the files will still be
-  intelligible, analyzed using commented code so that folks can
-  translate to whatever system succeeds R, or since you used R, you
-  can include a copy of R and all of the R packages you used in your
-  final analyses in the archive itself. You can even throw in
-  a copy of whatever version of linux you used and an open source virtual machine running the
-  whole environment.] You can say, 'Here is everything you need to
-reproduce my work.' To be extra helpful you can add 'Read the README
-file for further instructions.' And then you can get on with your life:
-maybe the next great idea will occur when your 4-year-old asks a wacky
-question after stripping and painting her overly cooperative
-1-year-old brother purple, or teaching a class, or in a coffee shop,
-or on a quiet walk.</p>
-
-<h1><a id="user-content-references" class="anchor" href="#references" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>References</h1>
-</article>
-  </div>
-
-</div>
-
-<button type="button" data-facebox="#jump-to-line" data-facebox-class="linejump" data-hotkey="l" class="hidden">Jump to Line</button>
-<div id="jump-to-line" style="display:none">
-  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="" class="js-jump-to-line-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-    <input class="form-control linejump-input js-jump-to-line-field" type="text" placeholder="Jump to line&hellip;" aria-label="Jump to line" autofocus>
-    <button type="submit" class="btn">Go</button>
-</form></div>
-
-  </div>
-  <div class="modal-backdrop js-touch-events"></div>
-</div>
-
-
-    </div>
-  </div>
-
-    </div>
-
-        <div class="container site-footer-container">
-  <div class="site-footer" role="contentinfo">
-    <ul class="site-footer-links right">
-        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact GitHub</a></li>
-      <li><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
-      <li><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
-      <li><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
-        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
-        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
-
-    </ul>
-
-    <a href="https://github.com" aria-label="Homepage" class="site-footer-mark" title="GitHub">
-      <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-</a>
-    <ul class="site-footer-links">
-      <li>&copy; 2016 <span title="0.06646s from github-fe122-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
-        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
-        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
-        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
-        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
-        <li><a href="https://help.github.com" data-ga-click="Footer, go to help, text:help">Help</a></li>
-    </ul>
-  </div>
-</div>
-
-
-
-
-
-    <div id="ajax-error-message" class="ajax-error-message flash flash-error">
-      <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
-      <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
-        <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
-      </button>
-      You can't perform that action at this time.
-    </div>
-
-
-
-      <script crossorigin="anonymous" integrity="sha256-dOKIA1HONo2PClLxKnRStCK+9jl9VHfYEgIH6nnw39k=" src="https://assets-cdn.github.com/assets/frameworks-74e2880351ce368d8f0a52f12a7452b422bef6397d5477d8120207ea79f0dfd9.js"></script>
-      <script async="async" crossorigin="anonymous" integrity="sha256-t6tzzhgs+eLZVTBkaEg3vPjNqMMeVzFmw+5RXSw+CdU=" src="https://assets-cdn.github.com/assets/github-b7ab73ce182cf9e2d9553064684837bcf8cda8c31e573166c3ee515d2c3e09d5.js"></script>
-
-
-
-
-
-
-    <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
-      <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
-      <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
-      <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
-    </div>
-    <div class="facebox" id="facebox" style="display:none;">
-  <div class="facebox-popup">
-    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
-    </div>
-    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
-      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>
-    </button>
-  </div>
-</div>
-
-  </body>
-</html>
-
->>>>>>> Stashed changes
