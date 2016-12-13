@@ -100,13 +100,13 @@ $endif$
 \graphicspath{{.}}
 
 
-\ifxetex
-\usepackage[pagebackref=true, setpagesize=false, % page size defined by xetex
-unicode=false, % unicode breaks when used with xetex
-xetex]{hyperref}
-\else
-\usepackage[pagebackref=true, unicode=true,pdftex]{hyperref}
-\fi
+%% \ifxetex
+%% \usepackage[pagebackref=true, setpagesize=false, % page size defined by xetex
+%% unicode=false, % unicode breaks when used with xetex
+%% xetex]{hyperref}
+%% \else
+\usepackage[pagebackref=true, unicode=true, bookmarks=true, pdftex]{hyperref}
+% \fi
 
 
 \hypersetup{breaklinks=true,
@@ -136,11 +136,9 @@ $endif$
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-%$if(number_sections)$
-\setcounter{secnumdepth}{5}
-%$else$
-%\setcounter{secnumdepth}{0}
-%$endif$
+
+%% Insist on this.
+\setcounter{secnumdepth}{2}
 
 $if(verbatim-in-note)$
 \VerbatimFootnotes % allows verbatim text in footnotes
@@ -186,14 +184,14 @@ $endfor$
 
 %\usepackage[margins=1in]{geometry}
 
-
-
 \usepackage[compact,bottomtitles]{titlesec}
 %\titleformat{ ⟨command⟩}[⟨shape⟩]{⟨format⟩}{⟨label⟩}{⟨sep⟩}{⟨before⟩}[⟨after⟩]
 \titleformat{\section}[hang]{\Large\bfseries}{\thesection}{.5em}{\hspace{0in}}[\vspace{-.2\baselineskip}]
 \titleformat{\subsection}[hang]{\large\bfseries}{\thesubsection}{.5em}{\hspace{0in}}[\vspace{-.2\baselineskip}]
-\titleformat{\subsubsection}[hang]{\bfseries}{\thesubsubsection}{.5em}{\hspace{0in}}[\vspace{-.2\baselineskip}]
-\titleformat{\paragraph}[runin]{\itshape}{\theparagraph}{1ex}{}{\vspace{-.2\baselineskip}}
+%\titleformat{\subsubsection}[hang]{\bfseries}{\thesubsubsection}{.5em}{\hspace{0in}}[\vspace{-.2\baselineskip}]
+\titleformat{\subsubsection}[runin]{\bfseries}{\thesubsubsection}{1ex}{}[\vspace{-.2\baselineskip}]
+\titleformat{\paragraph}[runin]{\bfseries\itshape}{\theparagraph}{1ex}{}{\vspace{-.2\baselineskip}}
+%\titleformat{\paragraph}[runin]{\itshape}{\theparagraph}{1ex}{}{\vspace{-.2\baselineskip}}
 
 %%\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{.5em}{\hspace{0in}}[\vspace{-.2\baselineskip}]
 %%%\titleformat*{\subsection}{\bfseries\scshape}
