@@ -1,7 +1,12 @@
 
 This is a paper aiming to cover aspects of social scientific workflow useful for graduate students.
 
-To create a pdf file in RStudio, click on "Knit to PDF". 
+To create a pdf file in RStudio, click on "Knit to PDF" or at the R console type:
+
+```
+library(rmarkdown)
+render('workflow.Rmd')
+```
 
 At the command line do (assuming that pandoc and pandoc-citeproc and pandoc-crossref are installed):
 
