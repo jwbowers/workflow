@@ -96,7 +96,7 @@ We organize the paper around a series of homilies that lead to certain concrete 
 
  - Data analysis is computer programming.
  - No data analyst is an island for long.
- - Meaningful code requires data.
+ - The territory of data analysis requires maps.
  - Version control prevents clobbering, reconciles history, and helps organize work.
  - Testing minimizes error.
  - Work can be reproducible.
